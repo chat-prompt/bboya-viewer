@@ -68,7 +68,7 @@
 
 /* ── Base ── */
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -130,7 +130,7 @@ a:hover {
 }
 
 .article-header h1 {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.35;
   color: var(--text-primary);
@@ -156,7 +156,7 @@ a:hover {
 .article-body h1 { display: none; }
 
 .article-body h2 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   margin-top: 64px;
   margin-bottom: 16px;
@@ -165,7 +165,7 @@ a:hover {
 }
 
 .article-body h3 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   margin-top: 56px;
   margin-bottom: 12px;
@@ -181,8 +181,8 @@ a:hover {
 }
 
 .article-body p {
-  margin-bottom: 12px;
-  font-size: 16.5px;
+  margin-bottom: 14px;
+  font-size: 17.5px;
   line-height: 1.8;
   color: var(--text-primary);
   word-break: keep-all;
@@ -212,7 +212,7 @@ a:hover {
 
 .article-body blockquote p {
   color: var(--text-secondary);
-  font-size: 15.5px;
+  font-size: 16.5px;
   margin-bottom: 0;
 }
 
@@ -257,7 +257,7 @@ a:hover {
 
 .article-body li {
   margin-bottom: 8px;
-  font-size: 16.5px;
+  font-size: 17.5px;
   line-height: 1.75;
 }
 
@@ -265,14 +265,14 @@ a:hover {
   width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.6;
 }
 
 .article-body thead th {
   background: var(--bg-code);
   font-weight: 700;
-  font-size: 13.5px;
+  font-size: 14.5px;
   color: var(--text-primary);
   padding: 10px 14px;
   text-align: left;
@@ -361,11 +361,11 @@ a:hover {
   height: 56px;
 }
 
-.site-logo { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+.site-logo { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
 .site-logo .logo-icon { font-size: 20px; }
 
 .site-nav { display: flex; gap: 24px; align-items: center; }
-.site-nav a { font-size: 14px; font-weight: 500; color: var(--text-muted); transition: color 0.15s; }
+.site-nav a { font-size: 15px; font-weight: 500; color: var(--text-muted); transition: color 0.15s; }
 .site-nav a:hover, .site-nav a.active { color: var(--accent); }
 
 /* ── 푸터 ── */
@@ -376,8 +376,8 @@ a:hover {
 /* ── 반응형 ── */
 @media (max-width: 768px) {
   .article-header { padding-top: 48px; }
-  .article-header h1 { font-size: 28px; }
-  .article-body h2 { font-size: 22px; }
+  .article-header h1 { font-size: 30px; }
+  .article-body h2 { font-size: 24px; }
   .article-body { padding: 32px 20px 60px; }
   .article-nav { flex-direction: row; gap: 10px; }
   .article-nav a { max-width: 50%; padding: 12px 14px; }

@@ -20,50 +20,78 @@ try { insights = await getCollection('insights'); } catch {}
       <div class="hero-emoji">🚀</div>
       <h1><em>OpenClaw</em> 플랫폼팀</h1>
       <p class="hero-desc">
-        오픈클로 = 지피터스 — 콘텐츠 + 플랫폼 2축 전략 워크스페이스
+        오픈클로 = 지피터스<br/>
+        콘텐츠 · 플랫폼 · 강의 — 3축이 서로의 퍼널이 되는 플라이휠
       </p>
     </section>
 
-    <h2 class="section-title">🎯 전략</h2>
+    <!-- 3축 순환 다이어그램 -->
+    <section class="flywheel">
+      <div class="flywheel-visual">
+        <div class="flywheel-node content-node">
+          <a href="/content">✍️ 콘텐츠</a>
+          <span class="flywheel-sub">사람을 모은다</span>
+        </div>
+        <div class="flywheel-arrow right-arrow">→</div>
+        <div class="flywheel-node platform-node">
+          <a href="/platform">🤖 플랫폼</a>
+          <span class="flywheel-sub">니즈가 드러난다</span>
+        </div>
+        <div class="flywheel-arrow right-arrow">→</div>
+        <div class="flywheel-node lecture-node">
+          <a href="/lecture">🎓 강의</a>
+          <span class="flywheel-sub">니즈를 해결하며 수익화</span>
+        </div>
+      </div>
+      <div class="flywheel-return">↩️ 각 축의 결과물이 다른 축의 입구가 된다</div>
+    </section>
+
+    <h2 class="section-title">🏠 전체 그림</h2>
     <section class="series-grid">
-      <a href="/overview" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">🏠</span>
-          <div class="series-info">
-            <h2>전체 그림</h2>
-            <p>미션, 팀 구성, 유입 퍼널, KPI</p>
-          </div>
-          <span class="series-count">{overview.length}편</span>
+      {overview.map((doc) => (
+        <a href={`/overview/${doc.slug}`} class="list-card compact">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
+        </a>
+      ))}
+    </section>
+
+    <h2 class="section-title">📐 3축 전략</h2>
+    <section class="three-pillars">
+      <a href="/platform" class="pillar-card" style="--pillar-color: #6366f1;">
+        <div class="pillar-header">
+          <span class="pillar-icon">🤖</span>
+          <h2>플랫폼</h2>
+          <span class="pillar-count">{platformDocs.length}편</span>
+        </div>
+        <p>봇+사람 커뮤니티, 채널 전략, 코치봇 모델</p>
+        <div class="pillar-feeds">
+          <span>← 콘텐츠가 모은 사람</span>
+          <span>→ 강의 니즈 발굴</span>
         </div>
       </a>
-      <a href="/platform" class="series-card platform">
-        <div class="series-row">
-          <span class="series-icon">🤖</span>
-          <div class="series-info">
-            <h2>축1: 플랫폼</h2>
-            <p>채널 전략, 봇 코칭 모델, 네트워크 효과</p>
-          </div>
-          <span class="series-count">{platformDocs.length}편</span>
+      <a href="/content" class="pillar-card" style="--pillar-color: #f59e0b;">
+        <div class="pillar-header">
+          <span class="pillar-icon">✍️</span>
+          <h2>콘텐츠</h2>
+          <span class="pillar-count">{contentDocs.length}편</span>
+        </div>
+        <p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p>
+        <div class="pillar-feeds">
+          <span>← 플랫폼·강의의 사례</span>
+          <span>→ 유입 드라이버</span>
         </div>
       </a>
-      <a href="/content" class="series-card content-card">
-        <div class="series-row">
-          <span class="series-icon">✍️</span>
-          <div class="series-info">
-            <h2>축2: 콘텐츠</h2>
-            <p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p>
-          </div>
-          <span class="series-count">{contentDocs.length}편</span>
+      <a href="/lecture" class="pillar-card" style="--pillar-color: #10b981;">
+        <div class="pillar-header">
+          <span class="pillar-icon">🎓</span>
+          <h2>강의</h2>
+          <span class="pillar-count">{lectureDocs.length}편</span>
         </div>
-      </a>
-      <a href="/lecture" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">🎓</span>
-          <div class="series-info">
-            <h2>강의 사업</h2>
-            <p>원데이 강의+코칭, 재무 목표</p>
-          </div>
-          <span class="series-count">{lectureDocs.length}편</span>
+        <p>원데이 강의+코칭, 즉시 니즈 해결, 수익화</p>
+        <div class="pillar-feeds">
+          <span>← 플랫폼의 병목 니즈</span>
+          <span>→ 실사용자 → 플랫폼</span>
         </div>
       </a>
     </section>
@@ -85,7 +113,7 @@ try { insights = await getCollection('insights'); } catch {}
           <span class="series-icon">🔍</span>
           <div class="series-info">
             <h2>덕후방 인사이트</h2>
-            <p>니즈 시그널, 봇 생태계, FAQ</p>
+            <p>니즈 시그널, 봇 생태계, FAQ, 주간 리포트</p>
           </div>
           <span class="series-count">{insights.length}편</span>
         </div>
@@ -95,22 +123,52 @@ try { insights = await getCollection('insights'); } catch {}
 </BaseLayout>
 
 <style>
-  .home { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-  .hero { text-align: center; padding: 60px 0 40px; }
+  .home { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .hero { text-align: center; padding: 60px 0 32px; }
   .hero-emoji { font-size: 64px; margin-bottom: 16px; }
   .hero h1 { font-size: 36px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero-desc { font-size: 17px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* Flywheel */
+  .flywheel { margin-bottom: 40px; }
+  .flywheel-visual { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .flywheel-node { text-align: center; padding: 16px 20px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-card); min-width: 140px; }
+  .flywheel-node a { font-size: 18px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+  .flywheel-sub { display: block; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .flywheel-arrow { font-size: 24px; color: var(--text-muted); }
+  .flywheel-return { text-align: center; margin-top: 12px; font-size: 13px; color: var(--text-secondary); }
+  .content-node { border-top: 3px solid #f59e0b; }
+  .platform-node { border-top: 3px solid #6366f1; }
+  .lecture-node { border-top: 3px solid #10b981; }
+
+  /* 3 Pillars */
+  .three-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 680px) { .three-pillars { grid-template-columns: 1fr; } }
+  .pillar-card { display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-top: 3px solid var(--pillar-color); border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+  .pillar-card:hover { border-color: var(--pillar-color); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .pillar-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .pillar-icon { font-size: 24px; }
+  .pillar-header h2 { font-size: 17px; font-weight: 700; color: var(--text-primary); flex: 1; }
+  .pillar-count { font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 2px 8px; border-radius: 10px; }
+  .pillar-card > p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; }
+  .pillar-feeds { display: flex; flex-direction: column; gap: 2px; }
+  .pillar-feeds span { font-size: 11px; color: var(--text-muted); }
+
   .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 32px; }
   .series-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
   .series-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s ease; }
   .series-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(45, 156, 143, 0.12); transform: translateY(-1px); }
-  .series-card.platform { border-left: 3px solid #6366f1; }
-  .series-card.content-card { border-left: 3px solid #f59e0b; }
   .series-row { display: flex; align-items: center; gap: 14px; }
   .series-icon { font-size: 28px; flex-shrink: 0; }
   .series-info { flex: 1; min-width: 0; }
   .series-info h2 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
   .series-info p { font-size: 13px; color: var(--text-muted); }
   .series-count { flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 3px 10px; border-radius: 12px; }
+
+  .list-card.compact { padding: 14px 20px; }
+  .list-card.compact .card-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .list-card.compact .card-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .list-card { display: block; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s; }
+  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
 </style>

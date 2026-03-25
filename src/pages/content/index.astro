@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const docs = (await getCollection('content')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
-<BaseLayout title="축2: 콘텐츠">
+<BaseLayout title="콘텐츠">
   <div class="list-page">
-    <header class="list-header"><h1>✍️ 축2: 콘텐츠</h1><p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p></header>
+    <header class="list-header"><h1>✍️ 콘텐츠</h1><p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p></header>
     <div class="list-grid">
       {docs.map((doc) => (
         <a href={`/content/${doc.slug}`} class="list-card">

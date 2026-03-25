@@ -1,7 +1,6 @@
 ---
 title: "유입 퍼널 + KPI + 타임라인 + 미결사항"
-episode: 6
-series: docs
+order: 2
 description: "유입 채널 → 구경꾼(카톡) → 전환 → 실사용자(슬랙) → 확장(디스코드) → 자체 앱. 플랫폼/콘텐츠/강의 KPI, 위험 요소, 실행 타임라인."
 publishedAt: "2026-03-25"
 ---

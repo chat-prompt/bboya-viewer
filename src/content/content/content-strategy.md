@@ -1,7 +1,6 @@
 ---
 title: "축2: 콘텐츠 전략"
-episode: 4
-series: docs
+order: 1
 description: "오픈클로 얼리어댑터 활용 → 잠재 고객 만 명 단위 확보. SEO 선점, 채널별 전략, 뽀짝이 캐릭터 콘텐츠."
 publishedAt: "2026-03-25"
 ---

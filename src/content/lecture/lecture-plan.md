@@ -1,7 +1,6 @@
 ---
 title: "강의 사업"
-episode: 5
-series: docs
+order: 1
 description: "스터디는 4주 호흡이 너무 김. 강의는 짧고 굵게 원하는 것을 배울 것이라는 기대. 월 1회 강의+코칭 원데이, 월 500만원 이상 이익 목표."
 publishedAt: "2026-03-25"
 ---

@@ -2,14 +2,16 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const docs = (await getCollection('docs')).sort((a, b) => a.data.episode - b.data.episode);
+const overview = (await getCollection('overview')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const platformDocs = (await getCollection('platform')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const contentDocs = (await getCollection('content')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const lectureDocs = (await getCollection('lecture')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 const meetings = (await getCollection('meetings')).sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
-const insights = await getCollection('insights');
-const weekly = (await getCollection('weekly')).sort((a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+
+let insights: any[] = [];
+try { insights = await getCollection('insights'); } catch {}
 ---
 
 <BaseLayout title="홈">
@@ -22,18 +24,52 @@ const weekly = (await getCollection('weekly')).sort((a, b) =>
       </p>
     </section>
 
-    <h2 class="section-title">📚 워크스페이스</h2>
+    <h2 class="section-title">🎯 전략</h2>
     <section class="series-grid">
-      <a href="/docs" class="series-card">
+      <a href="/overview" class="series-card">
         <div class="series-row">
-          <span class="series-icon">📋</span>
+          <span class="series-icon">🏠</span>
           <div class="series-info">
-            <h2>전략 문서</h2>
-            <p>프로젝트 개요, 플랫폼, 봇 코칭, 콘텐츠, 강의, KPI</p>
+            <h2>전체 그림</h2>
+            <p>미션, 팀 구성, 유입 퍼널, KPI</p>
           </div>
-          <span class="series-count">{docs.length}편</span>
+          <span class="series-count">{overview.length}편</span>
         </div>
       </a>
+      <a href="/platform" class="series-card platform">
+        <div class="series-row">
+          <span class="series-icon">🤖</span>
+          <div class="series-info">
+            <h2>축1: 플랫폼</h2>
+            <p>채널 전략, 봇 코칭 모델, 네트워크 효과</p>
+          </div>
+          <span class="series-count">{platformDocs.length}편</span>
+        </div>
+      </a>
+      <a href="/content" class="series-card content-card">
+        <div class="series-row">
+          <span class="series-icon">✍️</span>
+          <div class="series-info">
+            <h2>축2: 콘텐츠</h2>
+            <p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p>
+          </div>
+          <span class="series-count">{contentDocs.length}편</span>
+        </div>
+      </a>
+      <a href="/lecture" class="series-card">
+        <div class="series-row">
+          <span class="series-icon">🎓</span>
+          <div class="series-info">
+            <h2>강의 사업</h2>
+            <p>원데이 강의+코칭, 재무 목표</p>
+          </div>
+          <span class="series-count">{lectureDocs.length}편</span>
+        </div>
+      </a>
+    </section>
+
+    <h2 class="section-title">📁 아카이브</h2>
+    <section class="series-grid">
       <a href="/meetings" class="series-card">
         <div class="series-row">
           <span class="series-icon">🗓️</span>
@@ -49,19 +85,9 @@ const weekly = (await getCollection('weekly')).sort((a, b) =>
           <span class="series-icon">🔍</span>
           <div class="series-info">
             <h2>덕후방 인사이트</h2>
-            <p>니즈 시그널, 봇 생태계, FAQ, 보안 사례</p>
+            <p>니즈 시그널, 봇 생태계, FAQ</p>
           </div>
           <span class="series-count">{insights.length}편</span>
-        </div>
-      </a>
-      <a href="/weekly" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">📊</span>
-          <div class="series-info">
-            <h2>주간 리포트</h2>
-            <p>덕후방 주간 대화 분류 & 요약</p>
-          </div>
-          <span class="series-count">{weekly.length}편</span>
         </div>
       </a>
     </section>
@@ -75,10 +101,12 @@ const weekly = (await getCollection('weekly')).sort((a, b) =>
   .hero h1 { font-size: 36px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero-desc { font-size: 17px; color: var(--text-secondary); line-height: 1.7; }
-  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-  .series-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 32px; }
+  .series-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
   .series-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s ease; }
   .series-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(45, 156, 143, 0.12); transform: translateY(-1px); }
+  .series-card.platform { border-left: 3px solid #6366f1; }
+  .series-card.content-card { border-left: 3px solid #f59e0b; }
   .series-row { display: flex; align-items: center; gap: 14px; }
   .series-icon { font-size: 28px; flex-shrink: 0; }
   .series-info { flex: 1; min-width: 0; }

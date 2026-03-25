@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  let insights: any[] = [];
+  try { insights = await getCollection('insights'); } catch {}
+  return insights.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+---
+<BaseLayout title={doc.data.title}>
+  <div class="back-to-list top"><a href="/insights">← 인사이트</a></div>
+  <article>
+    <header class="article-header">
+      <span class="series-badge">🔍 인사이트</span>
+      <h1>{doc.data.title}</h1>
+    </header>
+    <div class="article-body"><Content /></div>
+  </article>
+</BaseLayout>

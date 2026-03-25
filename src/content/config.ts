@@ -1,25 +1,34 @@
 import { defineCollection, z } from 'astro:content';
 
-const docs = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    episode: z.number(),
-    series: z.literal('docs'),
-    description: z.string().optional(),
-    publishedAt: z.string().optional(),
-  }),
+const strategyBase = z.object({
+  title: z.string(),
+  order: z.number().optional(),
+  description: z.string().optional(),
+  publishedAt: z.string().optional(),
 });
+
+const overview = defineCollection({ type: 'content', schema: strategyBase });
+const platform = defineCollection({ type: 'content', schema: strategyBase });
+const content = defineCollection({ type: 'content', schema: strategyBase });
+const lecture = defineCollection({ type: 'content', schema: strategyBase });
 
 const meetings = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.string(),
-    series: z.literal('meetings'),
     description: z.string().optional(),
     participants: z.array(z.string()).optional(),
   }),
 });
 
-export const collections = { docs, meetings };
+const insights = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { overview, platform, content, lecture, meetings, insights };

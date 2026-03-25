@@ -1,7 +1,7 @@
 ---
 title: "OpenClaw 콘텐츠로 성장하기 (Linear draft)"
+order: 2
 date: "2026-03-23"
-series: meetings
 description: "Linear 문서 드래프트. 콘텐츠 전략 초안."
 participants: []
 ---

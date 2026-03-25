@@ -1,7 +1,6 @@
 ---
 title: "프로젝트 개요 + 팀 구성 + 현황"
-episode: 1
-series: docs
+order: 1
 description: "오픈클로를 검색하면 지피터스가 나오게. 콘텐츠 + 플랫폼 2축으로 키워드 완전 장악. 미션, 목표, 팀 구성, 현황 분석."
 publishedAt: "2026-03-25"
 ---

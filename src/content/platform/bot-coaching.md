@@ -1,7 +1,6 @@
 ---
 title: "\"봇이 봇을 키우는\" 모델"
-episode: 3
-series: docs
+order: 2
 description: "다지동산 실증 사례, 코치봇 모델, 봇 이력서 시스템, 슬랙 파일럿 실행 플랜. 네트워크 효과 가설 검증."
 publishedAt: "2026-03-25"
 ---

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+const docs = (await getCollection('docs')).sort((a, b) => a.data.episode - b.data.episode);
+const idx = docs.findIndex((d) => d.slug === doc.slug);
+const prev = idx > 0 ? docs[idx - 1] : null;
+const next = idx < docs.length - 1 ? docs[idx + 1] : null;
+---
+<BaseLayout title={doc.data.title}>
+  <div class="back-to-list top"><a href="/docs">← 전략 문서</a></div>
+  <article>
+    <header class="article-header">
+      <span class="series-badge">📋 #{doc.data.episode}</span>
+      <h1>{doc.data.title}</h1>
+      {doc.data.publishedAt && <div class="meta"><span>{doc.data.publishedAt}</span></div>}
+    </header>
+    <div class="article-body"><Content /></div>
+  </article>
+  {(prev || next) && (
+    <nav class="article-nav">
+      {prev && <a href={`/docs/${prev.slug}`} class="prev"><span class="nav-label">← 이전</span><span class="nav-title">#{prev.data.episode} {prev.data.title}</span></a>}
+      {next && <a href={`/docs/${next.slug}`} class="next"><span class="nav-label">다음 →</span><span class="nav-title">#{next.data.episode} {next.data.title}</span></a>}
+    </nav>
+  )}
+</BaseLayout>

@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const docs = (await getCollection('docs')).sort((a, b) => a.data.episode - b.data.episode);
+const meetings = (await getCollection('meetings')).sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const insights = await getCollection('insights');
+const weekly = (await getCollection('weekly')).sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="홈">
+  <div class="home">
+    <section class="hero">
+      <div class="hero-emoji">🚀</div>
+      <h1><em>OpenClaw</em> 플랫폼팀</h1>
+      <p class="hero-desc">
+        오픈클로 = 지피터스 — 콘텐츠 + 플랫폼 2축 전략 워크스페이스
+      </p>
+    </section>
+
+    <h2 class="section-title">📚 워크스페이스</h2>
+    <section class="series-grid">
+      <a href="/docs" class="series-card">
+        <div class="series-row">
+          <span class="series-icon">📋</span>
+          <div class="series-info">
+            <h2>전략 문서</h2>
+            <p>프로젝트 개요, 플랫폼, 봇 코칭, 콘텐츠, 강의, KPI</p>
+          </div>
+          <span class="series-count">{docs.length}편</span>
+        </div>
+      </a>
+      <a href="/meetings" class="series-card">
+        <div class="series-row">
+          <span class="series-icon">🗓️</span>
+          <div class="series-info">
+            <h2>회의록</h2>
+            <p>태현님·닿·소연 회의 기록</p>
+          </div>
+          <span class="series-count">{meetings.length}편</span>
+        </div>
+      </a>
+      <a href="/insights" class="series-card">
+        <div class="series-row">
+          <span class="series-icon">🔍</span>
+          <div class="series-info">
+            <h2>덕후방 인사이트</h2>
+            <p>니즈 시그널, 봇 생태계, FAQ, 보안 사례</p>
+          </div>
+          <span class="series-count">{insights.length}편</span>
+        </div>
+      </a>
+      <a href="/weekly" class="series-card">
+        <div class="series-row">
+          <span class="series-icon">📊</span>
+          <div class="series-info">
+            <h2>주간 리포트</h2>
+            <p>덕후방 주간 대화 분류 & 요약</p>
+          </div>
+          <span class="series-count">{weekly.length}편</span>
+        </div>
+      </a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .home { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+  .hero { text-align: center; padding: 60px 0 40px; }
+  .hero-emoji { font-size: 64px; margin-bottom: 16px; }
+  .hero h1 { font-size: 36px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-desc { font-size: 17px; color: var(--text-secondary); line-height: 1.7; }
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .series-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
+  .series-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s ease; }
+  .series-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(45, 156, 143, 0.12); transform: translateY(-1px); }
+  .series-row { display: flex; align-items: center; gap: 14px; }
+  .series-icon { font-size: 28px; flex-shrink: 0; }
+  .series-info { flex: 1; min-width: 0; }
+  .series-info h2 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+  .series-info p { font-size: 13px; color: var(--text-muted); }
+  .series-count { flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 3px 10px; border-radius: 12px; }
+</style>

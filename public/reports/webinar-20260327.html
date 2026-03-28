@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐱 3/27 OpenClaw 웨비나 종합 성과 분석 (완전판)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+</head>
+<body style="background:#F5F3EE; margin:0; padding:0;">
+<div style="max-width:680px; margin:0 auto; padding:16px 24px 0;">
+  <a href="/" style="color:#b45309; text-decoration:none; font-size:14px; font-family:'Pretendard',-apple-system,sans-serif;">← 전체 목록으로</a>
+</div>
+<style>
+  .report-wrap { max-width:680px; margin:0 auto; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif; color:#1A2332; background:#F5F3EE; padding:0; }
+  .kpi-table { width:100%; border-collapse:separate; border-spacing:8px; }
+  .kpi-table td { border-radius:12px; padding:16px 12px; text-align:center; vertical-align:top; }
+  .kpi-label { font-size:11px; color:rgba(255,255,255,0.8); font-weight:500; margin-bottom:6px; }
+  .kpi-value { font-size:26px; font-weight:800; color:#fff; line-height:1; }
+  .kpi-unit { font-size:10px; color:rgba(255,255,255,0.6); margin-top:4px; }
+  .section-card { background:#FFFDF9; border-radius:14px; padding:24px 20px; box-shadow:0 1px 4px rgba(180,160,130,0.08); border:1px solid #DDD8CE; margin:20px 12px; }
+  .data-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .data-table th, .data-table td { padding:7px 10px; border-bottom:1px solid #EDE9E0; }
+  .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+  @media (max-width: 680px) {
+    .report-wrap { max-width:100%; }
+    .section-card { margin:16px 8px; padding:20px 14px; }
+  }
+
+  @media (max-width: 480px) {
+    .kpi-table { display:block; }
+    .kpi-table tbody { display:block; }
+    .kpi-table tr { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+    .kpi-table td { width:auto !important; }
+    .kpi-label { font-size:10px; }
+    .kpi-value { font-size:22px; }
+
+    .compare-table tr { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .compare-table td { width:auto !important; min-width:120px; }
+    .compare-table td:nth-child(2) { display:none; }
+    .compare-table .diff-badge { margin-top:8px; display:block; }
+
+    .data-table { font-size:11px; }
+    .data-table th, .data-table td { padding:6px 6px; }
+
+    .section-card { margin:12px 4px; padding:16px 10px; }
+    .report-wrap { padding:0 !important; }
+
+    .footer-bar, .header-bar { border-radius:12px 12px 0 0 !important; padding:28px 16px 22px !important; }
+    .footer-bar { border-radius:0 0 12px 12px !important; }
+  }
+</style>
+
+<div class="report-wrap">
+
+<!-- ============ HEADER ============ -->
+<div class="header-bar" style="background:linear-gradient(135deg,#92400e 0%,#b45309 50%,#d97706 100%);border-radius:16px 16px 0 0;padding:36px 32px 28px;text-align:center;">
+  <div style="font-size:48px;margin-bottom:8px;">🐱</div>
+  <div style="color:#ffffff;font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;">뽀야 리포트</div>
+  <div style="color:#fde68a;font-size:14px;font-weight:500;margin-bottom:16px;">3/27 OpenClaw 웨비나 종합 성과 분석 (완전판)</div>
+  <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:20px;padding:8px 18px;">
+    <span style="color:#fff;font-size:12px;font-weight:600;">📅 2026.03.27 (금) 21:00~22:57 KST</span>
+  </div>
+  <div style="color:#fef3c7;font-size:11px;margin-top:10px;opacity:0.8;">데이터: Airtable API · Zoom API · 카카오톡 로컬 DB</div>
+</div>
+
+<!-- ============ SECTION 1: 핵심 KPI ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">📊 핵심 KPI</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:18px;">주요 성과 지표 한눈에 보기</div>
+
+  <table class="kpi-table" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="25%" style="background:linear-gradient(135deg,#b45309,#d97706);">
+        <div class="kpi-label">웨비나 신청</div>
+        <div class="kpi-value">1,208</div>
+        <div class="kpi-unit">명</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#92400e,#b45309);">
+        <div class="kpi-label">Zoom 참가자</div>
+        <div class="kpi-value">1,047</div>
+        <div class="kpi-unit">명 (고유)</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#c2410c,#ea580c);">
+        <div class="kpi-label">30분+ 체류</div>
+        <div class="kpi-value">675</div>
+        <div class="kpi-unit">명 (64.5%)</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#9a3412,#c2410c);">
+        <div class="kpi-label">60분+ 체류</div>
+        <div class="kpi-value">535</div>
+        <div class="kpi-unit">명 (51.1%)</div>
+      </td>
+    </tr>
+    <tr>
+      <td width="25%" style="background:linear-gradient(135deg,#dc2626,#ef4444);">
+        <div class="kpi-label">SNS 후기 인증</div>
+        <div class="kpi-value">262</div>
+        <div class="kpi-unit">건</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#059669,#10b981);">
+        <div class="kpi-label">설문 응답</div>
+        <div class="kpi-value">140</div>
+        <div class="kpi-unit">건</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
+        <div class="kpi-label">덕후방 멤버</div>
+        <div class="kpi-value">959</div>
+        <div class="kpi-unit">명 (+460)</div>
+      </td>
+      <td width="25%" style="background:linear-gradient(135deg,#7c2d12,#9a3412);">
+        <div class="kpi-label">진행시간</div>
+        <div class="kpi-value">125</div>
+        <div class="kpi-unit">분</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============ SECTION 2: 전환 퍼널 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">🔄 전환 퍼널</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:20px;">신청부터 설문 응답까지의 단계별 전환</div>
+
+  <!-- 신청 -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">신청</span>
+      <span style="font-size:13px;font-weight:700;color:#b45309;">1,208명 (100%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#b45309,#d97706);width:100%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+
+  <!-- Zoom 참가 -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">Zoom 참가</span>
+      <span style="font-size:13px;font-weight:700;color:#92400e;">1,047명 (86.7%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#92400e,#b45309);width:86.7%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+
+  <!-- 30분+ 체류 -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">30분+ 체류</span>
+      <span style="font-size:13px;font-weight:700;color:#2a9d8f;">675명 (55.9%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#2a9d8f,#52c9b8);width:55.9%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+
+  <!-- 폼 제출 -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">폼 제출</span>
+      <span style="font-size:13px;font-weight:700;color:#059669;">447명 (37.0%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#059669,#34d399);width:37%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+
+  <!-- SNS 인증 -->
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">SNS 인증</span>
+      <span style="font-size:13px;font-weight:700;color:#e76f51;">262명 (21.7%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:21.7%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+
+  <!-- 설문 응답 -->
+  <div style="margin-bottom:4px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:13px;font-weight:600;color:#1A2332;">설문 응답</span>
+      <span style="font-size:13px;font-weight:700;color:#e63946;">140명 (11.6%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:8px;height:28px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e63946,#ff6b6b);width:11.6%;height:28px;border-radius:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 3: 체류시간 분포 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">⏱️ 체류시간 분포</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:20px;">1,047명의 Zoom 체류시간 구간별 분석</div>
+
+  <!-- 120분+ -->
+  <div style="margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">120분+</span>
+      <span style="font-size:12px;color:#6B7A8F;">101명 (9.6%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#78350f,#92400e);width:9.6%;height:22px;border-radius:6px;min-width:20px;"></div>
+    </div>
+  </div>
+
+  <!-- 90~120분 -->
+  <div style="margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">90~120분 🔥 최다</span>
+      <span style="font-size:12px;color:#e76f51;font-weight:700;">290명 (27.7%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:27.7%;height:22px;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <!-- 60~90분 -->
+  <div style="margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">60~90분</span>
+      <span style="font-size:12px;color:#6B7A8F;">144명 (13.8%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e9c46a,#f4e285);width:13.8%;height:22px;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <!-- 30~60분 -->
+  <div style="margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">30~60분</span>
+      <span style="font-size:12px;color:#6B7A8F;">140명 (13.4%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#2a9d8f,#52c9b8);width:13.4%;height:22px;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <!-- 10~30분 -->
+  <div style="margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">10~30분</span>
+      <span style="font-size:12px;color:#6B7A8F;">162명 (15.5%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#264653,#457b7d);width:15.5%;height:22px;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <!-- 0~10분 -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">0~10분</span>
+      <span style="font-size:12px;color:#6B7A8F;">210명 (20.1%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:22px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#adb5bd,#ced4da);width:20.1%;height:22px;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <div style="background:#FAF8F5;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;">
+    <div>
+      <span style="font-size:11px;color:#6B7A8F;">평균 체류</span>
+      <div style="font-size:20px;font-weight:800;color:#1A2332;">62.2분</div>
+    </div>
+    <div style="text-align:right;">
+      <span style="font-size:11px;color:#6B7A8F;">90분+ (거의 끝까지)</span>
+      <div style="font-size:20px;font-weight:800;color:#e76f51;">391명 (37.3%)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 4: 역대 AI토크 비교 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">📈 역대 AI토크 참석률 비교</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:18px;">11회 AI토크 참석률 추이</div>
+
+  <!-- 비교 하이라이트 박스 -->
+  <div class="table-scroll">
+  <table class="compare-table" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
+    <tr>
+      <td width="40%" style="background:linear-gradient(135deg,#b45309,#d97706);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);">이번 참석률</div>
+        <div style="font-size:32px;font-weight:800;color:#fff;">86.7%</div>
+      </td>
+      <td width="10%" style="text-align:center;vertical-align:middle;">
+        <span style="font-size:20px;color:#6B7A8F;">→</span>
+      </td>
+      <td width="40%" style="background:#F0ECE4;border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:11px;color:#6B7A8F;">역대 평균</div>
+        <div style="font-size:32px;font-weight:800;color:#4A5568;">62.8%</div>
+      </td>
+      <td width="10%" style="text-align:center;vertical-align:middle;">
+        <span class="diff-badge" style="display:inline-block;background:#059669;color:#fff;font-size:14px;font-weight:700;border-radius:8px;padding:6px 10px;">+23.9%p</span>
+      </td>
+    </tr>
+  </table>
+  </div>
+
+  <!-- 역대 테이블 -->
+  <div class="table-scroll">
+  <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
+    <tr style="background:#FAF8F5;">
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">날짜</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">주제</td>
+      <td style="padding:8px 6px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:right;">신청</td>
+      <td style="padding:8px 6px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:right;">참석</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:right;">참석률</td>
+    </tr>
+    <tr style="background:linear-gradient(90deg,rgba(245,158,11,0.08),rgba(217,119,6,0.08));">
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;font-weight:700;color:#1A2332;">3/27</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;font-weight:700;color:#1A2332;">OpenClaw 뽀짝이 🔥</td>
+      <td style="padding:8px 6px;border-bottom:1px solid #EDE9E0;text-align:right;font-weight:700;color:#1A2332;">1,208</td>
+      <td style="padding:8px 6px;border-bottom:1px solid #EDE9E0;text-align:right;font-weight:700;color:#1A2332;">1,047</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:right;font-weight:800;color:#b45309;">86.7%</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/12</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">Manus AI</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">516</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">320</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">62.0%</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/9</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">SNS 5개 동시 발행</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">403</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">202</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">50.1%</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/9</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">AI스터디 설명회 2차</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">339</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">222</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">65.5%</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/7</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">뽀짝이 소개</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">315</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">172</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">54.6%</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/5</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">반복업무 자동화</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">596</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">308</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">51.7%</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/4</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">영상도 앱도 나혼자</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">426</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">263</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">61.7%</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">3/3</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">바이브코딩</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">373</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">358</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#059669;font-weight:600;">96.0%</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">2/24</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">설명회 1차</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">190</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">128</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">67.4%</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">2/20</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">Remotion 영상 자동화</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">246</td>
+      <td style="padding:7px 6px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">109</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:right;color:#4A5568;">44.3%</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;color:#4A5568;">2/19</td>
+      <td style="padding:7px 10px;color:#4A5568;">AI 조직문화</td>
+      <td style="padding:7px 6px;text-align:right;color:#4A5568;">194</td>
+      <td style="padding:7px 6px;text-align:right;color:#4A5568;">137</td>
+      <td style="padding:7px 10px;text-align:right;color:#4A5568;">70.6%</td>
+    </tr>
+  </table>
+  </div>
+</div>
+
+<!-- ============ SECTION 5: 카카오톡 덕후방 분석 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">💬 카카오톡 덕후방 분석</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:20px;">오픈클로 덕후방 커뮤니티 활동 데이터</div>
+
+  <!-- 5-1 성장 -->
+  <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:16px;margin-bottom:16px;">
+    <div style="font-size:14px;font-weight:700;color:#92400e;margin-bottom:10px;">📈 5-1. 멤버 성장</div>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" style="text-align:center;padding:8px;">
+          <div style="font-size:11px;color:#92400e;">웨비나 전</div>
+          <div style="font-size:24px;font-weight:800;color:#78350f;">~500명</div>
+        </td>
+        <td width="10%" style="text-align:center;font-size:24px;color:#92400e;">→</td>
+        <td width="33%" style="text-align:center;padding:8px;">
+          <div style="font-size:11px;color:#92400e;">현재</div>
+          <div style="font-size:24px;font-weight:800;color:#78350f;">959명</div>
+        </td>
+        <td width="24%" style="text-align:center;padding:8px;">
+          <span style="display:inline-block;background:#059669;color:#fff;border-radius:8px;padding:6px 10px;font-size:14px;font-weight:700;">+92%</span>
+        </td>
+      </tr>
+    </table>
+    <div style="margin-top:8px;font-size:12px;color:#92400e;">
+      📩 3/27 메시지: <strong>1,450건</strong> &nbsp;|&nbsp; 3/28 오전: <strong>345건</strong>
+    </div>
+  </div>
+
+  <!-- 5-2 시간대별 메시지 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">⏰ 5-2. 시간대별 메시지 + 참여자</div>
+
+  <div class="table-scroll">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:12px;margin-bottom:18px;">
+    <tr style="background:#FAF8F5;">
+      <td style="padding:6px 8px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">시간</td>
+      <td style="padding:6px 8px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:right;">메시지</td>
+      <td style="padding:6px 8px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:right;">참여자</td>
+      <td style="padding:6px 8px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">메모</td>
+      <td style="padding:6px 4px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;width:40%;">분포</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">0시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">38건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">9명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;font-size:11px;">새벽 기술토론</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#a8b4ce,#c8d0e0);width:14%;height:14px;border-radius:4px;min-width:8px;"></div></td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">1시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">100건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">11명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;font-size:11px;">로컬LLM/메모리</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#b45309,#d97706);width:38%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">9시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">99건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">19명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;font-size:11px;">오전 유입 러시</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#2a9d8f,#52c9b8);width:37%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">10시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">134건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">15명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;font-size:11px;">멀티에이전트 토론</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#e9c46a,#f4e285);width:51%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">16시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">117건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">14명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;font-size:11px;"><span style="color:#e63946;">🔴</span> 클로드 장애</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#e63946,#ff6b6b);width:44%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;">19시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">94건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;">18명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;font-size:11px;">웨비나 임박</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#f4a261,#ffd166);width:36%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;font-weight:700;">20시</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;font-weight:700;">143건</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;text-align:right;font-weight:700;">29명</td>
+      <td style="padding:6px 8px;border-bottom:1px solid #EDE9E0;font-size:11px;">🔥 웨비나 시작</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #EDE9E0;"><div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:54%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+    <tr style="background:rgba(230,57,70,0.05);">
+      <td style="padding:6px 8px;font-weight:700;color:#e63946;">23시</td>
+      <td style="padding:6px 8px;text-align:right;font-weight:700;color:#e63946;">263건</td>
+      <td style="padding:6px 8px;text-align:right;font-weight:700;color:#e63946;">32명</td>
+      <td style="padding:6px 8px;font-size:11px;">🔥🔥 후기 폭풍</td>
+      <td style="padding:6px 4px;"><div style="background:linear-gradient(90deg,#e63946,#ff6b6b);width:100%;height:14px;border-radius:4px;"></div></td>
+    </tr>
+  </table>
+  </div>
+
+  <!-- 5-3 핫 키워드 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">🏷️ 5-3. 핫 키워드 TOP 15</div>
+  <div style="margin-bottom:18px;line-height:2.2;">
+    <span style="display:inline-block;background:#b45309;color:#fff;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;margin:2px 3px;">오픈클로 91</span>
+    <span style="display:inline-block;background:#92400e;color:#fff;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;margin:2px 3px;">웨비나 80</span>
+    <span style="display:inline-block;background:#2a9d8f;color:#fff;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;margin:2px 3px;">뽀짝이 69</span>
+    <span style="display:inline-block;background:#e76f51;color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px 3px;">설치 51</span>
+    <span style="display:inline-block;background:#e9c46a;color:#78350f;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px 3px;">클로드 39</span>
+    <span style="display:inline-block;background:#264653;color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px 3px;">지피터스 24</span>
+    <span style="display:inline-block;background:#d97706;color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px 3px;">슬랙 23</span>
+    <span style="display:inline-block;background:#f72585;color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px 3px;">구독 23</span>
+    <span style="display:inline-block;background:#4ecdc4;color:#1A2332;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">에이전트 21</span>
+    <span style="display:inline-block;background:#ff6b6b;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">맥미니 19</span>
+    <span style="display:inline-block;background:#a8b4ce;color:#1A2332;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">로컬 17</span>
+    <span style="display:inline-block;background:#0ea5e9;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">텔레그램 17</span>
+    <span style="display:inline-block;background:#fbbf24;color:#78350f;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">무료 16</span>
+    <span style="display:inline-block;background:#78350f;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">API 16</span>
+    <span style="display:inline-block;background:#d4d4d8;color:#4A5568;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;margin:2px 3px;">소넷 14</span>
+  </div>
+
+  <!-- 5-4 대화 흐름 타임라인 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">📖 5-4. 대화 흐름 타임라인</div>
+
+  <div style="border-left:3px solid #e0e0e0;padding-left:16px;margin-bottom:18px;">
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#1A2332;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">새벽 00~02시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">메모리/SSD, 로컬 LLM(Qwen 3.5), 오픈클로 설정. <span style="background:#fef3c7;padding:1px 6px;border-radius:4px;font-size:12px;">"ssh...보안접속" 밈 탄생</span></div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#f59e0b;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">오전 7~9시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">"유튜브 보고 왔어요" 러시. <strong>500명 달성</strong> 🎉 웨비나 사전 안내</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#2a9d8f;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">오전 9~11시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">OAuth/코덱스 비교, 멀티에이전트(텔레그램 vs 슬랙), 맥미니 사양 토론, 사내 AX 워크샵 중계</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#d97706;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">낮 11~14시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">ppt 스킬, 카톡 연동 방법, IoT + 에이전트, 뽀짝이 서재 반응</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#e63946;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">오후 15~18시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">설치세션 안내, <span style="background:#fecaca;padding:1px 6px;border-radius:4px;font-size:12px;">클로드 장애 폭주("뽀짝이 파업")</span>, 비용 토론</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#059669;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">저녁 19~21시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">웨비나 임박 안내, SMS 링크 유입, 클로드 부활 <span style="background:#d1fae5;padding:1px 6px;border-radius:4px;font-size:12px;">"뽀짝이ㅠㅠ돌아왔따"</span></div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:inline-block;background:#e76f51;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">밤 21~23시</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">실시간 웨비나 Q&amp;A 안내, 패들렛, SNS 인증 이벤트</div>
+    </div>
+    <div style="margin-bottom:0;">
+      <div style="display:inline-block;background:#78350f;color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;margin-bottom:4px;">밤 23시 이후</div>
+      <div style="font-size:13px;color:#4A5568;margin-top:4px;">"역대급", "충격받음", 맥미니 구매 상담, 설치 MD 공유 팁, <strong>뽀야 실물 인증</strong> 🐱</div>
+    </div>
+  </div>
+
+  <!-- 5-5 유입 경로 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">🚪 5-5. 유입 경로 (대화 내용 기반)</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;">
+    <tr>
+      <td style="padding:6px 0;">
+        <span style="display:inline-block;background:#e63946;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:11px;font-weight:700;margin-right:8px;">1</span>
+        <strong>빌더 조쉬 유튜브</strong> <span style="color:#6B7A8F;font-size:12px;">— 최대 유입원 ("영상 보고 왔어요" 다수)</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:6px 0;">
+        <span style="display:inline-block;background:#e76f51;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:11px;font-weight:700;margin-right:8px;">2</span>
+        <strong>스레드(Threads)</strong> <span style="color:#6B7A8F;font-size:12px;">— 후기 보고 유입</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:6px 0;">
+        <span style="display:inline-block;background:#e9c46a;color:#78350f;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:11px;font-weight:700;margin-right:8px;">3</span>
+        <strong>지피터스 뉴스레터/SMS</strong>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:6px 0;">
+        <span style="display:inline-block;background:#2a9d8f;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:11px;font-weight:700;margin-right:8px;">4</span>
+        <strong>지인 추천</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============ SECTION 6: SNS 후기 인증 분석 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">📸 SNS 후기 인증 분석</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:18px;">폼 제출 및 SNS 인증 현황</div>
+
+  <table width="100%" cellpadding="0" cellspacing="8" style="border-collapse:separate;margin-bottom:16px;">
+    <tr>
+      <td width="33%" style="background:#FAF8F5;border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:11px;color:#6B7A8F;">총 폼 제출</div>
+        <div style="font-size:22px;font-weight:800;color:#1A2332;">447건</div>
+      </td>
+      <td width="33%" style="background:#FAF8F5;border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:11px;color:#6B7A8F;">이미지 첨부</div>
+        <div style="font-size:22px;font-weight:800;color:#e76f51;">262건</div>
+      </td>
+      <td width="33%" style="background:#FAF8F5;border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:11px;color:#6B7A8F;">서재 구독만</div>
+        <div style="font-size:22px;font-weight:800;color:#b45309;">185건</div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="font-size:13px;color:#4A5568;line-height:1.8;margin-bottom:12px;">
+    • Zoom 참가 → SNS 인증 전환: <strong style="color:#b45309;">25.0%</strong><br>
+    • 피크: 22시 <strong>171건</strong>(38.3%), 21시 114건, 23시 62건<br>
+    • 21~23시 집중: <strong style="color:#e63946;">347건 (77.6%)</strong>
+  </div>
+
+  <div style="font-size:12px;font-weight:600;color:#4A5568;margin-bottom:6px;">유입경로 분포:</div>
+  <div style="line-height:2;">
+    <span style="display:inline-block;background:#F0ECE4;border-radius:6px;padding:3px 10px;font-size:12px;color:#4A5568;margin:2px 3px;">미입력(인증폼) 262</span>
+    <span style="display:inline-block;background:#F0ECE4;border-radius:6px;padding:3px 10px;font-size:12px;color:#4A5568;margin:2px 3px;">서재 167</span>
+    <span style="display:inline-block;background:#F0ECE4;border-radius:6px;padding:3px 10px;font-size:12px;color:#4A5568;margin:2px 3px;">유튜브 16</span>
+    <span style="display:inline-block;background:#F0ECE4;border-radius:6px;padding:3px 10px;font-size:12px;color:#4A5568;margin:2px 3px;">인스타 1</span>
+    <span style="display:inline-block;background:#F0ECE4;border-radius:6px;padding:3px 10px;font-size:12px;color:#4A5568;margin:2px 3px;">카톡방 1</span>
+  </div>
+</div>
+
+<!-- ============ SECTION 7: 운영진 내부 데이터 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">🏗️ 운영진 내부 데이터</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:6px;">카카오톡 운영진방 기반 · 운영진: 닿, 소파(수오), 타타, SJ-Park, 최병찬, 박정기</div>
+  <div style="height:1px;background:#DDD8CE;margin:14px 0;"></div>
+
+  <!-- 7-1 운영 타임라인 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">🕐 7-1. 운영 타임라인</div>
+  <div style="border-left:3px solid #d97706;padding-left:16px;margin-bottom:18px;">
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#d97706;">01시</span> — 패들렛 Q&amp;A 세팅 (타타 주도). 닿 <span style="background:#fef3c7;padding:1px 6px;border-radius:4px;font-size:12px;">"진짜과로사할거같음"</span> → 기절
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#d97706;">오전~오후</span> — 경쟁사 모니터링 (오픈클로 코리아 웨비나 ~20명, "에이전트 판매 목적")
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#e63946;">16시</span> — 클로드 장애 대응. 폴백 논의 🔴
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#d97706;">18시</span> — 닿 "방좀봐주세요ㅠㅠㅠ" — 홍보 나간 후 유입 폭주
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#e76f51;">20시</span> — 웨비나 시작. 소파 줌 관리, 타타 패들렛+카톡, 병찬 미팅 중
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#e76f51;">21시</span> — 타타 합류 "나 이제 왔어요" — 줌 채팅 + 패들렛 + SNS 인증 동시 운영
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#e63946;">22시</span> — "800명" → <span style="background:#fecaca;padding:1px 6px;border-radius:4px;font-size:12px;">"패캠에서 채팅창 막는 이유를 알겠네요"</span>
+    </div>
+    <div style="margin-bottom:0;font-size:13px;color:#4A5568;">
+      <span style="font-weight:700;color:#059669;">23시</span> — 웨비나 종료. <strong>"다 뿌셔버린 웨비나"</strong> 🎉
+    </div>
+  </div>
+
+  <!-- 7-2 운영진 감정선 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">🎭 7-2. 운영진 감정선 (실제 카톡 발언)</div>
+
+  <!-- 타타 -->
+  <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:10px;">
+    <div style="font-size:12px;font-weight:700;color:#92400e;margin-bottom:6px;">👩‍💻 타타</div>
+    <div style="font-size:13px;color:#78350f;font-style:italic;line-height:1.6;">
+      "나 담주 휴가 안갈래 이거할래" → "한컴타자연습 하는 기분임요" → "손가락 터질거같아염"
+    </div>
+  </div>
+
+  <!-- 소파 -->
+  <div style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-left:4px solid #3b82f6;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:10px;">
+    <div style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">🛋️ 소파</div>
+    <div style="font-size:13px;color:#1e3a5f;font-style:italic;line-height:1.6;">
+      "첫날인데 이게 스타트업인거죠..?" → "1200명 이상 신청. 불금에 말도 안되는 전환률" → "난 술마시고 싶음"
+    </div>
+  </div>
+
+  <!-- 닿 -->
+  <div style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-left:4px solid #ec4899;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:10px;">
+    <div style="font-size:12px;font-weight:700;color:#9d174d;margin-bottom:6px;">🐱 닿</div>
+    <div style="font-size:13px;color:#831843;font-style:italic;line-height:1.6;">
+      "진짜과로사할거같음 사랑합니다.." → "뽀짝이ㅠㅠ돌아왔따" → 마지막에 뽀야 실물 사진 인증 📸
+    </div>
+  </div>
+
+  <!-- SJ-Park -->
+  <div style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe);border-left:4px solid #6366f1;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:10px;">
+    <div style="font-size:12px;font-weight:700;color:#3730a3;margin-bottom:6px;">🕵️ SJ-Park</div>
+    <div style="font-size:13px;color:#312e81;font-style:italic;line-height:1.6;">
+      "적진 염탐" → "오픈클로 코리아는 20명 모아놓고 무플의 향연"
+    </div>
+  </div>
+
+  <!-- 병찬 -->
+  <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-left:4px solid #059669;border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:18px;">
+    <div style="font-size:12px;font-weight:700;color:#065f46;margin-bottom:6px;">📊 병찬</div>
+    <div style="font-size:13px;color:#064e3b;font-style:italic;line-height:1.6;">
+      "웨비나 이후 고객 니즈 파악 중요" (설문 10문항 자발적 설계) → "다 뿌셔버린 웨비나"
+    </div>
+  </div>
+
+  <!-- 7-3 경쟁사 모니터링 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">🔍 7-3. 경쟁사 모니터링</div>
+  <div style="background:#FAF8F5;border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:13px;color:#4A5568;line-height:1.8;">
+    • <strong>오픈클로 코리아</strong>: 같은 날 웨비나, 참가자 <span style="color:#e63946;">~20명</span><br>
+    • 에이전트 = "자비스" <span style="color:#6B7A8F;font-size:12px;">(운영진: "귀엽지 않아서 탈락")</span><br>
+    • 목적: 에이전트 판매 (유료 서비스 홍보)<br>
+    • 태현 대표님도 "클로터스" 이름으로 참석 모니터링<br>
+    • 다음 세션 주제: <strong>보안</strong>
+  </div>
+
+  <!-- 7-4 핵심 수치 (소파님 집계) -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">📋 7-4. 핵심 수치 (소파님 23:36 집계)</div>
+  <div style="background:linear-gradient(135deg,#92400e,#b45309);border-radius:12px;padding:18px 20px;color:#fff;font-size:14px;line-height:2;">
+    <div>📌 1200명 이상 신청</div>
+    <div>📌 대략 700명 줌 입장 <span style="font-size:11px;color:#fde68a;">← 동시접속 기준 체감</span></div>
+    <div>📌 250명 이상 후기인증</div>
+    <div>📌 인스타만 200명 증가 추정</div>
+    <div>📌 설치모각 35명+ 결제 <span style="font-size:11px;color:#fde68a;">(목표 50)</span></div>
+  </div>
+</div>
+
+<!-- ============ SECTION 8: Zoom 설문 요약 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">📋 Zoom 설문 요약</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:20px;">총 140건 응답 분석</div>
+
+  <!-- 8-1 만족도 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">⭐ 8-1. 만족도</div>
+
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">5점 ⭐⭐⭐⭐⭐</span>
+      <span style="font-size:12px;font-weight:700;color:#059669;">108명 (77.1%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#059669,#34d399);width:77.1%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">4점 ⭐⭐⭐⭐</span>
+      <span style="font-size:12px;color:#6B7A8F;">25명 (17.9%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#2a9d8f,#52c9b8);width:17.9%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">3점 ⭐⭐⭐</span>
+      <span style="font-size:12px;color:#6B7A8F;">5명 (3.6%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e9c46a,#f4e285);width:3.6%;height:20px;border-radius:6px;min-width:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:18px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">2점 ⭐⭐</span>
+      <span style="font-size:12px;color:#6B7A8F;">2명 (1.4%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:1.4%;height:20px;border-radius:6px;min-width:4px;"></div>
+    </div>
+  </div>
+
+  <!-- 8-2 추천 의향 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">💜 8-2. 추천 의향</div>
+
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">5점</span>
+      <span style="font-size:12px;font-weight:700;color:#b45309;">106명 (75.7%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#b45309,#d97706);width:75.7%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">4점</span>
+      <span style="font-size:12px;color:#6B7A8F;">27명 (19.3%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#d97706,#f59e0b);width:19.3%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">3점</span>
+      <span style="font-size:12px;color:#6B7A8F;">3명 (2.1%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e9c46a,#f4e285);width:2.1%;height:20px;border-radius:6px;min-width:4px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">2점</span>
+      <span style="font-size:12px;color:#6B7A8F;">3명 (2.1%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:2.1%;height:20px;border-radius:6px;min-width:4px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:18px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">1점</span>
+      <span style="font-size:12px;color:#6B7A8F;">1명 (0.7%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e63946,#ff6b6b);width:0.7%;height:20px;border-radius:6px;min-width:4px;"></div>
+    </div>
+  </div>
+
+  <!-- 8-3 활용 단계 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">🎯 8-3. 현재 활용 단계</div>
+
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">들어는 봤는데 아직 안 써봤다</span>
+      <span style="font-size:12px;font-weight:700;color:#e76f51;">67명 (47.9%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e76f51,#f4a261);width:47.9%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">설치했는데 잘 안 됐다</span>
+      <span style="font-size:12px;color:#6B7A8F;">30명 (21.4%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#e9c46a,#f4e285);width:21.4%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">실제 업무에 가볍게 쓰고 있다</span>
+      <span style="font-size:12px;color:#6B7A8F;">28명 (20.0%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#2a9d8f,#52c9b8);width:20%;height:20px;border-radius:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">오늘 처음 들어봤다</span>
+      <span style="font-size:12px;color:#6B7A8F;">9명 (6.4%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#adb5bd,#ced4da);width:6.4%;height:20px;border-radius:6px;min-width:6px;"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:18px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+      <span style="font-size:12px;font-weight:600;color:#4A5568;">세계관까지 구축하며 하드하게</span>
+      <span style="font-size:12px;color:#6B7A8F;">6명 (4.3%)</span>
+    </div>
+    <div style="background:#EDE9E0;border-radius:6px;height:20px;overflow:hidden;">
+      <div style="background:linear-gradient(90deg,#b45309,#d97706);width:4.3%;height:20px;border-radius:6px;min-width:6px;"></div>
+    </div>
+  </div>
+
+  <!-- 8-4 서술형 답변 -->
+  <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">💬 8-4. 서술형 주요 답변</div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:8px;">✨ 좋았던 점</div>
+    <div style="background:#f0fdf4;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:6px;font-size:13px;color:#065f46;font-style:italic;">
+      "오픈클로의 엄청난 가능성을 발견한 것. 코딩용어조차 낯선 분이 첨단 도구를 자유롭게 활용하시는 모습에서 새로운 시대가 열렸다는걸 느꼈다"
+    </div>
+    <div style="background:#f0fdf4;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:6px;font-size:13px;color:#065f46;font-style:italic;">
+      "찐 노하우 공유 감사합니다"
+    </div>
+    <div style="background:#f0fdf4;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:4px;font-size:13px;color:#065f46;font-style:italic;">
+      "오픈클로의 활용법 사례가 다양해서 좋았다"
+    </div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div style="font-size:12px;font-weight:700;color:#b45309;margin-bottom:8px;">🆘 어떤 도움이 필요</div>
+    <div style="background:#FFF8EB;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:6px;font-size:13px;color:#78350f;font-style:italic;">
+      "같이 배우고 질문할 수 있는 커뮤니티나 스터디" <span style="background:#d97706;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-style:normal;font-weight:600;">최다</span>
+    </div>
+    <div style="background:#FFF8EB;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:6px;font-size:13px;color:#78350f;font-style:italic;">
+      "나 혼자 처음부터 따라하는 가이드"
+    </div>
+    <div style="background:#FFF8EB;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:4px;font-size:13px;color:#78350f;font-style:italic;">
+      "내 업종·업무에 딱 맞는 예시 템플릿"
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:12px;font-weight:700;color:#e76f51;margin-bottom:8px;">🔍 관심 주제 (67건)</div>
+    <div style="line-height:2;">
+      <span style="display:inline-block;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:6px;padding:3px 10px;font-size:12px;margin:2px 3px;">🔒 보안 이슈 보완</span>
+      <span style="display:inline-block;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:6px;padding:3px 10px;font-size:12px;margin:2px 3px;">🤖 개인용/업무용 모델 구성 추천</span>
+      <span style="display:inline-block;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:6px;padding:3px 10px;font-size:12px;margin:2px 3px;">⚙️ 세팅부터 배우고 싶다</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 9: 데이터 소스 팩트체크 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">✅ 데이터 소스 팩트체크</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:16px;">✅ = API/DB 직접 조회 &nbsp;|&nbsp; ⚠️ = 카톡 발언 기반</div>
+
+  <div class="table-scroll">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:12px;">
+    <tr style="background:#FAF8F5;">
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">수치</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">값</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:center;">검증</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;">소스</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">웨비나 신청</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">1,208명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Airtable API</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">Zoom 고유 참가자</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">1,047명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Zoom Participants API</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">30분+/60분+ 체류</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">675명/535명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Zoom duration 합산</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">SNS 후기 인증</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">262건</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Airtable 이미지 첨부 필터</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">설문 응답</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">140건</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Zoom Survey API</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">덕후방 멤버</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">959명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">카카오톡 로컬 DB</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">진행시간</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">125분</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Zoom API</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">체류시간 분포</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">구간별 인원</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">Zoom duration 합산 계산</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">카톡 메시지 수</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">1,450건/345건</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">✅</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">kakaocli 로컬 DB</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">동시접속 ~700명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">~700명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">⚠️</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">소파님 카톡 체감치</td>
+    </tr>
+    <tr>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;">인스타 200명 증가</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;font-weight:600;">~200명</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;text-align:center;">⚠️</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #EDE9E0;color:#6B7A8F;">소파님 카톡 추정</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:7px 10px;">설치모각 35명+ 결제</td>
+      <td style="padding:7px 10px;font-weight:600;">35명+</td>
+      <td style="padding:7px 10px;text-align:center;">⚠️</td>
+      <td style="padding:7px 10px;color:#6B7A8F;">소파님 카톡 발언</td>
+    </tr>
+  </table>
+  </div>
+</div>
+
+<!-- ============ SECTION 10: 핵심 인사이트 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">💡 핵심 인사이트</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:18px;">데이터에서 도출한 5가지 핵심 발견</div>
+
+  <!-- 인사이트 1 -->
+  <div style="background:linear-gradient(135deg,#fef3c7,rgba(253,230,138,0.12));border-left:4px solid #d97706;border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+      <span style="display:inline-block;background:#d97706;color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:10px;">1</span>
+      <span style="font-size:14px;font-weight:700;color:#92400e;">역대급 참석률 86.7%</span>
+    </div>
+    <div style="font-size:13px;color:#4A5568;line-height:1.6;padding-left:34px;">
+      평균 대비 <strong>+24%p</strong>. 빌더 조쉬 바이럴 + "뽀짝이 코딩인간" 화제성이 견인
+    </div>
+  </div>
+
+  <!-- 인사이트 2 -->
+  <div style="background:linear-gradient(135deg,#fef3c7,#fde68a20);border-left:4px solid #f59e0b;border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+      <span style="display:inline-block;background:#f59e0b;color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:10px;">2</span>
+      <span style="font-size:14px;font-weight:700;color:#92400e;">37.3%가 끝까지</span>
+    </div>
+    <div style="font-size:13px;color:#4A5568;line-height:1.6;padding-left:34px;">
+      90분+ 체류 <strong>391명</strong>. 125분 진행인데 1/3 이상 완주. 콘텐츠 만족도 증거
+    </div>
+  </div>
+
+  <!-- 인사이트 3 -->
+  <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d020);border-left:4px solid #059669;border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+      <span style="display:inline-block;background:#059669;color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:10px;">3</span>
+      <span style="font-size:14px;font-weight:700;color:#065f46;">덕후방 하루 +92%</span>
+    </div>
+    <div style="font-size:13px;color:#4A5568;line-height:1.6;padding-left:34px;">
+      500→959. 자생적 커뮤니티. <strong>1,000명 임박</strong>
+    </div>
+  </div>
+
+  <!-- 인사이트 4 -->
+  <div style="background:linear-gradient(135deg,#fee2e2,#fecaca20);border-left:4px solid #e63946;border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+      <span style="display:inline-block;background:#e63946;color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:10px;">4</span>
+      <span style="font-size:14px;font-weight:700;color:#991b1b;">"설치"가 최대 pain point</span>
+    </div>
+    <div style="font-size:13px;color:#4A5568;line-height:1.6;padding-left:34px;">
+      카톡 키워드 4위, 설문 <strong>48%가 미사용</strong>. 4/4 설치세션 수요 확실
+    </div>
+  </div>
+
+  <!-- 인사이트 5 -->
+  <div style="background:linear-gradient(135deg,#dbeafe,#bfdbfe20);border-left:4px solid #3b82f6;border-radius:0 12px 12px 0;padding:16px 18px;margin-bottom:0;">
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+      <span style="display:inline-block;background:#3b82f6;color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:10px;">5</span>
+      <span style="font-size:14px;font-weight:700;color:#1e40af;">운영진 전원 과부하</span>
+    </div>
+    <div style="font-size:13px;color:#4A5568;line-height:1.6;padding-left:34px;">
+      불금 밤 <strong>3명이 1,000명+</strong> 동시 운영. 향후 운영 자동화 필수
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 11: 후속 액션 ============ -->
+<div class="section-card">
+  <div style="font-size:18px;font-weight:700;color:#1A2332;margin-bottom:4px;">⏰ 후속 액션</div>
+  <div style="font-size:12px;color:#6B7A8F;margin-bottom:16px;">웨비나 후 처리 항목 추적</div>
+
+  <div class="table-scroll">
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:12px;">
+    <tr style="background:#FAF8F5;">
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;width:50%;">액션</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;text-align:center;width:25%;">상태</td>
+      <td style="padding:8px 10px;font-weight:700;color:#4A5568;border-bottom:2px solid #DDD8CE;width:25%;">담당</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">Zoom 녹화본 다시보기 URL</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#F0ECE4;color:#6B7A8F;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 미완</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">닿/소파</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">SNS 인증 262명 다시보기+자료집 발송</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#F0ECE4;color:#6B7A8F;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 미완</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">뽀짝이</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">설치세션 50명 마감 (잔여 ~15)</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#dbeafe;color:#2563eb;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;">🔄 진행중</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">운영진</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">패들렛 미답변 질문 처리</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#F0ECE4;color:#6B7A8F;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 미완</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">닿</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">중급자 모임 안내</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 다음주</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">타타</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">Airtable AI토크 참여자 링크</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#F0ECE4;color:#6B7A8F;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 0건</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">뽀짝이</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;">설문 서술형 상세 분석</td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;text-align:center;"><span style="display:inline-block;background:#d1fae5;color:#059669;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:600;">✅ 완료</span></td>
+      <td style="padding:8px 10px;border-bottom:1px solid #EDE9E0;color:#4A5568;">뽀짝이 리포트</td>
+    </tr>
+    <tr style="background:#F8F6F2;">
+      <td style="padding:8px 10px;">gog Gmail CLI 재인증</td>
+      <td style="padding:8px 10px;text-align:center;"><span style="display:inline-block;background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 10px;font-size:11px;">⬜ 만료</span></td>
+      <td style="padding:8px 10px;color:#4A5568;">닿</td>
+    </tr>
+  </table>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer-bar" style="background:linear-gradient(135deg,#92400e 0%,#b45309 50%,#d97706 100%);border-radius:0 0 16px 16px;padding:24px 32px;text-align:center;">
+  <div style="font-size:28px;margin-bottom:6px;">🐱</div>
+  <div style="color:#ffffff;font-size:14px;font-weight:700;margin-bottom:4px;">뽀야 리포트 (완전판)</div>
+  <div style="color:#fef3c7;font-size:11px;line-height:1.8;">
+    Airtable API · Zoom API · 카카오톡 로컬 DB (kakaocli)<br>
+    생성: 2026-03-28 | 모든 수치는 API/DB 직접 조회 기반 (추정치는 ⚠️ 표기)
+  </div>
+  <div style="margin-top:12px;">
+    <span style="display:inline-block;background:rgba(255,255,255,0.15);color:#fde68a;border-radius:20px;padding:4px 14px;font-size:10px;">Powered by OpenClaw 🐾</span>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

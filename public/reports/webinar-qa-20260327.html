@@ -6,260 +6,455 @@
 <title>Q&A 정리 — [지피터스] OpenClaw 뽀짝이, AI를 '진짜' 팀원으로 만드는 법 | OpenClaw 플랫폼팀</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  /* ── 플랫폼 네비게이션 바 ── */
-  .platform-nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(245,243,238,0.92);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #DDD8CE;
-    padding: 0 20px;
-  }
-  [data-theme="dark"] .platform-nav {
-    background: rgba(30,32,40,0.92);
-    border-bottom-color: #3A3D48;
-  }
-  .platform-nav-inner {
-    max-width: 860px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 52px;
-  }
-  .platform-nav .nav-logo {
-    font-size: 15px; font-weight: 700; color: #1A2332;
-    text-decoration: none; display: flex; align-items: center; gap: 6px;
-  }
-  [data-theme="dark"] .platform-nav .nav-logo { color: #E8EAED; }
-  .platform-nav .nav-links { display: flex; gap: 16px; align-items: center; }
-  .platform-nav .nav-links a {
-    font-size: 13px; color: #6B7A8F; text-decoration: none; font-weight: 500;
-  }
-  .platform-nav .nav-links a:hover { color: #2D9C8F; }
-  [data-theme="dark"] .platform-nav .nav-links a { color: #7B8698; }
-  [data-theme="dark"] .platform-nav .nav-links a:hover { color: #3DB8A9; }
-  .nav-theme-btn {
-    background: none; border: 1px solid #DDD8CE; border-radius: 8px;
-    padding: 4px 8px; cursor: pointer; font-size: 16px; line-height: 1;
-    color: #6B7A8F;
-  }
-  .nav-theme-btn:hover { border-color: #2D9C8F; background: rgba(45,156,143,0.08); }
-  [data-theme="dark"] .nav-theme-btn { border-color: #3A3D48; color: #7B8698; }
-  .back-link {
-    max-width: 860px; margin: 0 auto; padding: 16px 20px 0;
-    font-size: 14px;
-  }
-  .back-link a {
-    color: #2D9C8F; text-decoration: none; font-weight: 500;
-  }
-  .back-link a:hover { color: #3DB8A9; }
-  [data-theme="dark"] .back-link a { color: #3DB8A9; }
-  @media (max-width: 600px) {
-    .platform-nav .nav-links a { font-size: 12px; }
-    .platform-nav .nav-links { gap: 10px; }
-  }
+  /* ═══════════════════════════════════════════
+     OpenClaw 플랫폼팀 — 웨비나 Q&A 리포트
+     global.css 디자인 시스템 기반
+     ═══════════════════════════════════════════ */
+
+  /* ── Light (기본) ── */
   :root {
-    --primary: #2D9C8F;
-    --primary-light: #3DB8A9;
-    --primary-dark: #247D73;
-    --bg: #F5F3EE;
-    --white: #FFFDF9;
-    --gray-50: #FAF8F5;
-    --gray-100: #F0EDE7;
-    --gray-200: #E8E4DB;
-    --gray-300: #DDD8CE;
-    --gray-600: #6B7A8F;
-    --gray-800: #4A5568;
-    --gray-900: #1A2332;
+    --bg-page: #F5F3EE;
+    --bg-card: #FFFDF9;
+    --bg-code: #F0EDE7;
+    --border-card: #DDD8CE;
+    --border-light: #E8E4DB;
+    --text-primary: #1A2332;
+    --text-secondary: #4A5568;
+    --text-muted: #6B7A8F;
+    --text-faint: #9BA8B8;
     --accent: #2D9C8F;
-    --staff-bg: #E8F6F4;
-    --staff-border: #2D9C8F;
+    --accent-light: #3DB8A9;
+    --accent-bg: #E8F6F4;
+    --header-bg: rgba(245, 243, 238, 0.85);
+    --content-width: 680px;
+    --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    color-scheme: light;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-    background: var(--bg);
-    color: var(--gray-900);
-    line-height: 1.7;
+
+  /* ── Dark ── */
+  [data-theme="dark"] {
+    --bg-page: #1E2028;
+    --bg-card: #262830;
+    --bg-code: #2A2D36;
+    --border-card: #3A3D48;
+    --border-light: #333640;
+    --text-primary: #E8EAED;
+    --text-secondary: #B0B8C4;
+    --text-muted: #7B8698;
+    --text-faint: #5A6370;
+    --accent: #3DB8A9;
+    --accent-light: #5CCFBF;
+    --accent-bg: rgba(61, 184, 169, 0.12);
+    --header-bg: rgba(30, 32, 40, 0.85);
+    color-scheme: dark;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ── Base ── */
+  html {
+    font-size: 17px;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: var(--bg-page);
+    line-height: 1.8;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
+  a:hover { color: var(--accent-light); }
 
-  /* Header */
-  header {
-    background: linear-gradient(135deg, #2D9C8F 0%, #247D73 100%);
-    color: #FFFDF9;
-    padding: 48px 0 40px;
-    text-align: center;
+  /* ── 사이트 헤더 (site-header 패턴) ── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 0 24px;
   }
-  header .emoji-title { font-size: 48px; margin-bottom: 12px; }
-  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
-  header .subtitle { font-size: 14px; opacity: 0.85; margin-bottom: 20px; }
-  .meta-row {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
-    font-size: 13px; opacity: 0.9;
+  .site-header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
   }
-  .meta-row span { display: flex; align-items: center; gap: 4px; }
-  .stats-bar {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
-    margin-top: 24px; padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.2);
+  .site-logo {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 17px; font-weight: 700;
+    color: var(--text-primary); text-decoration: none;
   }
-  .stat { text-align: center; }
-  .stat .num { font-size: 28px; font-weight: 800; }
-  .stat .label { font-size: 12px; opacity: 0.8; }
+  .site-logo .logo-icon { font-size: 20px; }
+  .site-nav { display: flex; gap: 24px; align-items: center; }
+  .site-nav a {
+    font-size: 15px; font-weight: 500;
+    color: var(--text-muted); transition: color 0.15s;
+  }
+  .site-nav a:hover, .site-nav a.active { color: var(--accent); }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.2s;
+    color: var(--text-muted);
+  }
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
 
-  /* TOC */
+  /* ── 뒤로가기 ── */
+  .back-to-list {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 24px 24px 0;
+  }
+  .back-to-list a {
+    display: inline-flex; align-items: center;
+    font-size: 14px; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .back-to-list a:hover { color: var(--accent); }
+
+  /* ── 기사 스타일 헤더 (article-header 패턴) ── */
+  .article-header {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 48px 24px 0;
+  }
+  .article-header .series-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-bg);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin-bottom: 8px;
+  }
+  .article-header .meta span {
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .article-header .stats-inline {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    margin-top: 16px;
+  }
+  .article-header .stats-inline .stat {
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .article-header .stats-inline .stat strong {
+    color: var(--accent); font-weight: 700;
+  }
+
+  /* ── 본문 컨테이너 ── */
+  .article-body {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ── TOC ── */
   .toc {
-    background: var(--white);
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
     border-radius: 12px;
     padding: 24px 28px;
-    margin: 28px 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
   }
-  .toc h2 { font-size: 16px; color: var(--primary); margin-bottom: 12px; }
+  .toc h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+  }
   .toc ul { list-style: none; }
-  .toc li { margin: 6px 0; }
+  .toc li { margin: 4px 0; }
   .toc a {
-    color: var(--gray-800); text-decoration: none; font-size: 14px;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 6px 8px; border-radius: 6px; transition: background 0.15s;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
   }
-  .toc a:hover { background: var(--gray-100); }
+  .toc a:hover {
+    background: var(--accent-bg);
+    color: var(--accent);
+  }
   .toc .count {
-    background: var(--primary-light); color: var(--white);
-    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 10px;
+    flex-shrink: 0;
   }
 
-  /* Section */
-  section.category {
-    background: var(--white);
+  /* ── 카테고리 섹션 (details/summary) ── */
+  .category {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
     border-radius: 12px;
-    margin: 20px 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
     overflow: hidden;
   }
-  section.category > summary,
-  section.category > .cat-header {
-    display: flex; align-items: center; gap: 10px;
+  .category > summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 18px 24px;
-    font-size: 16px; font-weight: 700;
-    cursor: pointer; user-select: none;
-    border-bottom: 1px solid var(--gray-200);
-    background: var(--gray-50);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    list-style: none;
+    transition: background 0.15s;
   }
-  section.category > summary::-webkit-details-marker { display: none; }
-  section.category > summary::before { content: '▸'; transition: transform 0.2s; }
-  section.category[open] > summary::before { transform: rotate(90deg); }
+  .category > summary::-webkit-details-marker { display: none; }
+  .category > summary::before {
+    content: '▸';
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .category[open] > summary::before { transform: rotate(90deg); }
+  .category[open] > summary {
+    border-bottom-color: var(--border-light);
+  }
+  .category > summary:hover { background: var(--bg-code); }
   .cat-count {
     margin-left: auto;
-    background: var(--primary); color: var(--white);
-    font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
   }
 
-  /* QA Item */
+  /* ── Q&A 항목 ── */
   .qa-item {
     padding: 20px 24px;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--border-light);
   }
   .qa-item:last-child { border-bottom: none; }
+
   .question {
-    display: flex; gap: 10px; margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
   }
   .q-badge {
     flex-shrink: 0;
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--primary); color: var(--white);
-    font-size: 12px; font-weight: 800;
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 2px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
   }
-  .q-text { font-weight: 600; font-size: 15px; color: var(--gray-900); }
+  .q-text {
+    font-weight: 600;
+    font-size: 15.5px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
   .q-meta {
-    font-size: 12px; color: var(--gray-600); margin-top: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
   }
-  .q-meta .asker { color: var(--primary); font-weight: 600; }
+  .q-meta .asker {
+    color: var(--accent);
+    font-weight: 600;
+  }
   .duplicate {
-    display: inline-block; background: #fff3e0; color: #e65100;
-    font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 8px;
+    display: inline-block;
+    background: #FFF3E0;
+    color: #E65100;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 8px;
+    border-radius: 8px;
     margin-left: 6px;
   }
+  [data-theme="dark"] .duplicate {
+    background: rgba(230, 81, 0, 0.15);
+    color: #FFB74D;
+  }
+
+  /* ── 답변 ── */
   .answer {
     margin-left: 34px;
     padding: 12px 16px;
-    background: var(--gray-50);
-    border-left: 3px solid var(--gray-300);
+    background: var(--bg-page);
+    border-left: 3px solid var(--border-card);
     border-radius: 0 8px 8px 0;
-    font-size: 14px;
-    color: var(--gray-800);
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    line-height: 1.75;
   }
+  .answer:last-child { margin-bottom: 0; }
   .answer.staff {
-    background: var(--staff-bg);
-    border-left-color: var(--staff-border);
+    background: var(--accent-bg);
+    border-left-color: var(--accent);
   }
   .answer .a-meta {
-    font-size: 12px; color: var(--gray-600); margin-bottom: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
   }
-  .answer .a-meta .responder { font-weight: 700; }
+  .answer .a-meta .responder { font-weight: 700; color: var(--text-secondary); }
+  .answer.staff .a-meta .responder { color: var(--accent); }
   .answer .a-meta .staff-badge {
-    background: var(--primary); color: var(--white);
-    font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px;
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 6px;
     margin-left: 4px;
+    vertical-align: middle;
   }
+  .answer a { color: var(--accent); }
+  .answer a:hover { color: var(--accent-light); }
+  .answer code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--bg-code);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
   .no-answer {
-    margin-left: 34px; font-size: 13px; color: var(--gray-600);
-    font-style: italic; padding: 8px 0;
+    margin-left: 34px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 0;
   }
 
-  /* Footer */
-  footer {
-    text-align: center; padding: 32px 20px 48px;
-    font-size: 12px; color: var(--gray-600);
+  /* ── 푸터 ── */
+  .site-footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: 13px;
   }
-  footer .bot-note { margin-top: 8px; opacity: 0.7; }
+  .site-footer a { color: var(--text-muted); }
+  .site-footer a:hover { color: var(--accent); }
+  .site-footer .bot-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
 
-  @media (max-width: 600px) {
-    header h1 { font-size: 18px; }
-    .stats-bar { gap: 16px; }
-    .stat .num { font-size: 22px; }
-    .qa-item { padding: 16px 16px; }
-    .answer { margin-left: 20px; }
-    .toc { padding: 16px 18px; }
+  /* ── 반응형 ── */
+  @media (max-width: 768px) {
+    .article-header { padding-top: 32px; }
+    .article-header h1 { font-size: 26px; }
+    .article-body { padding: 24px 20px 60px; }
+    .qa-item { padding: 16px 18px; }
+    .answer { margin-left: 20px; padding: 10px 14px; }
+    .toc { padding: 18px 20px; }
+    .site-nav { gap: 14px; }
+    .site-nav a { font-size: 13px; }
+    .site-header-inner { height: 50px; }
+    .site-logo { font-size: 15px; }
   }
 </style>
 </head>
 <body>
 
-<nav class="platform-nav">
-  <div class="platform-nav-inner">
-    <a href="/" class="nav-logo"><span>🚀</span> OpenClaw 플랫폼팀</a>
-    <div class="nav-links">
+<!-- ── 사이트 헤더 ── -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="site-logo"><span class="logo-icon">🚀</span> OpenClaw 플랫폼팀</a>
+    <nav class="site-nav">
       <a href="/overview">전체 그림</a>
       <a href="/insights">인사이트</a>
-      <a href="/reports">보고서</a>
-      <button class="nav-theme-btn" id="nav-theme-toggle" aria-label="테마 전환">🌙</button>
-    </div>
-  </div>
-</nav>
-<div class="back-link"><a href="/reports">← 보고서 목록</a></div>
-
-<header>
-  <div class="container">
-    <div class="emoji-title">🐱💬</div>
-    <h1>[지피터스] OpenClaw 뽀짝이,<br>AI를 '진짜' 팀원으로 만드는 법</h1>
-    <div class="subtitle">웨비나 Q&A 아카이브</div>
-    <div class="meta-row">
-      <span>📅 2026년 3월 27일 (금)</span>
-      <span>🕘 20:50 ~ 23:00 KST</span>
-      <span>🎤 GPTers 송다혜 (닿)</span>
-    </div>
-    <div class="stats-bar">
-      <div class="stat"><div class="num">600+</div><div class="label">참여자</div></div>
-      <div class="stat"><div class="num">68</div><div class="label">Q&A 항목</div></div>
-      <div class="stat"><div class="num">8</div><div class="label">카테고리</div></div>
-      <div class="stat"><div class="num">~2h</div><div class="label">진행시간</div></div>
-    </div>
+      <a href="/reports" class="active">보고서</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="테마 전환">🌙</button>
+    </nav>
   </div>
 </header>
 
-<div class="container">
+<!-- ── 뒤로가기 ── -->
+<div class="back-to-list"><a href="/reports">← 보고서 목록</a></div>
+
+<!-- ── 기사 스타일 헤더 ── -->
+<div class="article-header">
+  <span class="series-badge">📊 웨비나 Q&A</span>
+  <h1>[지피터스] OpenClaw 뽀짝이,<br>AI를 '진짜' 팀원으로 만드는 법</h1>
+  <div class="meta">
+    <span>📅 2026년 3월 27일 (금)</span>
+    <span>🕘 20:50 ~ 23:00 KST</span>
+    <span>🎤 GPTers 송다혜 (닿)</span>
+  </div>
+  <div class="stats-inline">
+    <span class="stat"><strong>600+</strong> 참여자</span>
+    <span class="stat"><strong>68</strong> Q&A 항목</span>
+    <span class="stat"><strong>8</strong> 카테고리</span>
+    <span class="stat"><strong>~2h</strong> 진행시간</span>
+  </div>
+</div>
+
+<!-- ── 본문 ── -->
+<div class="article-body">
 
 <!-- TOC -->
 <nav class="toc">
@@ -627,7 +822,7 @@
 
 <div class="qa-item">
   <div class="question"><span class="q-badge">Q</span><div><div class="q-text">뽀짝이의 서재는 어떻게 만든 건가요? 저희도 볼 수 있나요?</div><div class="q-meta"><span class="asker">David Kim, 라이엇</span> · 01:03~01:16</div></div></div>
-  <div class="answer staff"><div class="a-meta"><span class="responder">김태현</span> <span class="staff-badge">운영진</span></div>네 일부 공개되어 있습니다! <a href="https://bbojjak-library.gpters.org/join" style="color:var(--primary)">뽀짝이의 서재 구독</a></div>
+  <div class="answer staff"><div class="a-meta"><span class="responder">김태현</span> <span class="staff-badge">운영진</span></div>네 일부 공개되어 있습니다! <a href="https://bbojjak-library.gpters.org/join">뽀짝이의 서재 구독</a></div>
 </div>
 
 <div class="qa-item">
@@ -681,12 +876,12 @@
 <div class="qa-item">
   <div class="question"><span class="q-badge">Q</span><div><div class="q-text">오늘 녹화본은 어디서 볼 수 있나요?</div><div class="q-meta"><span class="asker">k, 이우용</span> · 00:17~00:20</div></div></div>
   <div class="answer staff"><div class="a-meta"><span class="responder">김태현</span> <span class="staff-badge">운영진</span></div>SNS 캠페인 참가하시면요!</div>
-  <div class="answer">인스타/쓰레드에 @gptersorg 태그 후 화면 캡처 올리고 <a href="https://airtable.com/appMhAQwMXvxcGLms/pagyulzHzrUCZiyTT/form" style="color:var(--primary)">제출 폼</a> 작성 시 녹화본 + 핵심자료집 제공</div>
+  <div class="answer">인스타/쓰레드에 @gptersorg 태그 후 화면 캡처 올리고 <a href="https://airtable.com/appMhAQwMXvxcGLms/pagyulzHzrUCZiyTT/form">제출 폼</a> 작성 시 녹화본 + 핵심자료집 제공</div>
 </div>
 
 <div class="qa-item">
   <div class="question"><span class="q-badge">Q</span><div><div class="q-text">4/4 오프라인 설치 세션에 대한 상세 정보</div><div class="q-meta"><span class="asker">다수</span> · 00:16~01:59</div></div></div>
-  <div class="answer staff"><div class="a-meta"><span class="responder">SOPA</span> <span class="staff-badge">운영진</span></div>【입문자】 4/4(토) 오프라인 설치 모각 (맥 유저 전용) → 선착순 50명 | 5만원 | 팁스타운 S2 지하<br>→ 신청: <a href="https://www.gpters.org/events/post/offline-installation-openclaw-beginners-oOZYGOzwzV2grCb" style="color:var(--primary)">신청 링크</a></div>
+  <div class="answer staff"><div class="a-meta"><span class="responder">SOPA</span> <span class="staff-badge">운영진</span></div>【입문자】 4/4(토) 오프라인 설치 모각 (맥 유저 전용) → 선착순 50명 | 5만원 | 팁스타운 S2 지하<br>→ 신청: <a href="https://www.gpters.org/events/post/offline-installation-openclaw-beginners-oOZYGOzwzV2grCb">신청 링크</a></div>
 </div>
 
 <div class="qa-item">
@@ -701,20 +896,19 @@
 
 </details>
 
-</div><!-- /container -->
+</div><!-- /article-body -->
 
-<footer>
-  <div class="container">
-    <p>🐱 이 문서는 <strong>뽀야</strong>가 Zoom VTT + Chat 기반으로 자동 생성했습니다.</p>
-    <p class="bot-note">2026년 3월 28일 · GPTers × OpenClaw</p>
-  </div>
+<!-- ── 푸터 ── -->
+<footer class="site-footer">
+  <p>🚀 <strong>OpenClaw 플랫폼팀</strong> — 오픈클로 = 지피터스</p>
+  <p class="bot-note">🐱 이 문서는 뽀야가 Zoom VTT + Chat 기반으로 자동 생성했습니다.</p>
 </footer>
 
 <script>
 (function() {
   var saved = localStorage.getItem('theme');
   if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  var btn = document.getElementById('nav-theme-toggle');
+  var btn = document.getElementById('theme-toggle');
   function update() {
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     btn.textContent = isDark ? '☀️' : '🌙';

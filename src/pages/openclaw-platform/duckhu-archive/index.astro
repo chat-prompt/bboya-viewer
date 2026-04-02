@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const allDocs = await getCollection('openclaw-platform');
+const duckhu = allDocs.filter(d => d.slug.startsWith('duckhu-archive/')).sort((a, b) => (b.data.date ?? b.slug).localeCompare(a.data.date ?? a.slug));
+
+// Sub-group
+const daily = duckhu.filter(d => d.slug.includes('/daily/'));
+const weekly = duckhu.filter(d => d.slug.includes('/weekly/'));
+const insights = duckhu.filter(d => d.slug.includes('/insights/'));
+const other = duckhu.filter(d => !d.slug.includes('/daily/') && !d.slug.includes('/weekly/') && !d.slug.includes('/insights/') && !d.slug.toLowerCase().endsWith('readme'));
+---
+
+<BaseLayout title="덕후방 아카이브 — openclaw-platform">
+  <div class="list-page">
+    <div class="back"><a href="/openclaw-platform">← openclaw-platform</a></div>
+    <header class="list-header">
+      <h1>🔍 덕후방 아카이브</h1>
+      <p>{duckhu.length}편 — 일일/주간 아카이브, 인사이트, 패턴 분석</p>
+    </header>
+
+    {daily.length > 0 && (
+      <>
+        <h2 class="sub-title">📅 일일 아카이브 <span class="count">{daily.length}편</span></h2>
+        <div class="list-grid">
+          {daily.map((doc) => (
+            <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+              <h3 class="card-title">{doc.data.title}</h3>
+              {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    {weekly.length > 0 && (
+      <>
+        <h2 class="sub-title">📊 주간 리포트 <span class="count">{weekly.length}편</span></h2>
+        <div class="list-grid">
+          {weekly.map((doc) => (
+            <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+              <h3 class="card-title">{doc.data.title}</h3>
+              {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+              {doc.data.category && <span class="card-cat">{doc.data.category}</span>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    {insights.length > 0 && (
+      <>
+        <h2 class="sub-title">💡 인사이트 <span class="count">{insights.length}편</span></h2>
+        <div class="list-grid">
+          {insights.map((doc) => (
+            <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+              <h3 class="card-title">{doc.data.title}</h3>
+              {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    {other.length > 0 && (
+      <>
+        <h2 class="sub-title">📄 기타 <span class="count">{other.length}편</span></h2>
+        <div class="list-grid">
+          {other.map((doc) => (
+            <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+              <h3 class="card-title">{doc.data.title}</h3>
+              {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+  .back { padding-top: 24px; }
+  .back a { font-size: 14px; color: var(--accent); text-decoration: none; font-weight: 600; }
+  .back a:hover { text-decoration: underline; }
+  .list-header { text-align: center; padding: 32px 0 24px; }
+  .list-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .list-header p { font-size: 15px; color: var(--text-secondary); }
+  .sub-title { font-size: 17px; font-weight: 700; margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; }
+  .count { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 2px 8px; border-radius: 10px; }
+  .list-grid { display: flex; flex-direction: column; gap: 10px; }
+  .list-card {
+    display: block; padding: 16px 20px;
+    background: var(--bg-card); border: 1px solid var(--border-card);
+    border-radius: 12px; text-decoration: none; transition: all 0.2s;
+  }
+  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .card-date { font-size: 12px; color: var(--text-muted); margin-top: 2px; display: inline-block; }
+  .card-cat { font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--accent-bg); padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+</style>

@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allDocs = await getCollection('bbopters-team');
+const docs = allDocs.filter(d => d.slug.toLowerCase() !== 'readme').sort((a, b) => a.slug.localeCompare(b.slug));
+const readme = allDocs.find(d => d.slug.toLowerCase() === 'readme');
+---
+
+<BaseLayout title="bbopters-team">
+  <div class="list-page">
+    <header class="list-header">
+      <h1>🐱 bbopters-team</h1>
+      <p>뽀피터스 팀 키우기 — 멀티에이전트 팀 운영 가이드</p>
+    </header>
+
+    {readme && (
+      <a href="/bbopters-team/readme" class="readme-link">📖 README.md — 팀 현황 보기</a>
+    )}
+
+    <h2 class="sub-title">📝 매뉴얼 <span class="count">{docs.length}편</span></h2>
+    <div class="list-grid">
+      {docs.map((doc) => (
+        <a href={`/bbopters-team/${doc.slug}`} class="list-card">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+  .list-header { text-align: center; padding: 60px 0 24px; }
+  .list-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-mono); }
+  .list-header p { font-size: 16px; color: var(--text-secondary); }
+  .readme-link {
+    display: block; text-align: center; padding: 12px;
+    background: var(--accent-bg); border: 1px solid var(--accent);
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+    color: var(--accent); margin-bottom: 32px; transition: all 0.2s;
+  }
+  .readme-link:hover { background: var(--accent); color: white; }
+  .sub-title { font-size: 17px; font-weight: 700; margin: 32px 0 12px; display: flex; align-items: center; gap: 8px; }
+  .count { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 2px 8px; border-radius: 10px; }
+  .list-grid { display: flex; flex-direction: column; gap: 10px; }
+  .list-card {
+    display: block; padding: 16px 20px;
+    background: var(--bg-card); border: 1px solid var(--border-card);
+    border-radius: 12px; text-decoration: none; transition: all 0.2s;
+  }
+  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .card-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+</style>

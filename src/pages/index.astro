@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const openclawContent = await getCollection('openclaw-content');
 const openclawPlatform = await getCollection('openclaw-platform');
+const bboptersTeam = await getCollection('bbopters-team');
 ---
 
 <BaseLayout title="홈">
@@ -38,6 +39,15 @@ const openclawPlatform = await getCollection('openclaw-platform');
           <span class="project-count">{openclawContent.length}편</span>
         </div>
         <p>콘텐츠 전략, SNS 채널 전략, SEO 선점</p>
+      </a>
+
+      <a href="/bbopters-team" class="project-card" style="--project-color: #10b981;">
+        <div class="project-header">
+          <span class="project-icon">🐱</span>
+          <h2>bbopters-team</h2>
+          <span class="project-count">{bboptersTeam.length}편</span>
+        </div>
+        <p>뽀피터스 팀 키우기 — 온보딩, 스킬 공유, 협업 프로토콜, 문서 구조</p>
       </a>
     </section>
   </div>

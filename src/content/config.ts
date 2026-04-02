@@ -15,8 +15,10 @@ const flexSchema = z.object({
 
 const openclawContent = defineCollection({ type: 'content', schema: flexSchema });
 const openclawPlatform = defineCollection({ type: 'content', schema: flexSchema });
+const bboptersTeam = defineCollection({ type: 'content', schema: flexSchema });
 
 export const collections = {
   'openclaw-content': openclawContent,
   'openclaw-platform': openclawPlatform,
+  'bbopters-team': bboptersTeam,
 };

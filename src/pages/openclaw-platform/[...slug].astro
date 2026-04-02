@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('openclaw-platform');
+  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+
+// Determine section for badge and back link
+let section = '전략 문서';
+let sectionIcon = '📝';
+if (doc.slug.startsWith('meetings/')) { section = '회의록'; sectionIcon = '🗓️'; }
+else if (doc.slug.startsWith('duckhu-archive/')) { section = '덕후방 아카이브'; sectionIcon = '🔍'; }
+else if (doc.slug.startsWith('reports/')) { section = '보고서'; sectionIcon = '📊'; }
+---
+
+<BaseLayout title={doc.data.title}>
+  <div class="back-to-list top"><a href="/openclaw-platform">← openclaw-platform</a></div>
+  <article>
+    <header class="article-header">
+      <span class="series-badge">{sectionIcon} {section}</span>
+      <h1>{doc.data.title}</h1>
+      {doc.data.date && <div class="meta"><span>{doc.data.date}</span></div>}
+    </header>
+    <div class="article-body"><Content /></div>
+  </article>
+  {doc.data.htmlFile && (
+    <div class="html-report">
+      <a href={`/reports/${doc.data.htmlFile}`} target="_blank" class="html-link">
+        📄 HTML 보고서 보기 →
+      </a>
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .html-report {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .html-link {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    transition: all 0.2s;
+  }
+  .html-link:hover { background: var(--accent); color: white; }
+</style>

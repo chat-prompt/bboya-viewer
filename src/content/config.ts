@@ -1,47 +1,24 @@
 import { defineCollection, z } from 'astro:content';
 
-const strategyBase = z.object({
+const flexSchema = z.object({
   title: z.string(),
-  order: z.number().optional(),
+  date: z.string().optional(),
   description: z.string().optional(),
+  order: z.number().optional(),
+  category: z.string().optional(),
   publishedAt: z.string().optional(),
+  participants: z.array(z.string()).optional(),
+  source: z.string().optional(),
+  duration: z.string().optional(),
+  htmlFile: z.string().optional(),
 });
 
-const overview = defineCollection({ type: 'content', schema: strategyBase });
-const platform = defineCollection({ type: 'content', schema: strategyBase });
-const content = defineCollection({ type: 'content', schema: strategyBase });
-const lecture = defineCollection({ type: 'content', schema: strategyBase });
+const duckhuArchive = defineCollection({ type: 'content', schema: flexSchema });
+const openclawContent = defineCollection({ type: 'content', schema: flexSchema });
+const openclawPlatform = defineCollection({ type: 'content', schema: flexSchema });
 
-const meetings = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.string(),
-    description: z.string().optional(),
-    participants: z.array(z.string()).optional(),
-  }),
-});
-
-const insights = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.string().optional(),
-    description: z.string().optional(),
-    category: z.string().optional(),
-    order: z.number().optional(),
-  }),
-});
-
-const reports = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.string(),
-    description: z.string().optional(),
-    htmlFile: z.string().optional(),
-    order: z.number().optional(),
-  }),
-});
-
-export const collections = { overview, platform, content, lecture, meetings, insights, reports };
+export const collections = {
+  'duckhu-archive': duckhuArchive,
+  'openclaw-content': openclawContent,
+  'openclaw-platform': openclawPlatform,
+};

@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allDocs = await getCollection('openclaw-platform');
+
+// Group by subfolder
+const topLevel: typeof allDocs = [];
+const meetings: typeof allDocs = [];
+const duckhuArchive: typeof allDocs = [];
+const reports: typeof allDocs = [];
+
+for (const doc of allDocs) {
+  if (doc.slug.startsWith('meetings/')) meetings.push(doc);
+  else if (doc.slug.startsWith('duckhu-archive/')) duckhuArchive.push(doc);
+  else if (doc.slug.startsWith('reports/')) reports.push(doc);
+  else if (doc.slug !== 'README') topLevel.push(doc);
+}
+
+// Sort: top-level by filename order, meetings/duckhu by date desc
+topLevel.sort((a, b) => a.slug.localeCompare(b.slug));
+meetings.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+duckhuArchive.sort((a, b) => (b.data.date ?? b.slug).localeCompare(a.data.date ?? a.slug));
+reports.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+// Get README for project description
+const readme = allDocs.find(d => d.slug === 'README');
+---
+
+<BaseLayout title="openclaw-platform">
+  <div class="list-page">
+    <header class="list-header">
+      <h1>🤖 openclaw-platform</h1>
+      <p>플랫폼 전략, 채널 설계, 봇 코칭 모델, KPI — 오픈클로 실사용자 니즈 검증 프로젝트</p>
+    </header>
+
+    {readme && (
+      <a href="/openclaw-platform/README" class="readme-link">📖 README.md — 프로젝트 인덱스 보기</a>
+    )}
+
+    <h2 class="sub-title">📝 전략 문서</h2>
+    <div class="list-grid">
+      {topLevel.map((doc) => (
+        <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+          {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
+        </a>
+      ))}
+    </div>
+
+    <h2 class="sub-title">🗓️ 회의록 <span class="sub-count">{meetings.length}편</span></h2>
+    <div class="list-grid">
+      {meetings.map((doc) => (
+        <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+        </a>
+      ))}
+    </div>
+
+    <h2 class="sub-title">🔍 덕후방 아카이브 <span class="sub-count">{duckhuArchive.length}편</span></h2>
+    <div class="list-grid">
+      {duckhuArchive.map((doc) => (
+        <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+          {doc.data.category && <span class="card-cat">{doc.data.category}</span>}
+        </a>
+      ))}
+    </div>
+
+    {reports.length > 0 && (
+      <>
+        <h2 class="sub-title">📊 보고서 <span class="sub-count">{reports.length}편</span></h2>
+        <div class="list-grid">
+          {reports.map((doc) => (
+            <a href={`/openclaw-platform/${doc.slug}`} class="list-card">
+              <h3 class="card-title">{doc.data.title}</h3>
+              {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+              {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+  .list-header { text-align: center; padding: 60px 0 24px; }
+  .list-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-mono); }
+  .list-header p { font-size: 16px; color: var(--text-secondary); }
+
+  .readme-link {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 32px;
+    transition: all 0.2s;
+  }
+  .readme-link:hover { background: var(--accent); color: white; }
+
+  .sub-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .list-grid { display: flex; flex-direction: column; gap: 10px; }
+  .list-card {
+    display: block;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .card-date { font-size: 12px; color: var(--text-muted); margin-top: 2px; display: inline-block; }
+  .card-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+  .card-cat { font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--bg-code, var(--accent-bg)); padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+</style>

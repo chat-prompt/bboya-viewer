@@ -2,19 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const overview = (await getCollection('overview')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const platformDocs = (await getCollection('platform')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const contentDocs = (await getCollection('content')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const lectureDocs = (await getCollection('lecture')).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const meetings = (await getCollection('meetings')).sort((a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
-
-let insights: any[] = [];
-try { insights = await getCollection('insights'); } catch {}
-
-let reports: any[] = [];
-try { reports = await getCollection('reports'); } catch {}
+const duckhuArchive = await getCollection('duckhu-archive');
+const openclawContent = await getCollection('openclaw-content');
+const openclawPlatform = await getCollection('openclaw-platform');
 ---
 
 <BaseLayout title="홈">
@@ -28,108 +18,36 @@ try { reports = await getCollection('reports'); } catch {}
       </p>
     </section>
 
-    <!-- 3축 순환 다이어그램 -->
-    <section class="flywheel">
-      <div class="flywheel-visual">
-        <div class="flywheel-node content-node">
-          <a href="/content">✍️ 콘텐츠</a>
-          <span class="flywheel-sub">사람을 모은다</span>
+    <h2 class="section-title">📁 프로젝트</h2>
+    <section class="projects-grid">
+      <a href="/openclaw-platform" class="project-card" style="--project-color: #6366f1;">
+        <div class="project-header">
+          <span class="project-icon">🤖</span>
+          <h2>openclaw-platform</h2>
+          <span class="project-count">{openclawPlatform.length}편</span>
         </div>
-        <div class="flywheel-arrow right-arrow">→</div>
-        <div class="flywheel-node platform-node">
-          <a href="/platform">🤖 플랫폼</a>
-          <span class="flywheel-sub">니즈가 드러난다</span>
+        <p>플랫폼 전략, 채널 설계, 봇 코칭, KPI, 회의록, 덕후방 인사이트, 보고서</p>
+        <div class="project-sub">
+          <span>📂 meetings/ · duckhu-archive/ · reports/</span>
         </div>
-        <div class="flywheel-arrow right-arrow">→</div>
-        <div class="flywheel-node lecture-node">
-          <a href="/lecture">🎓 강의</a>
-          <span class="flywheel-sub">니즈를 해결하며 수익화</span>
-        </div>
-      </div>
-      <div class="flywheel-return">↩️ 각 축의 결과물이 다른 축의 입구가 된다</div>
-    </section>
+      </a>
 
-    <h2 class="section-title">🏠 전체 그림</h2>
-    <section class="series-grid">
-      {overview.map((doc) => (
-        <a href={`/overview/${doc.slug}`} class="list-card compact">
-          <h3 class="card-title">{doc.data.title}</h3>
-          {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
-        </a>
-      ))}
-    </section>
+      <a href="/openclaw-content" class="project-card" style="--project-color: #f59e0b;">
+        <div class="project-header">
+          <span class="project-icon">✍️</span>
+          <h2>openclaw-content</h2>
+          <span class="project-count">{openclawContent.length}편</span>
+        </div>
+        <p>콘텐츠 전략, SNS 채널 전략, SEO 선점</p>
+      </a>
 
-    <h2 class="section-title">📐 3축 전략</h2>
-    <section class="three-pillars">
-      <a href="/platform" class="pillar-card" style="--pillar-color: #6366f1;">
-        <div class="pillar-header">
-          <span class="pillar-icon">🤖</span>
-          <h2>플랫폼</h2>
-          <span class="pillar-count">{platformDocs.length}편</span>
+      <a href="/duckhu-archive" class="project-card" style="--project-color: #10b981;">
+        <div class="project-header">
+          <span class="project-icon">📊</span>
+          <h2>duckhu-archive</h2>
+          <span class="project-count">{duckhuArchive.length}편</span>
         </div>
-        <p>봇+사람 커뮤니티, 채널 전략, 코치봇 모델</p>
-        <div class="pillar-feeds">
-          <span>← 콘텐츠가 모은 사람</span>
-          <span>→ 강의 니즈 발굴</span>
-        </div>
-      </a>
-      <a href="/content" class="pillar-card" style="--pillar-color: #f59e0b;">
-        <div class="pillar-header">
-          <span class="pillar-icon">✍️</span>
-          <h2>콘텐츠</h2>
-          <span class="pillar-count">{contentDocs.length}편</span>
-        </div>
-        <p>SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p>
-        <div class="pillar-feeds">
-          <span>← 플랫폼·강의의 사례</span>
-          <span>→ 유입 드라이버</span>
-        </div>
-      </a>
-      <a href="/lecture" class="pillar-card" style="--pillar-color: #10b981;">
-        <div class="pillar-header">
-          <span class="pillar-icon">🎓</span>
-          <h2>강의</h2>
-          <span class="pillar-count">{lectureDocs.length}편</span>
-        </div>
-        <p>원데이 강의+코칭, 즉시 니즈 해결, 수익화</p>
-        <div class="pillar-feeds">
-          <span>← 플랫폼의 병목 니즈</span>
-          <span>→ 실사용자 → 플랫폼</span>
-        </div>
-      </a>
-    </section>
-
-    <h2 class="section-title">📁 아카이브</h2>
-    <section class="series-grid">
-      <a href="/meetings" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">🗓️</span>
-          <div class="series-info">
-            <h2>회의록</h2>
-            <p>태현님·닿·소연 회의 기록</p>
-          </div>
-          <span class="series-count">{meetings.length}편</span>
-        </div>
-      </a>
-      <a href="/insights" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">🔍</span>
-          <div class="series-info">
-            <h2>덕후방 인사이트</h2>
-            <p>니즈 시그널, 봇 생태계, FAQ, 주간 리포트</p>
-          </div>
-          <span class="series-count">{insights.length}편</span>
-        </div>
-      </a>
-      <a href="/reports" class="series-card">
-        <div class="series-row">
-          <span class="series-icon">📊</span>
-          <div class="series-info">
-            <h2>보고서</h2>
-            <p>설문 분석, 운영 모니터링, 콘텐츠 패턴 보고서</p>
-          </div>
-          <span class="series-count">{reports.length}편</span>
-        </div>
+        <p>뽀둥이 분석 파이프라인 — 덕후방 데이터 취합·분석·인사이트</p>
       </a>
     </section>
   </div>
@@ -143,45 +61,35 @@ try { reports = await getCollection('reports'); } catch {}
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero-desc { font-size: 17px; color: var(--text-secondary); line-height: 1.7; }
 
-  /* Flywheel */
-  .flywheel { margin-bottom: 40px; }
-  .flywheel-visual { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-  .flywheel-node { text-align: center; padding: 16px 20px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-card); min-width: 140px; }
-  .flywheel-node a { font-size: 18px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
-  .flywheel-sub { display: block; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-  .flywheel-arrow { font-size: 24px; color: var(--text-muted); }
-  .flywheel-return { text-align: center; margin-top: 12px; font-size: 13px; color: var(--text-secondary); }
-  .content-node { border-top: 3px solid #f59e0b; }
-  .platform-node { border-top: 3px solid #6366f1; }
-  .lecture-node { border-top: 3px solid #10b981; }
-
-  /* 3 Pillars */
-  .three-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
-  @media (max-width: 680px) { .three-pillars { grid-template-columns: 1fr; } }
-  .pillar-card { display: block; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-top: 3px solid var(--pillar-color); border-radius: 12px; text-decoration: none; transition: all 0.2s; }
-  .pillar-card:hover { border-color: var(--pillar-color); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .pillar-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .pillar-icon { font-size: 24px; }
-  .pillar-header h2 { font-size: 17px; font-weight: 700; color: var(--text-primary); flex: 1; }
-  .pillar-count { font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 2px 8px; border-radius: 10px; }
-  .pillar-card > p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; }
-  .pillar-feeds { display: flex; flex-direction: column; gap: 2px; }
-  .pillar-feeds span { font-size: 11px; color: var(--text-muted); }
-
   .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 32px; }
-  .series-grid { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
-  .series-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s ease; }
-  .series-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(45, 156, 143, 0.12); transform: translateY(-1px); }
-  .series-row { display: flex; align-items: center; gap: 14px; }
-  .series-icon { font-size: 28px; flex-shrink: 0; }
-  .series-info { flex: 1; min-width: 0; }
-  .series-info h2 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-  .series-info p { font-size: 13px; color: var(--text-muted); }
-  .series-count { flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 3px 10px; border-radius: 12px; }
 
-  .list-card.compact { padding: 14px 20px; }
-  .list-card.compact .card-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
-  .list-card.compact .card-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-  .list-card { display: block; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; text-decoration: none; transition: all 0.2s; }
-  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .projects-grid { display: flex; flex-direction: column; gap: 14px; padding-bottom: 80px; }
+
+  .project-card {
+    display: block;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-top: 3px solid var(--project-color);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--project-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .project-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .project-icon { font-size: 28px; }
+  .project-header h2 { font-size: 18px; font-weight: 700; color: var(--text-primary); flex: 1; font-family: var(--font-mono); }
+  .project-count { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 2px 10px; border-radius: 10px; }
+
+  .project-card > p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+  .project-sub { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 680px) {
+    .project-header h2 { font-size: 15px; }
+  }
 </style>

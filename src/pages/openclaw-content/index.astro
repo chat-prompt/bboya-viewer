@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allDocs = await getCollection('openclaw-content');
+const readme = allDocs.find(d => d.slug === 'README');
+const docs = allDocs.filter(d => d.slug !== 'README').sort((a, b) => a.slug.localeCompare(b.slug));
+---
+
+<BaseLayout title="openclaw-content">
+  <div class="list-page">
+    <header class="list-header">
+      <h1>✍️ openclaw-content</h1>
+      <p>오픈클로 콘텐츠 전략 — SEO 선점, 채널별 전략, 캐릭터 콘텐츠</p>
+    </header>
+
+    {readme && (
+      <a href="/openclaw-content/README" class="readme-link">📖 README.md — 프로젝트 인덱스 보기</a>
+    )}
+
+    <div class="list-grid">
+      {docs.map((doc) => (
+        <a href={`/openclaw-content/${doc.slug}`} class="list-card">
+          <h3 class="card-title">{doc.data.title}</h3>
+          {doc.data.date && <span class="card-date">{doc.data.date}</span>}
+          {doc.data.description && <p class="card-desc">{doc.data.description}</p>}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+  .list-header { text-align: center; padding: 60px 0 24px; }
+  .list-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-mono); }
+  .list-header p { font-size: 16px; color: var(--text-secondary); }
+
+  .readme-link {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 32px;
+    transition: all 0.2s;
+  }
+  .readme-link:hover { background: var(--accent); color: white; }
+
+  .list-grid { display: flex; flex-direction: column; gap: 10px; }
+  .list-card {
+    display: block;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .list-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .card-date { font-size: 12px; color: var(--text-muted); margin-top: 2px; display: inline-block; }
+  .card-desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+</style>

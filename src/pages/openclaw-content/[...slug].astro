@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('openclaw-content');
+  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+---
+
+<BaseLayout title={doc.data.title}>
+  <div class="back-to-list top"><a href="/openclaw-content">← openclaw-content</a></div>
+  <article>
+    <header class="article-header">
+      <span class="series-badge">✍️ 콘텐츠</span>
+      <h1>{doc.data.title}</h1>
+      {doc.data.date && <div class="meta"><span>{doc.data.date}</span></div>}
+    </header>
+    <div class="article-body"><Content /></div>
+  </article>
+</BaseLayout>

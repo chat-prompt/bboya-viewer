@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(155,107,155,0.1);
+    color: #9B6B9B;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .steps {
+    display: flex;
+    gap: 14px;
+    width: 940px;
+    margin-bottom: 28px;
+  }
+
+  .step {
+    flex: 1;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 14px;
+    padding: 24px 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #5B8DBE;
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .step-icon { font-size: 36px; }
+
+  .step-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A2332;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: #6B7A8F;
+    line-height: 1.5;
+  }
+
+  .step-quote {
+    font-size: 13px;
+    color: #9BA8B8;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* 화살표 연결 */
+  .step::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #D4DCE2;
+    font-weight: 800;
+  }
+
+  .step:last-child::after { content: none; }
+
+  .footer {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 14px 24px;
+    text-align: center;
+    width: 940px;
+  }
+
+  .footer-text {
+    font-size: 17px;
+    color: #4A5568;
+  }
+  .footer-text em {
+    color: #5B8DBE;
+    font-style: normal;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">👻 SOUL.md 만드는 과정</div>
+  <div class="title">대화로 함께 만든다 — 빈 템플릿을 채우지 마</div>
+</div>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-icon">💬</div>
+    <div class="step-name">물어보기</div>
+    <div class="step-desc">이름, 역할, 말투<br>봇에게 직접 물어봐</div>
+    <div class="step-quote">"너 이름 뭐로 할래?"</div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-icon">🎛️</div>
+    <div class="step-name">조율하기</div>
+    <div class="step-desc">마음에 안 들면<br>방향을 잡아줘</div>
+    <div class="step-quote">"좀 더 장난기 있게"</div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-icon">📝</div>
+    <div class="step-name">기록시키기</div>
+    <div class="step-desc">봇이 직접<br>SOUL.md 작성</div>
+    <div class="step-quote">"지금까지 얘기한 거 정리해"</div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-icon">🧪</div>
+    <div class="step-name">테스트</div>
+    <div class="step-desc">자기소개 시켜보고<br>성격 확인</div>
+    <div class="step-quote">"자기소개 해봐"</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    <em>처음부터 완벽할 수 없어.</em> 3일 쓰다 보면 고치고 싶은 게 보여. 그게 정상이야.
+  </div>
+</div>
+
+</body>
+</html>

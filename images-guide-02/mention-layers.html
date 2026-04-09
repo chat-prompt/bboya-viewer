@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(245,158,11,0.1);
+    color: #D97706;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 920px;
+    margin-bottom: 24px;
+  }
+
+  .layer-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .layer-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .layer-row:nth-child(1) .layer-num { background: #3B82F6; }
+  .layer-row:nth-child(2) .layer-num { background: #D97706; }
+  .layer-row:nth-child(3) .layer-num { background: #059669; }
+
+  .layer-card {
+    flex: 1;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .layer-info { flex: 1; }
+
+  .layer-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1A2332;
+    margin-bottom: 2px;
+  }
+
+  .layer-file {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  .layer-row:nth-child(1) .layer-file { background: rgba(59,130,246,0.08); color: #3B82F6; }
+  .layer-row:nth-child(2) .layer-file { background: rgba(217,119,6,0.08); color: #D97706; }
+  .layer-row:nth-child(3) .layer-file { background: rgba(5,150,105,0.08); color: #059669; }
+
+  .layer-desc {
+    font-size: 15px;
+    color: #6B7A8F;
+    line-height: 1.4;
+  }
+
+  .layer-analogy {
+    font-size: 14px;
+    color: #9BA8B8;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #E4E9ED;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .layer-analogy .emoji {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* 화살표 연결 */
+  .arrow-down {
+    display: flex;
+    justify-content: center;
+    margin: -4px 0;
+  }
+
+  .arrow-down span {
+    font-size: 18px;
+    color: #D4DCE2;
+  }
+
+  .footer {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 14px 24px;
+    text-align: center;
+    width: 920px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+    color: #4A5568;
+  }
+  .footer-text strong { color: #5B8DBE; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">📢 호명규칙</div>
+  <div class="title">3개 레이어로 "언제 답할지" 결정한다</div>
+</div>
+
+<div class="layers">
+  <div class="layer-row">
+    <div class="layer-num">1</div>
+    <div class="layer-card">
+      <div class="layer-info">
+        <div class="layer-name">기술 레이어</div>
+        <div class="layer-file">openclaw.json</div>
+        <div class="layer-desc">멘션 없으면 메시지 자체를 안 받음</div>
+      </div>
+      <div class="layer-analogy">
+        <span class="emoji">🚪</span>
+        현관문 잠금
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"><span>↓</span></div>
+
+  <div class="layer-row">
+    <div class="layer-num">2</div>
+    <div class="layer-card">
+      <div class="layer-info">
+        <div class="layer-name">호명 레이어</div>
+        <div class="layer-file">agents.json</div>
+        <div class="layer-desc">한글 이름으로 불러도 문 열어줌</div>
+      </div>
+      <div class="layer-analogy">
+        <span class="emoji">🔔</span>
+        초인종 패턴
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down"><span>↓</span></div>
+
+  <div class="layer-row">
+    <div class="layer-num">3</div>
+    <div class="layer-card">
+      <div class="layer-info">
+        <div class="layer-name">행동 레이어</div>
+        <div class="layer-file">AGENTS.md</div>
+        <div class="layer-desc">문은 열었는데 대답할지 판단</div>
+      </div>
+      <div class="layer-analogy">
+        <span class="emoji">🛋️</span>
+        응접실 매너
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    <strong>1개만 한다면</strong> → requireMention &nbsp;|&nbsp;
+    <strong>2개까지</strong> → + mentionPatterns &nbsp;|&nbsp;
+    <strong>3개 다</strong> → + AGENTS.md 호명규칙
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const notes = (await getCollection('notes')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="이것저것 노트">
+  <div class="list-page">
+    <header class="list-header">
+      <h1>📝 이것저것 노트</h1>
+      <p>배운 것, 메모할 것, 기록할 것</p>
+    </header>
+
+    <div class="list-grid">
+      {notes.map((note) => (
+        <a href={`/notes/${note.slug}`} class="list-card">
+          <div class="card-header">
+            <span class="card-date">{note.data.date}</span>
+          </div>
+          <h2 class="card-title">{note.data.token && '🔒 '}{note.data.title}</h2>
+          {note.data.description && (
+            <p class="card-desc">{note.data.description}</p>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .list-header {
+    text-align: center;
+    padding: 60px 0 40px;
+  }
+
+  .list-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .list-header p {
+    font-size: 16px;
+    color: var(--text-secondary);
+  }
+
+  .list-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .list-card {
+    display: block;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .list-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(91, 141, 190, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-date {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>

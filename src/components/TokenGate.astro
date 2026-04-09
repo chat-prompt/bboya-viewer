@@ -1,0 +1,221 @@
+---
+interface Props {
+  token?: string;
+  slug: string;
+  collection: string;
+}
+
+const { token, slug, collection } = Astro.props;
+const hasToken = !!token;
+
+let tokenHash = '';
+if (hasToken) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(token);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  tokenHash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+---
+
+{hasToken && (
+  <div id="token-gate" data-token-hash={tokenHash} data-slug={slug} data-collection={collection}>
+    <div class="gate-overlay">
+      <div class="gate-card">
+        <div class="gate-icon">🔒</div>
+        <h2>보호된 콘텐츠</h2>
+        <p>이 글은 접근 토큰이 필요해요.</p>
+        <p class="gate-hint">공유받은 링크로 접속하거나, 토큰을 입력해주세요.</p>
+        <form id="token-form" class="gate-form">
+          <input type="text" id="token-input" placeholder="토큰 입력" autocomplete="off" />
+          <button type="submit">확인</button>
+        </form>
+        <p id="token-error" class="gate-error" style="display:none;">토큰이 맞지 않아요 😿</p>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function() {
+      var gate = document.getElementById('token-gate');
+      if (!gate) return;
+      var expectedHash = gate.dataset.tokenHash;
+      var slug = gate.dataset.slug;
+      var collection = gate.dataset.collection;
+      var storageKey = collection + '-token-' + slug;
+      function decodeContent(b64) {
+        var binStr = atob(b64);
+        var bytes = new Uint8Array(binStr.length);
+        for (var i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
+        return new TextDecoder().decode(bytes);
+      }
+      function unlock() {
+        gate.style.display = 'none';
+        var article = document.getElementById('article-content');
+        if (article) {
+          var encoded = article.dataset.encoded;
+          if (encoded) {
+            article.innerHTML = decodeContent(encoded);
+            article.removeAttribute('data-encoded');
+          }
+          article.style.display = '';
+        } else {
+          document.addEventListener('DOMContentLoaded', function() {
+            var a = document.getElementById('article-content');
+            if (a) {
+              var enc = a.dataset.encoded;
+              if (enc) { a.innerHTML = decodeContent(enc); a.removeAttribute('data-encoded'); }
+              a.style.display = '';
+            }
+          });
+          if (document.readyState !== 'loading') {
+            setTimeout(function() {
+              var a = document.getElementById('article-content');
+              if (a) {
+                var enc = a.dataset.encoded;
+                if (enc) { a.innerHTML = decodeContent(enc); a.removeAttribute('data-encoded'); }
+                a.style.display = '';
+              }
+            }, 0);
+          }
+        }
+      }
+
+      async function hashToken(token) {
+        var encoder = new TextEncoder();
+        var data = encoder.encode(token);
+        var buf = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+
+      async function tryToken(token, save) {
+        var h = await hashToken(token);
+        if (h === expectedHash) {
+          if (save) localStorage.setItem(storageKey, token);
+          unlock();
+          return true;
+        }
+        return false;
+      }
+
+      // 1) URL ?token= 파라미터
+      var params = new URLSearchParams(window.location.search);
+      var urlToken = params.get('token');
+      if (urlToken) {
+        tryToken(urlToken, true).then(function(ok) {
+          if (ok) window.history.replaceState({}, '', window.location.pathname);
+          else initForm();
+        });
+        return;
+      }
+
+      // 2) localStorage (slug-specific)
+      var saved = localStorage.getItem(storageKey);
+      if (saved) {
+        tryToken(saved, false).then(function(ok) {
+          if (!ok) { localStorage.removeItem(storageKey); checkSeriesToken(); }
+        });
+        return;
+      }
+
+      // 3) series-level token (try multiple series keys)
+      checkSeriesToken();
+
+      function checkSeriesToken() {
+        var seriesKeys = ['guides-series-token', 'setup-guides-series-token'];
+        tryNextSeriesKey(seriesKeys, 0);
+      }
+
+      function tryNextSeriesKey(keys, idx) {
+        if (idx >= keys.length) { initForm(); return; }
+        var seriesToken = localStorage.getItem(keys[idx]);
+        if (seriesToken) {
+          tryToken(seriesToken, true).then(function(ok) {
+            if (!ok) { localStorage.removeItem(keys[idx]); tryNextSeriesKey(keys, idx + 1); }
+          });
+        } else {
+          tryNextSeriesKey(keys, idx + 1);
+        }
+      }
+
+      function initForm() {
+        var form = document.getElementById('token-form');
+        var input = document.getElementById('token-input');
+        var error = document.getElementById('token-error');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var val = input.value.trim();
+          tryToken(val, true).then(function(ok) {
+            if (!ok) {
+              error.style.display = '';
+              input.classList.add('shake');
+              setTimeout(function() { input.classList.remove('shake'); }, 500);
+            }
+          });
+        });
+      }
+    })();
+  </script>
+)}
+
+<style>
+  .gate-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  .gate-card {
+    text-align: center;
+    padding: 48px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card, #D4DCE2);
+    border-radius: 16px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 24px rgba(26, 35, 50, 0.06);
+  }
+  .gate-icon { font-size: 48px; margin-bottom: 16px; }
+  .gate-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #1A2332); }
+  .gate-card p { font-size: 15px; color: var(--text-secondary, #4A5568); line-height: 1.5; }
+  .gate-hint { margin-top: 4px; font-size: 13px; color: var(--text-muted, #6B7A8F); }
+  .gate-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+  .gate-form input {
+    padding: 10px 16px;
+    border: 1px solid var(--border-card, #D4DCE2);
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--bg-page, #F8FAFB);
+    color: var(--text-primary, #1A2332);
+    width: 200px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: var(--font-body, 'Pretendard', sans-serif);
+  }
+  .gate-form input:focus { border-color: var(--accent, #5B8DBE); }
+  .gate-form button {
+    padding: 10px 20px;
+    background: var(--accent, #5B8DBE);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: var(--font-body, 'Pretendard', sans-serif);
+  }
+  .gate-form button:hover { opacity: 0.9; }
+  .gate-error { color: #ef4444; font-size: 14px; margin-top: 12px; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+  :global(.shake) { animation: shake 0.4s; }
+</style>

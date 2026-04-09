@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TokenGate from '../../components/TokenGate.astro';
+import ProtectedContent from '../../components/ProtectedContent.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+const hasToken = !!note.data.token;
+---
+
+<BaseLayout title={note.data.title} description={note.data.description}>
+  <div class="back-to-list top">
+    <a href="/notes">← 노트 목록</a>
+  </div>
+
+  <TokenGate token={note.data.token} slug={note.slug} collection="note" />
+
+  <ProtectedContent hasToken={hasToken}>
+    <article>
+      <header class="article-header">
+        <span class="series-badge">📝 노트</span>
+        <h1>{note.data.title}</h1>
+        <div class="meta">
+          <span>{note.data.date}</span>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <Content />
+      </div>
+    </article>
+
+    <div class="back-to-list">
+      <a href="/notes">← 노트 목록으로</a>
+    </div>
+  </ProtectedContent>
+</BaseLayout>

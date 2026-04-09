@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.min.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px;
+    font-family: 'Pretendard Variable', sans-serif;
+    background: linear-gradient(150deg, #F8FAFB 0%, #E1EBF5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card {
+    width: 1200px; height: 630px;
+    display: flex;
+    align-items: center;
+    padding: 60px 70px;
+    position: relative;
+  }
+  .left {
+    flex: 1;
+    z-index: 1;
+  }
+  .badge {
+    display: inline-block;
+    background: #5B8DBE;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+  }
+  .title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #1A2332;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .title .accent {
+    color: #5B8DBE;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: #5A6B7A;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+  .right {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 1;
+  }
+  .phase {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s;
+  }
+  .phase-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+  }
+  .p1 { background: #5B8DBE; }
+  .p2 { background: #6BA368; }
+  .p3 { background: #D4915E; }
+  .p4 { background: #8B7EC8; }
+  .phase-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1A2332;
+    line-height: 1.4;
+  }
+  .phase-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: #7A8A9A;
+    margin-top: 2px;
+  }
+  /* decorative circles */
+  .deco-1 {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(91,141,190,0.06);
+    top: -80px; right: -60px;
+  }
+  .deco-2 {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(91,141,190,0.04);
+    bottom: -50px; left: 200px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="deco-1"></div>
+  <div class="deco-2"></div>
+  <div class="left">
+    <div class="badge">뽀피터스 훈련일지 #2</div>
+    <div class="title">커뮤니티가 찾은<br><span class="accent">42가지 사례</span>,<br>우리는 <span class="accent">4가지</span>로</div>
+    <div class="subtitle">awesome-openclaw-usecases 레포 분석 →<br>뽀피터스 팀 적용 로드맵</div>
+  </div>
+  <div class="right">
+    <div class="phase">
+      <div class="phase-num p1">1</div>
+      <div>
+        <div class="phase-text">모닝 브리핑 통합</div>
+        <div class="phase-sub">이번 주 · 뽀야</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num p2">2</div>
+      <div>
+        <div class="phase-text">데일리 다이제스트</div>
+        <div class="phase-sub">다음 주 · 뽀둥이</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num p3">3</div>
+      <div>
+        <div class="phase-text">태스크 보드 반자동화</div>
+        <div class="phase-sub">4월 중순 · 뽀야</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num p4">4</div>
+      <div>
+        <div class="phase-text">시맨틱 메모리 검색</div>
+        <div class="phase-sub">4월 후반 · 실험</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

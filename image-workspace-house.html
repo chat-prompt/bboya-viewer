@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(91,141,190,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(91,141,190,0.12);
+    color: #5B8DBE;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 38px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  /* 터미널 */
+  .terminal {
+    width: 940px;
+    margin-bottom: 14px;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1A2332;
+    border-radius: 10px;
+    padding: 12px 18px;
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #FF5F57; }
+  .dot.y { background: #FFBD2E; }
+  .dot.g { background: #28CA42; }
+
+  .terminal-text {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 16px;
+    color: #7AABDB;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+  .terminal-text .prompt { color: #6EE7B7; }
+
+  /* 그리드 */
+  .grid {
+    width: 940px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 18px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .card-icon {
+    font-size: 30px;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .card:nth-child(1) .card-icon,
+  .row-2 .card:nth-child(1) .card-icon { background: rgba(91,141,190,0.1); }
+  .row-2 .card:nth-child(2) .card-icon { background: rgba(59,130,246,0.08); }
+  .row-3 .card:nth-child(1) .card-icon { background: rgba(245,158,11,0.08); }
+  .row-3 .card:nth-child(2) .card-icon { background: rgba(16,185,129,0.08); }
+  .row-3 .card:nth-child(3) .card-icon { background: rgba(139,92,246,0.08); }
+
+  .card-content { flex: 1; }
+
+  .card-name {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A2332;
+    margin-bottom: 1px;
+  }
+
+  .card-label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .row-2 .card:nth-child(1) .card-label { color: #5B8DBE; }
+  .row-2 .card:nth-child(2) .card-label { color: #3B82F6; }
+  .row-3 .card:nth-child(1) .card-label { color: #D97706; }
+  .row-3 .card:nth-child(2) .card-label { color: #059669; }
+  .row-3 .card:nth-child(3) .card-label { color: #7C3AED; }
+
+  .card-desc {
+    font-size: 15px;
+    color: #6B7A8F;
+    line-height: 1.5;
+  }
+
+  /* 하단 3열 약간 작게 */
+  .row-3 .card { padding: 14px 12px; }
+  .row-3 .card-icon { width: 38px; height: 38px; font-size: 24px; }
+  .row-3 .card-name { font-size: 16px; }
+  .row-3 .card-label { font-size: 13px; }
+  .row-3 .card-desc { font-size: 14px; }
+
+  /* 하단 */
+  .footer {
+    margin-top: 20px;
+    font-size: 17px;
+    color: #4A5568;
+    font-weight: 500;
+  }
+  .footer em {
+    color: #5B8DBE;
+    font-style: normal;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">📖 가이드 #1 · 봇이 사는 집</div>
+  <div class="title">🏠 워크스페이스 핵심 파일 5개</div>
+</div>
+
+<div class="terminal">
+  <div class="terminal-bar">
+    <span class="dot r"></span>
+    <span class="dot y"></span>
+    <span class="dot g"></span>
+    <span class="terminal-text"><span class="prompt">$</span> ls ~/.openclaw/workspace-뽀야/</span>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="row-2">
+    <div class="card">
+      <div class="card-icon">👻</div>
+      <div class="card-content">
+        <div class="card-name">SOUL.md</div>
+        <div class="card-label">영혼</div>
+        <div class="card-desc">성격, 말투, 가치관, 미션</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <div class="card-content">
+        <div class="card-name">USER.md</div>
+        <div class="card-label">집사 프로필</div>
+        <div class="card-desc">주인 정보, 선호, 소통 스타일</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <div class="card-content">
+        <div class="card-name">AGENTS.md</div>
+        <div class="card-label">사규 / 매뉴얼</div>
+        <div class="card-desc">보안, 호명규칙, 행동 규칙</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-content">
+        <div class="card-name">MEMORY.md</div>
+        <div class="card-label">화이트보드</div>
+        <div class="card-desc">현재 상태 스냅샷</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪪</div>
+      <div class="card-content">
+        <div class="card-name">IDENTITY.md</div>
+        <div class="card-label">명함</div>
+        <div class="card-desc">이름, ID, 기본 정보</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  봇은 매 세션마다 이 파일들을 읽어. <em>파일에 안 쓰면 기억 못 한다.</em>
+</div>
+
+</body>
+</html>

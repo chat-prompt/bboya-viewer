@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TokenGate from '../../../components/TokenGate.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('case-studies');
+  const categoryMap = new Map<string, typeof posts>();
+
+  for (const post of posts) {
+    const category = post.slug.split('/')[0];
+    if (!categoryMap.has(category)) categoryMap.set(category, []);
+    categoryMap.get(category)!.push(post);
+  }
+
+  return [...categoryMap.entries()].map(([category, posts]) => ({
+    params: { category },
+    props: {
+      posts: posts.sort((a, b) => a.data.episode - b.data.episode),
+      label: posts[0].data.category || category,
+      token: posts[0].data.token,
+    },
+  }));
+}
+
+const { posts, label, token } = Astro.props;
+const { category } = Astro.params;
+const hasToken = !!token;
+---
+
+<BaseLayout title={label}>
+  <div class="back-to-list top">
+    <a href="/case-studies">&larr; 후기리워드 자료집</a>
+  </div>
+
+  <TokenGate token={token} slug={category!} collection="case-studies-folder" />
+
+  <div id="article-content" style={hasToken ? 'display:none;' : ''}>
+    <div class="list-page">
+      <header class="list-header">
+        <h1>📁 {label}</h1>
+      </header>
+
+      <div class="list-grid">
+        {posts.map((post) => {
+          const articleSlug = post.slug.split('/').slice(1).join('/');
+          return (
+            <a href={`/case-studies/${category}/${articleSlug}`} class="list-card">
+              <div class="card-header">
+                <span class="card-episode">#{post.data.episode}</span>
+                <span class="card-date">{post.data.date}</span>
+              </div>
+              <h2 class="card-title">{post.data.title}</h2>
+              {post.data.description && (
+                <p class="card-desc">{post.data.description}</p>
+              )}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .list-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .list-header {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .list-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .list-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .list-card {
+    display: block;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .list-card:hover {
+    border-color: #D4802A;
+    box-shadow: 0 4px 24px rgba(212, 128, 42, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-episode {
+    font-size: 12px;
+    font-weight: 600;
+    color: #D4802A;
+  }
+
+  .card-date {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>

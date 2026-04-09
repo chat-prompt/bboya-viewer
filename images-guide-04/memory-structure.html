@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(16,185,129,0.1);
+    color: #059669;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .tiers {
+    display: flex;
+    gap: 16px;
+    width: 920px;
+    margin-bottom: 28px;
+  }
+
+  .tier {
+    flex: 1;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 14px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .tier-icon { font-size: 40px; }
+
+  .tier-file {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1A2332;
+  }
+
+  .tier-label {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .tier:nth-child(1) .tier-label { background: rgba(91,141,190,0.1); color: #5B8DBE; }
+  .tier:nth-child(2) .tier-label { background: rgba(245,158,11,0.1); color: #D97706; }
+  .tier:nth-child(3) .tier-label { background: rgba(220,38,38,0.08); color: #DC2626; }
+
+  .tier-desc {
+    font-size: 15px;
+    color: #6B7A8F;
+    line-height: 1.5;
+  }
+
+  .tier-persist {
+    font-size: 13px;
+    color: #9BA8B8;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #E4E9ED;
+    width: 100%;
+  }
+
+  .footer {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 14px 24px;
+    text-align: center;
+    width: 920px;
+  }
+
+  .footer-text {
+    font-size: 17px;
+    color: #4A5568;
+  }
+  .footer-text em {
+    color: #5B8DBE;
+    font-style: normal;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🧠 메모리</div>
+  <div class="title">봇의 기억 3단 구조</div>
+</div>
+
+<div class="tiers">
+  <div class="tier">
+    <div class="tier-icon">📋</div>
+    <div class="tier-file">MEMORY.md</div>
+    <div class="tier-label">화이트보드</div>
+    <div class="tier-desc">현재 상태 스냅샷<br>진행 중인 프로젝트, 블로커</div>
+    <div class="tier-persist">수동 업데이트 · 항상 유지</div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-icon">📅</div>
+    <div class="tier-file">memory/날짜.md</div>
+    <div class="tier-label">일기장</div>
+    <div class="tier-desc">그날 있었던 일의 날것 기록<br>결정사항, 맥락, 이벤트</div>
+    <div class="tier-persist">매일 자동 생성</div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-icon">📕</div>
+    <div class="tier-file">learnings/</div>
+    <div class="tier-label">오답노트</div>
+    <div class="tier-desc">삽질 → 해결 과정 기록<br>같은 실수 반복 방지</div>
+    <div class="tier-persist">영구 보존</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    <em>1가지 정보는 1곳에만.</em> 교훈 → learnings/ · 오늘 일 → memory/날짜.md · 현재 상태 → MEMORY.md
+  </div>
+</div>
+
+</body>
+</html>

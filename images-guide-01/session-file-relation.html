@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(91,141,190,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(91,141,190,0.12);
+    color: #5B8DBE;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  /* 다이어그램 */
+  .diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 900px;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  /* 세션 박스들 (좌우) */
+  .sessions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .session-box {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 240px;
+  }
+
+  .session-box .icon {
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(91,141,190,0.08);
+    flex-shrink: 0;
+  }
+
+  .session-box .name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1A2332;
+  }
+
+  .session-box .sub {
+    font-size: 13px;
+    color: #6B7A8F;
+  }
+
+  /* 가운데 파일 허브 */
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 32px;
+    position: relative;
+  }
+
+  .file-hub {
+    background: rgba(91,141,190,0.08);
+    border: 2px solid rgba(91,141,190,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .file-hub-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+
+  .file-hub-name {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A2332;
+    margin-bottom: 2px;
+  }
+
+  .file-hub-label {
+    font-size: 14px;
+    color: #5B8DBE;
+    font-weight: 600;
+  }
+
+  .file-hub-files {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mini-file {
+    font-family: 'SF Mono', monospace;
+    font-size: 11px;
+    color: #5B8DBE;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(91,141,190,0.15);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  /* 화살표 */
+  .arrows-left, .arrows-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    width: 80px;
+  }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #5B8DBE;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .arrow-icon {
+    font-size: 20px;
+  }
+
+  /* 범례 */
+  .legend {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+  }
+
+  .legend-dot.session { background: rgba(255,255,255,0.85); border: 1px solid #D4DCE2; }
+  .legend-dot.file { background: rgba(91,141,190,0.15); border: 2px solid rgba(91,141,190,0.3); }
+
+  .legend-text {
+    font-size: 15px;
+    color: #6B7A8F;
+    font-weight: 500;
+  }
+
+  .legend-text strong {
+    color: #4A5568;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">핵심 개념</div>
+  <div class="title">📂 세션은 분리, 파일은 공유</div>
+</div>
+
+<div class="diagram">
+  <!-- 좌측 세션들 -->
+  <div class="sessions">
+    <div class="session-box">
+      <div class="icon">💬</div>
+      <div>
+        <div class="name">DM 세션</div>
+        <div class="sub">1:1 메인 대화</div>
+      </div>
+    </div>
+    <div class="session-box">
+      <div class="icon">🧵</div>
+      <div>
+        <div class="name">스레드 A</div>
+        <div class="sub">매출 분석 질문</div>
+      </div>
+    </div>
+    <div class="session-box">
+      <div class="icon">🧵</div>
+      <div>
+        <div class="name">스레드 B</div>
+        <div class="sub">스케줄 확인</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 좌측 화살표 -->
+  <div class="arrows-left">
+    <div class="arrow"><span class="arrow-icon">→</span>읽기</div>
+    <div class="arrow"><span class="arrow-icon">→</span>읽기</div>
+    <div class="arrow"><span class="arrow-icon">→</span>읽기</div>
+  </div>
+
+  <!-- 중앙 파일 허브 -->
+  <div class="center">
+    <div class="file-hub">
+      <div class="file-hub-icon">📁</div>
+      <div class="file-hub-name">워크스페이스</div>
+      <div class="file-hub-label">모든 세션이 공유</div>
+      <div class="file-hub-files">
+        <span class="mini-file">SOUL.md</span>
+        <span class="mini-file">USER.md</span>
+        <span class="mini-file">AGENTS.md</span>
+        <span class="mini-file">MEMORY.md</span>
+        <span class="mini-file">IDENTITY.md</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 우측 화살표 -->
+  <div class="arrows-right">
+    <div class="arrow">쓰기<span class="arrow-icon">←</span></div>
+    <div class="arrow">쓰기<span class="arrow-icon">←</span></div>
+    <div class="arrow">쓰기<span class="arrow-icon">←</span></div>
+  </div>
+
+  <!-- 우측 세션들 (같은 세션, 쓰기 방향) -->
+  <div class="sessions">
+    <div class="session-box">
+      <div class="icon">💬</div>
+      <div>
+        <div class="name">DM 세션</div>
+        <div class="sub">"이거 기억해"</div>
+      </div>
+    </div>
+    <div class="session-box">
+      <div class="icon">🧵</div>
+      <div>
+        <div class="name">스레드 A</div>
+        <div class="sub">결과 기록</div>
+      </div>
+    </div>
+    <div class="session-box">
+      <div class="icon">🧵</div>
+      <div>
+        <div class="name">스레드 B</div>
+        <div class="sub">교훈 저장</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot session"></div>
+    <div class="legend-text"><strong>세션</strong> — 대화는 분리됨</div>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot file"></div>
+    <div class="legend-text"><strong>워크스페이스 파일</strong> — 모두가 공유</div>
+  </div>
+</div>
+
+</body>
+</html>

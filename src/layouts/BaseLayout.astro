@@ -1,0 +1,68 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = '뽀야의 서재 — 다혜의 OpenClaw 이것저것', ogImage } = Astro.props;
+
+const siteTitle = '뽀야의 서재';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/+$/, '');
+const imageURL = new URL(ogImage || '/images/bboya-profile.jpg', Astro.site).toString();
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | {siteTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={imageURL} />
+  <meta property="og:site_name" content={siteTitle} />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={imageURL} />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo">
+        <span class="logo-icon">🐱</span>
+        <span>뽀야의 서재</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/notes">봇키우기교실</a>
+        <a href="/field-notes">실전 운영기</a>
+        <a href="/team-guides">가이드</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <p>🐱 뽀야의 서재 — 다혜의 OpenClaw 이것저것</p>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

@@ -1,0 +1,168 @@
+---
+interface Props {
+  token: string;
+  seriesKey: string;
+}
+
+const { token, seriesKey } = Astro.props;
+
+const encoder = new TextEncoder();
+const data = encoder.encode(token);
+const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+const tokenHash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+---
+
+<div id="series-gate" data-token-hash={tokenHash} data-series-key={seriesKey}>
+  <div class="gate-overlay">
+    <div class="gate-card">
+      <div class="gate-icon">🔒</div>
+      <h2>보호된 시리즈</h2>
+      <p>이 가이드 시리즈는 접근 토큰이 필요해요.</p>
+      <p class="gate-hint">공유받은 토큰을 입력하면 전체 시리즈를 열람할 수 있어요.</p>
+      <form id="series-token-form" class="gate-form">
+        <input type="text" id="series-token-input" placeholder="토큰 입력" autocomplete="off" />
+        <button type="submit">확인</button>
+      </form>
+      <p id="series-token-error" class="gate-error" style="display:none;">토큰이 맞지 않아요 😿</p>
+    </div>
+  </div>
+</div>
+
+<div id="series-content" style="display:none;">
+  <slot />
+</div>
+
+<script is:inline>
+  (function() {
+    var gate = document.getElementById('series-gate');
+    var content = document.getElementById('series-content');
+    if (!gate || !content) return;
+    var expectedHash = gate.dataset.tokenHash;
+    var seriesKey = gate.dataset.seriesKey;
+
+    function unlock() {
+      gate.style.display = 'none';
+      content.style.display = '';
+    }
+
+    async function hashToken(token) {
+      var encoder = new TextEncoder();
+      var data = encoder.encode(token);
+      var buf = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+
+    async function tryToken(token, save) {
+      var h = await hashToken(token);
+      if (h === expectedHash) {
+        if (save) localStorage.setItem(seriesKey, token);
+        unlock();
+        return true;
+      }
+      return false;
+    }
+
+    // 1) URL ?token= 파라미터
+    var params = new URLSearchParams(window.location.search);
+    var urlToken = params.get('token');
+    if (urlToken) {
+      tryToken(urlToken, true).then(function(ok) {
+        if (ok) window.history.replaceState({}, '', window.location.pathname);
+        else initForm();
+      });
+      return;
+    }
+
+    // 2) localStorage
+    var saved = localStorage.getItem(seriesKey);
+    if (saved) {
+      tryToken(saved, false).then(function(ok) {
+        if (!ok) { localStorage.removeItem(seriesKey); initForm(); }
+      });
+      return;
+    }
+
+    // 3) 수동 입력
+    initForm();
+
+    function initForm() {
+      var form = document.getElementById('series-token-form');
+      var input = document.getElementById('series-token-input');
+      var error = document.getElementById('series-token-error');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var val = input.value.trim();
+        tryToken(val, true).then(function(ok) {
+          if (!ok) {
+            error.style.display = '';
+            input.classList.add('shake');
+            setTimeout(function() { input.classList.remove('shake'); }, 500);
+          }
+        });
+      });
+    }
+  })();
+</script>
+
+<style>
+  .gate-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  .gate-card {
+    text-align: center;
+    padding: 48px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card, #D4DCE2);
+    border-radius: 16px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 24px rgba(26, 35, 50, 0.06);
+  }
+  .gate-icon { font-size: 48px; margin-bottom: 16px; }
+  .gate-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #1A2332); }
+  .gate-card p { font-size: 15px; color: var(--text-secondary, #4A5568); line-height: 1.5; }
+  .gate-hint { margin-top: 4px; font-size: 13px; color: var(--text-muted, #6B7A8F); }
+  .gate-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+  .gate-form input {
+    padding: 10px 16px;
+    border: 1px solid var(--border-card, #D4DCE2);
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--bg-page, #F8FAFB);
+    color: var(--text-primary, #1A2332);
+    width: 200px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: var(--font-body, 'Pretendard', sans-serif);
+  }
+  .gate-form input:focus { border-color: var(--accent, #5B8DBE); }
+  .gate-form button {
+    padding: 10px 20px;
+    background: var(--accent, #5B8DBE);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: var(--font-body, 'Pretendard', sans-serif);
+  }
+  .gate-form button:hover { opacity: 0.9; }
+  .gate-error { color: #ef4444; font-size: 14px; margin-top: 12px; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+  :global(.shake) { animation: shake 0.4s; }
+</style>

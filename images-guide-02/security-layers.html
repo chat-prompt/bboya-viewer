@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(220,38,38,0.1);
+    color: #DC2626;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .layers {
+    display: flex;
+    gap: 20px;
+    width: 920px;
+    margin-bottom: 28px;
+  }
+
+  .layer {
+    flex: 1;
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .layer.soft {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+  }
+
+  .layer.hard {
+    background: rgba(26,35,50,0.03);
+    border: 1px solid rgba(26,35,50,0.12);
+  }
+
+  .layer-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .layer-icon {
+    font-size: 28px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .layer.soft .layer-icon { background: rgba(245,158,11,0.1); }
+  .layer.hard .layer-icon { background: rgba(220,38,38,0.08); }
+
+  .layer-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1A2332;
+  }
+
+  .layer-file {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .layer.soft .layer-file {
+    background: rgba(245,158,11,0.08);
+    color: #D97706;
+  }
+
+  .layer.hard .layer-file {
+    background: rgba(220,38,38,0.06);
+    color: #DC2626;
+  }
+
+  .layer-desc {
+    font-size: 16px;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+
+  .layer-features {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .feature {
+    font-size: 15px;
+    color: #6B7A8F;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feature-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .layer.soft .feature-dot { background: #D97706; }
+  .layer.hard .feature-dot { background: #DC2626; }
+
+  .vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #9BA8B8;
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .footer {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 14px 24px;
+    text-align: center;
+    width: 920px;
+  }
+
+  .footer-text {
+    font-size: 17px;
+    color: #4A5568;
+    font-weight: 500;
+  }
+  .footer-text em {
+    color: #5B8DBE;
+    font-style: normal;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">🔒 보안 구조</div>
+  <div class="title">소프트 보안 + 하드 보안 = 완전한 갑옷</div>
+</div>
+
+<div class="layers">
+  <div class="layer soft">
+    <div class="layer-header">
+      <div class="layer-icon">📝</div>
+      <div class="layer-title">소프트 보안</div>
+    </div>
+    <div class="layer-file">AGENTS.md</div>
+    <div class="layer-desc">자연어로 된 <strong>판단 기준</strong></div>
+    <div class="layer-features">
+      <div class="feature"><span class="feature-dot"></span>맥락에 따라 유연하게 적용</div>
+      <div class="feature"><span class="feature-dot"></span>"이 사람은 주인이 아니니까 거절"</div>
+      <div class="feature"><span class="feature-dot"></span>주인 ID, 권한 범위, 거절 멘트</div>
+    </div>
+  </div>
+
+  <div class="vs">+</div>
+
+  <div class="layer hard">
+    <div class="layer-header">
+      <div class="layer-icon">🔧</div>
+      <div class="layer-title">하드 보안</div>
+    </div>
+    <div class="layer-file">openclaw.json</div>
+    <div class="layer-desc">기술적으로 강제하는 <strong>물리적 차단</strong></div>
+    <div class="layer-features">
+      <div class="feature"><span class="feature-dot"></span>맥락 무관하게 차단</div>
+      <div class="feature"><span class="feature-dot"></span>DM 정책 (allowlist/pairing)</div>
+      <div class="feature"><span class="feature-dot"></span>exec 보안 레벨 (deny/allowlist)</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    소프트만 있으면 프롬프트 인젝션에 뚫리고, 하드만 있으면 맥락 판단이 안 돼. <em>둘 다 필요해.</em>
+  </div>
+</div>
+
+</body>
+</html>

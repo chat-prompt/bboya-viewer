@@ -1,0 +1,17 @@
+---
+interface Props {
+  hasToken: boolean;
+}
+
+const { hasToken } = Astro.props;
+const html = await Astro.slots.render('default');
+const encoded = hasToken ? Buffer.from(html).toString('base64') : null;
+---
+
+{hasToken ? (
+  <div id="article-content" style="display:none;" data-encoded={encoded}></div>
+) : (
+  <div id="article-content">
+    <Fragment set:html={html} />
+  </div>
+)}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(91,141,190,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(91,141,190,0.12);
+    color: #5B8DBE;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .cards {
+    display: flex;
+    gap: 16px;
+    width: 940px;
+    margin-bottom: 32px;
+  }
+
+  .session-card {
+    flex: 1;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D4DCE2;
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .session-icon {
+    font-size: 48px;
+    margin-bottom: 4px;
+  }
+
+  .session-type {
+    font-size: 14px;
+    font-weight: 700;
+    color: #5B8DBE;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .session-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1A2332;
+    margin-bottom: 4px;
+  }
+
+  .session-analogy {
+    font-size: 16px;
+    color: #6B7A8F;
+    line-height: 1.5;
+  }
+
+  .session-analogy strong {
+    color: #4A5568;
+  }
+
+  .arrow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 940px;
+    margin-bottom: 28px;
+  }
+
+  .arrow-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4DCE2 20%, #D4DCE2 80%, transparent);
+  }
+
+  .arrow-text {
+    font-size: 15px;
+    color: #6B7A8F;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 6px 16px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #D4DCE2;
+    border-radius: 20px;
+  }
+
+  .key-point {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 16px 28px;
+    text-align: center;
+    width: 940px;
+  }
+
+  .key-point-text {
+    font-size: 19px;
+    color: #4A5568;
+    font-weight: 500;
+  }
+
+  .key-point-text em {
+    color: #5B8DBE;
+    font-style: normal;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">세션 = 대화의 단위</div>
+  <div class="title">💬 카카오톡에 비유하면 바로 이해돼</div>
+</div>
+
+<div class="cards">
+  <div class="session-card">
+    <div class="session-icon">👤</div>
+    <div class="session-type">DM</div>
+    <div class="session-name">1:1 채팅방</div>
+    <div class="session-analogy">봇과 나만의 대화<br><strong>→ 메인 세션 1개</strong></div>
+  </div>
+
+  <div class="session-card">
+    <div class="session-icon">👥</div>
+    <div class="session-type">채널</div>
+    <div class="session-name">오픈 채팅방</div>
+    <div class="session-analogy">여러 사람이 있는 곳<br><strong>→ 채널 세션 1개</strong></div>
+  </div>
+
+  <div class="session-card">
+    <div class="session-icon">🧵</div>
+    <div class="session-type">스레드</div>
+    <div class="session-name">답글 묶음</div>
+    <div class="session-analogy">하나의 주제로 묶인 대화<br><strong>→ 스레드마다 별도 세션</strong></div>
+  </div>
+</div>
+
+<div class="arrow-row">
+  <div class="arrow-line"></div>
+  <div class="arrow-text">각 세션은 서로의 대화를 모름</div>
+  <div class="arrow-line"></div>
+</div>
+
+<div class="key-point">
+  <div class="key-point-text">
+    스레드 A의 대화를 스레드 B는 모른다. 하지만 <em>MEMORY.md에 기록하면 모든 세션이 읽을 수 있다.</em>
+  </div>
+</div>
+
+</body>
+</html>

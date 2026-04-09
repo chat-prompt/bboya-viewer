@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TokenGate from '../../../components/TokenGate.astro';
+import ProtectedContent from '../../../components/ProtectedContent.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('case-studies');
+  return posts.map((post) => {
+    const parts = post.slug.split('/');
+    const category = parts[0];
+    const slug = parts.slice(1).join('/');
+    return {
+      params: { category, slug },
+      props: { post, category },
+    };
+  });
+}
+
+const { post, category } = Astro.props;
+const { Content } = await post.render();
+const hasToken = !!post.data.token;
+const label = post.data.category || category;
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="back-to-list top">
+    <a href={`/case-studies/${category}`}>&larr; {label}</a>
+  </div>
+
+  <TokenGate token={post.data.token} slug={post.slug} collection="case-studies" />
+
+  <ProtectedContent hasToken={hasToken}>
+    <article>
+      <header class="article-header">
+        <span class="series-badge">🏆 {label} #{post.data.episode}</span>
+        <h1>{post.data.title}</h1>
+        <div class="meta">
+          <span>{post.data.date}</span>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <Content />
+      </div>
+    </article>
+
+    <div class="back-to-list">
+      <a href={`/case-studies/${category}`}>&larr; {label}으로</a>
+    </div>
+  </ProtectedContent>
+</BaseLayout>

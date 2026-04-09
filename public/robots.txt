@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bboya-viewer.vercel.app/sitemap-index.xml

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 760px;
+    background: linear-gradient(150deg, #F8FAFB 0%, #F0F5FA 30%, #E8F0F8 70%, #E1EBF5 100%);
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-flex;
+    background: rgba(91,141,190,0.12);
+    color: #5B8DBE;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A2332;
+    letter-spacing: -0.5px;
+  }
+
+  .compare {
+    display: flex;
+    gap: 20px;
+    width: 920px;
+    margin-bottom: 28px;
+  }
+
+  .compare-card {
+    flex: 1;
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .compare-card.cron {
+    background: rgba(59,130,246,0.04);
+    border: 1px solid rgba(59,130,246,0.15);
+  }
+
+  .compare-card.heartbeat {
+    background: rgba(220,38,38,0.03);
+    border: 1px solid rgba(220,38,38,0.12);
+  }
+
+  .compare-icon { font-size: 48px; }
+
+  .compare-name {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .compare-card.cron .compare-name { color: #3B82F6; }
+  .compare-card.heartbeat .compare-name { color: #DC2626; }
+
+  .compare-analogy {
+    font-size: 16px;
+    color: #6B7A8F;
+    font-weight: 600;
+  }
+
+  .compare-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .compare-feature {
+    font-size: 15px;
+    color: #4A5568;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .feature-check {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #D4DCE2;
+    flex-shrink: 0;
+    width: 40px;
+  }
+
+  .footer {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid #D4DCE2;
+    border-radius: 12px;
+    padding: 14px 24px;
+    text-align: center;
+    width: 920px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+    color: #4A5568;
+  }
+  .footer-text strong { color: #5B8DBE; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">⏰ 자동화</div>
+  <div class="title">크론잡 vs 하트비트 — 언제 뭘 쓰나</div>
+</div>
+
+<div class="compare">
+  <div class="compare-card cron">
+    <div class="compare-icon">⏰</div>
+    <div class="compare-name">크론잡</div>
+    <div class="compare-analogy">= 알람시계</div>
+    <div class="compare-features">
+      <div class="compare-feature"><span class="feature-check">✅</span>정확한 시각에 실행</div>
+      <div class="compare-feature"><span class="feature-check">✅</span>별도 세션에서 독립 실행</div>
+      <div class="compare-feature"><span class="feature-check">✅</span>메인 대화에 영향 없음</div>
+    </div>
+  </div>
+
+  <div class="vs-divider">vs</div>
+
+  <div class="compare-card heartbeat">
+    <div class="compare-icon">💓</div>
+    <div class="compare-name">하트비트</div>
+    <div class="compare-analogy">= 심장박동</div>
+    <div class="compare-features">
+      <div class="compare-feature"><span class="feature-check">✅</span>주기적으로 폴링 체크</div>
+      <div class="compare-feature"><span class="feature-check">✅</span>최근 대화 맥락 사용 가능</div>
+      <div class="compare-feature"><span class="feature-check">✅</span>HEARTBEAT.md로 체크 항목 관리</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    <strong>정확한 시각</strong>이 중요하면 크론 &nbsp;|&nbsp;
+    <strong>주기적 확인</strong>이 중요하면 하트비트 &nbsp;|&nbsp;
+    <strong>둘 다</strong> 쓰는 게 보통
+  </div>
+</div>
+
+</body>
+</html>

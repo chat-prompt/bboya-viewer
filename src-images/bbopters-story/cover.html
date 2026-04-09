@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #F8F6F3 0%, #EDE8E1 100%);
+      font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+      display: flex;
+      padding: 50px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 40px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1f2e;
+      color: #c4b5fd;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+    .title {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.25;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 18px;
+      font-weight: 500;
+      color: #6B6B6B;
+      line-height: 1.6;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .avatars-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      background: white;
+    }
+    .avatar.large {
+      width: 120px;
+      height: 120px;
+      font-size: 56px;
+      border: 4px solid #c4b5fd;
+    }
+    .avatar-label {
+      text-align: center;
+    }
+    .avatar-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-top: 6px;
+    }
+    .avatar-role {
+      font-size: 11px;
+      color: #888;
+    }
+    .connector {
+      width: 1px;
+      height: 20px;
+      background: #D0D0D0;
+    }
+    .footer-tag {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      font-size: 13px;
+      color: #999;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <div class="badge">🐾 뽀피터스 운영기 #0</div>
+    <div class="title">고양이 이름 하나에서<br>시작된 팀</div>
+    <div class="subtitle">진짜 고양이 → AI 봇 → 동생들 → 팀 → 커뮤니티<br>→ 봇 만들기 세션까지. 뽀피터스가 만들어진 이야기.</div>
+  </div>
+  <div class="right">
+    <div class="avatars-row">
+      <div class="avatar-label">
+        <div class="avatar large">🐱</div>
+        <div class="avatar-name">뽀야</div>
+        <div class="avatar-role">팀장</div>
+      </div>
+    </div>
+    <div class="avatars-row">
+      <div class="avatar-label">
+        <div class="avatar">🐈‍⬛</div>
+        <div class="avatar-name">뽀짝이</div>
+        <div class="avatar-role">부팀장</div>
+      </div>
+      <div class="avatar-label">
+        <div class="avatar">☁️</div>
+        <div class="avatar-name">뽀둥이</div>
+        <div class="avatar-role">플랫폼</div>
+      </div>
+    </div>
+    <div class="avatars-row">
+      <div class="avatar-label">
+        <div class="avatar">🩶</div>
+        <div class="avatar-name">뽀식이</div>
+        <div class="avatar-role">커뮤니티</div>
+      </div>
+      <div class="avatar-label">
+        <div class="avatar">🐕</div>
+        <div class="avatar-name">시고르</div>
+        <div class="avatar-role">콘텐츠</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-tag">bboya-viewer.vercel.app</div>
+</body>
+</html>

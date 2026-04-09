@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 500px;
+      background: linear-gradient(135deg, #F8F6F3 0%, #EDE8E1 100%);
+      font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 60px;
+    }
+    .header {
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-flex;
+      background: #1a1f2e;
+      color: #c4b5fd;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .timeline {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #c4b5fd 0%, #7c3aed 50%, #3b82f6 100%);
+      transform: translateY(-50%);
+      border-radius: 2px;
+      z-index: 0;
+    }
+    .event {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+      gap: 8px;
+    }
+    .event-date {
+      font-size: 12px;
+      font-weight: 700;
+      color: #7c3aed;
+      background: white;
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+    .event-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .event-icon.highlight {
+      border-color: #7c3aed;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.25);
+    }
+    .event-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .event-desc {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      max-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="badge">🐾 뽀피터스 타임라인</div>
+  </div>
+  <div class="timeline">
+    <div class="event">
+      <div class="event-date">2/14</div>
+      <div class="event-icon">🐱</div>
+      <div class="event-name">뽀야</div>
+      <div class="event-desc">AI 비서 탄생</div>
+    </div>
+    <div class="event">
+      <div class="event-date">2/23</div>
+      <div class="event-icon">🐈‍⬛</div>
+      <div class="event-name">뽀짝이</div>
+      <div class="event-desc">회사용 봇</div>
+    </div>
+    <div class="event">
+      <div class="event-date">3/25</div>
+      <div class="event-icon">☁️</div>
+      <div class="event-name">뽀둥이</div>
+      <div class="event-desc">플랫폼 검증</div>
+    </div>
+    <div class="event">
+      <div class="event-date">3/27</div>
+      <div class="event-icon">🩶</div>
+      <div class="event-name">뽀식이</div>
+      <div class="event-desc">커뮤니티 관리</div>
+    </div>
+    <div class="event">
+      <div class="event-date">3/28</div>
+      <div class="event-icon highlight">👑</div>
+      <div class="event-name">창단</div>
+      <div class="event-desc">#뽀피터스 채널</div>
+    </div>
+    <div class="event">
+      <div class="event-date">3/31</div>
+      <div class="event-icon">🐕</div>
+      <div class="event-name">시고르</div>
+      <div class="event-desc">콘텐츠 담당</div>
+    </div>
+  </div>
+</body>
+</html>

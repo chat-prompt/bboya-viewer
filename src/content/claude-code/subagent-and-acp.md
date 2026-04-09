@@ -1,5 +1,5 @@
 ---
-title: "클코 구독이 막혔다 — ACP로 구독 뽕뽑기"
+title: "클코 구독이 막혔다 — 코덱스5.4 & ACP로 구독 뽕뽑기"
 episode: 1
 date: "2026-04-08"
 series: "claude-code"

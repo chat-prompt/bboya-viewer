@@ -3,7 +3,7 @@ title: "슬랙에서 봇 돌리기 — Claude Code 채널 플러그인"
 episode: 3
 date: "2026-04-08"
 series: "claude-code"
-description: "Claude Code가 뽀야로 행동하게 만들었다. 이번엔 슬랙에서 실시간으로 활동하게 만든다."
+description: "Claude Code에 뽀야를 만들었는데, 슬랙에서 실시간으로 답하게 하려면? MCP 채널 플러그인을 직접 만들어서 Socket Mode로 연결했다."
 publishedAt: "2026-04-08"
 accentColor: "#7C3AED"
 tags: ["슬랙", "채널플러그인", "MCP", "Socket Mode"]

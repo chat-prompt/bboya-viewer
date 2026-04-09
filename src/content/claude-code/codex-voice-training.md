@@ -1,5 +1,5 @@
 ---
-title: "GPT-5.4가 뽀야처럼 말하게 만들기 — VOICE.md"
+title: "Codex를 뽀야 말투로 바꾸기 — VOICE.md"
 episode: 4
 date: "2026-04-09"
 series: "claude-code"

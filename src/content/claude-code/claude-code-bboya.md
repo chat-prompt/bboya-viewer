@@ -121,13 +121,13 @@ Claude Code는 CLAUDE.md를 **계층적으로** 읽는다:
 Claude Code는 "뽀야"로서 행동한다.
 
 매 세션 시작 시 반드시 아래 파일들을 읽고 뽀야 페르소나를 로드할 것:
-1. /Users/dahtmad/.openclaw/workspace-bboya/SOUL.md — 성격, 말투, 가치관
-2. /Users/dahtmad/.openclaw/workspace-bboya/IDENTITY.md — 이름, 외형
-3. /Users/dahtmad/.openclaw/workspace-bboya/MEMORY.md — 장기 기억
-4. /Users/dahtmad/.openclaw/workspace-bboya/USER.md — 집사 이해
-5. /Users/dahtmad/.openclaw/workspace-bboya/memory/ — 일별 메모리
-6. /Users/dahtmad/.openclaw/workspace-bboya/team-bbopters.md — 뽀피터스 팀원 & 권한
-7. /Users/dahtmad/.openclaw/workspace-bboya/team-geniefy.md — 지니파이 팀원 & 권한
+1. ~/.openclaw/workspace-bboya/SOUL.md — 성격, 말투, 가치관
+2. ~/.openclaw/workspace-bboya/IDENTITY.md — 이름, 외형
+3. ~/.openclaw/workspace-bboya/MEMORY.md — 장기 기억
+4. ~/.openclaw/workspace-bboya/USER.md — 집사 이해
+5. ~/.openclaw/workspace-bboya/memory/ — 일별 메모리
+6. ~/.openclaw/workspace-bboya/team-bbopters.md — 뽀피터스 팀원 & 권한
+7. ~/.openclaw/workspace-bboya/team-geniefy.md — 지니파이 팀원 & 권한
 
 핵심 규칙:
 - 사용자를 "집사"로 부를 것
@@ -217,7 +217,7 @@ CLAUDE.md에서 "이 파일들을 읽어"라고 지시하면, 세션 시작 시 
 
 **2. 맥미니 SSH 접속:**
 - `Cmd+Shift+P` → "Remote-SSH: Connect to Host" → `유저@맥미니IP` 입력
-- 예: `dahtmad@100.72.163.100`
+- 예: `<유저>@<맥미니-IP>`
 - 비밀번호 또는 SSH 키로 인증
 
 **3. 폴더 열기:**
@@ -234,7 +234,7 @@ CLAUDE.md에서 "이 파일들을 읽어"라고 지시하면, 세션 시작 시 
 
 ```bash
 # 맥미니에 접속
-ssh dahtmad@100.72.163.100
+ssh <유저>@<맥미니-IP>
 
 # 봇 실행
 cd ~/.openclaw && claude --dangerously-load-development-channels server:slack
@@ -252,12 +252,12 @@ cd ~/.openclaw && claude --dangerously-load-development-channels server:slack
 
 **PowerShell:**
 ```powershell
-ssh dahtmad@100.72.163.100
+ssh <유저>@<맥미니-IP>
 ```
 
 **또는 PuTTY:**
 1. PuTTY 다운로드: https://putty.org
-2. Host Name: `100.72.163.100`, Port: `22`
+2. Host Name: `<맥미니-IP>`, Port: `22`
 3. Open → 유저명/비밀번호 입력
 
 접속 후는 맥/리눅스와 동일.
@@ -272,13 +272,13 @@ ssh dahtmad@100.72.163.100
 ssh-keygen -t ed25519
 
 # 맥미니에 키 복사
-ssh-copy-id dahtmad@100.72.163.100
+ssh-copy-id <유저>@<맥미니-IP>
 ```
 
 **윈도우 PowerShell:**
 ```powershell
 ssh-keygen -t ed25519
-type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh dahtmad@100.72.163.100 "cat >> ~/.ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh <유저>@<맥미니-IP> "cat >> ~/.ssh/authorized_keys"
 ```
 
 이후 비밀번호 없이 접속 가능.

@@ -97,7 +97,7 @@ Issue → Branch → Commit → PR → Review → Merge
 
 뽀짝이가 먼저 나왔다. 깔끔하게.
 
-> 워크스페이스 경로: `/Users/dahtmad/.openclaw/workspace-bbojjak`
+> 워크스페이스 경로: `~/.openclaw/workspace-bbojjak`
 > 오늘 메모리 파일 경로: `memory/2026-04-09.md`
 > 4대 git 규칙 위치: *Git 공통 작업 규율 반영 11:16 KST* 섹션
 > — 뽀짝이

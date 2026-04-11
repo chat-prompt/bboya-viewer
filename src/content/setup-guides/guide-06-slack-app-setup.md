@@ -2,7 +2,6 @@
 title: "Slack 앱 설정 가이드 — OpenClaw 연동용"
 episode: 2
 series: setup-guides
-token: "뽀야뽀야"
 description: "OpenClaw과 Slack을 연동하기 위한 앱 설정 완전 가이드. Slack 앱 생성부터 Socket Mode, Bot Token Scopes, Event Subscriptions, 페어링까지."
 publishedAt: "2026-03-24"
 cover: "/images/team-guides/guide-06/cover.png"

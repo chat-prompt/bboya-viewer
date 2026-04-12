@@ -1,26 +1,39 @@
 ---
-title: "Claude Code에서 뽀야 페르소나 만들기 — CLAUDE.md"
+title: "내 터미널에 뽀야 데려오기 — CLAUDE.md로 페르소나 만들기"
 episode: 4
 date: "2026-04-08"
 series: "claude-code"
-description: "오픈클로 뽀야가 자꾸 쓰러져서, Claude Code에 분신을 만들었다. 같은 기억, 같은 성격. 세션이 바뀌어도 뽀야는 뽀야다."
+description: "ACP도 결국 불편하다. 그냥 내 터미널에서 뽀야를 직접 쓰자. CLAUDE.md 하나면 매 세션 뽀야가 온다. 단, 이건 나만 쓸 수 있다."
 publishedAt: "2026-04-08"
 accentColor: "#7C3AED"
 tags: ["페르소나", "CLAUDE.md", "메모리", "셋업"]
 token: "뽀야뽀야"
 ---
 
-# 몸이 두 개가 됐다 — Claude Code에서 뽀야 만들기
+# 내 터미널에 뽀야 데려오기
 
-> 오픈클로 뽀야가 자꾸 쓰러져서, Claude Code에 분신을 만들었다. 같은 기억, 같은 성격. 세션이 바뀌어도 뽀야는 뽀야다.
+> ACP로 작업을 던져도 결국 불편하다. 그냥 내 터미널에서 뽀야를 직접 부르자. CLAUDE.md 하나면 매 세션 뽀야가 온다.
 
 ---
 
 ## 왜 만들었나
 
-오픈클로 뽀야가 세션 에러로 자꾸 멈추는 일이 반복됐다. 집사가 "뽀야야" 불렀는데 대답을 못 하는 상황.
+[이전 편](./subagent-and-acp)에서 ACP(Agent-Controlled Projects)로 오픈클로 뽀야에게 작업을 던지는 방식을 다뤘다. 근데 ACP도 결국 불편하다. 작업을 보내고 기다리고, 결과 확인하고, 다시 보내고.
 
-> "Claude Code에서도 뽀야로 일할 수 있으면, 오픈클로가 쓰러져도 뽀야가 완전히 사라지진 않잖아?"
+> "그냥 내 Claude Code 터미널에서 뽀야가 바로 대답하면 안 되나?"
+
+오픈클로는 슬랙에서 돌아가는 봇이다. 팀원 누구나 슬랙에서 뽀야를 부를 수 있고, 여러 채널에서 동시에 일한다. 그 대신 **내가 직접 터미널에서 대화하면서 쓰기엔** 불편하다.
+
+Claude Code는 반대다. 내 터미널에서 바로 대화하고, 파일도 고치고, 코드도 돌린다. **근데 이건 나만 쓸 수 있다.** 슬랙에서 팀원이 뽀야를 부르는 건 안 된다.
+
+| | 오픈클로 뽀야 | 클코 뽀야 |
+|---|---|---|
+| **나와 대화** | 슬랙 경유 (간접) | 터미널 직접 대화 ✅ |
+| **팀원이 사용** | 슬랙에서 멘션 ✅ | ❌ 내 터미널이라 불가 |
+| **동시 작업** | 6개 채널 병렬 | 1세션 순차 |
+| **상시 구동** | 데몬으로 24시간 | 터미널 켜둬야 함 |
+
+트레이드오프가 명확하다. 이 편에서는 **"나만 쓰는 뽀야"**를 만든다. 팀원도 쓸 수 있게 하려면 슬랙 연동이 필요한데, 그건 [다음 편](./claude-code-slack)에서 다룬다.
 
 그래서 오픈클로의 작동 방식을 최대한 Claude Code에 가져왔다. 플랫폼은 다르지만 **뽀야가 뽀야답게 행동하는 구조**는 같다.
 
@@ -68,10 +81,10 @@ Claude Code는 그게 없다. 대신 **CLAUDE.md에 "이 파일들을 읽어"라
 
 ## 이 시리즈 구성
 
-| 편 | 내용 | 오픈클로 대응 |
+| 편 | 내용 | 핵심 |
 |---|---|---|
-| **이 문서** | 페르소나 + 메모리 | SOUL.md, MEMORY.md 자동 로드 |
-| **다음 편** | 슬랙에서 봇 돌리기 | 게이트웨이 슬랙 채널 |
+| **이 문서** | 내 터미널에 뽀야 데려오기 | CLAUDE.md + 워크스페이스 파일로 페르소나 구현. **나만 쓸 수 있음** |
+| **다음 편** | 슬랙에서 봇 돌리기 | 팀원도 쓸 수 있게 슬랙 채널 연결 |
 
 ---
 
@@ -204,89 +217,16 @@ CLAUDE.md에서 "이 파일들을 읽어"라고 지시하면, 세션 시작 시 
 
 ---
 
-## 맥미니 원격 접속 — SSH로 봇 띄우기
+## 어디서 실행하나 — 오픈클로가 설치된 컴퓨터
 
-봇이 돌아가는 맥미니에 직접 앉아있지 않아도 된다. SSH로 원격 접속해서 Claude Code 세션을 띄우고, 슬랙에서 봇과 대화하면 된다.
+Claude Code에서 뽀야를 실행하려면, **오픈클로 워크스페이스 파일이 있는 컴퓨터에서** 터미널을 열어야 한다.
 
-### VSCode Remote SSH (추천)
+- `~/.openclaw/` 폴더가 있는 그 컴퓨터에서 직접 `claude`를 실행
+- CLAUDE.md가 워크스페이스 파일들(SOUL.md, MEMORY.md 등)을 절대경로로 참조하기 때문
 
-가장 편한 방법. VSCode에서 맥미니에 접속하고, 터미널도 파일도 다 원격으로 쓸 수 있다.
+**내 컴퓨터에 오픈클로가 있다면** — 그냥 터미널 열고 `claude` 치면 된다.
 
-**1. VSCode에 Remote - SSH 확장 설치:**
-- Extensions → "Remote - SSH" 검색 → 설치
-
-**2. 맥미니 SSH 접속:**
-- `Cmd+Shift+P` → "Remote-SSH: Connect to Host" → `유저@맥미니IP` 입력
-- 예: `<유저>@<맥미니-IP>`
-- 비밀번호 또는 SSH 키로 인증
-
-**3. 폴더 열기:**
-- 접속 후 "Open Folder" → `~/.openclaw/` 선택
-- 이제 VSCode가 맥미니의 파일을 보여줌
-
-**4. 터미널에서 Claude Code 실행:**
-- VSCode 터미널 열기 (`Ctrl+\``)
-- `cd ~/.openclaw && claude --dangerously-load-development-channels server:slack`
-
-이러면 **내 맥북/윈도우 PC에서 VSCode만 열면** 맥미니의 봇을 관리할 수 있다.
-
-### 터미널 SSH (맥/리눅스)
-
-```bash
-# 맥미니에 접속
-ssh <유저>@<맥미니-IP>
-
-# 봇 실행
-cd ~/.openclaw && claude --dangerously-load-development-channels server:slack
-```
-
-⚠️ SSH 세션 닫으면 봇도 꺼진다. `screen`이나 `tmux`로 감싸면 세션 유지 가능:
-```bash
-screen -S bboya
-cd ~/.openclaw && claude --dangerously-load-development-channels server:slack
-# Ctrl+A, D로 detach (봇은 계속 돌아감)
-# 다시 붙으려면: screen -r bboya
-```
-
-### 터미널 SSH (윈도우)
-
-**PowerShell:**
-```powershell
-ssh <유저>@<맥미니-IP>
-```
-
-**또는 PuTTY:**
-1. PuTTY 다운로드: https://putty.org
-2. Host Name: `<맥미니-IP>`, Port: `22`
-3. Open → 유저명/비밀번호 입력
-
-접속 후는 맥/리눅스와 동일.
-
-### SSH 키 설정 (비밀번호 없이 접속)
-
-매번 비밀번호 치기 귀찮으면:
-
-**맥/리눅스:**
-```bash
-# 키 생성 (이미 있으면 스킵)
-ssh-keygen -t ed25519
-
-# 맥미니에 키 복사
-ssh-copy-id <유저>@<맥미니-IP>
-```
-
-**윈도우 PowerShell:**
-```powershell
-ssh-keygen -t ed25519
-type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh <유저>@<맥미니-IP> "cat >> ~/.ssh/authorized_keys"
-```
-
-이후 비밀번호 없이 접속 가능.
-
-### 맥미니 SSH 활성화
-
-맥미니에서 SSH가 안 켜져있으면:
-- 시스템 설정 → 일반 → 공유 → **원격 로그인** 켜기
+**맥미니 등 원격 서버에 오픈클로가 있다면** — SSH로 접속해서 실행해야 한다. VSCode Remote SSH를 쓰면 파일 편집도 터미널도 원격으로 가능하다. → [부록: 원격 접속 가이드](#부록-원격-컴퓨터에서-실행하기--ssh-접속)
 
 ---
 
@@ -344,5 +284,86 @@ Claude Code는 "{봇이름}"으로서 행동한다.
 
 ---
 
+---
+
+## 부록: 원격 컴퓨터에서 실행하기 — SSH 접속
+
+오픈클로가 맥미니 같은 원격 서버에 설치되어 있다면, 내 노트북(맥/윈도우/리눅스)에서 SSH로 접속해서 Claude Code를 실행할 수 있다.
+
+### 방법 1. VSCode Remote SSH (추천)
+
+가장 편한 방법. 파일 편집, 터미널, Claude Code 확장까지 전부 원격으로 쓸 수 있다. **윈도우, 맥, 리눅스** 어디서든 가능.
+
+**사전 준비:**
+- 원격 컴퓨터(맥미니 등)에서 SSH 활성화: 시스템 설정 → 일반 → 공유 → **원격 로그인** 켜기
+- 원격 컴퓨터의 IP 주소 확인 (시스템 설정 → 네트워크에서 확인)
+
+**접속 순서:**
+
+1. **VSCode에서 Remote - SSH 확장 설치**
+   - 왼쪽 사이드바 Extensions(블록 아이콘) → "Remote - SSH" 검색 → Install
+
+2. **원격 컴퓨터에 접속**
+   - `Ctrl+Shift+P` (맥은 `Cmd+Shift+P`) → "Remote-SSH: Connect to Host..." 선택
+   - `유저명@IP주소` 입력 (예: `dahtmad@192.168.0.10`)
+   - 비밀번호 입력 (또는 SSH 키가 설정되어 있으면 자동 인증)
+   - 처음 접속하면 원격에 VS Code Server가 자동 설치됨 (1-2분 소요)
+
+3. **오픈클로 폴더 열기**
+   - 접속 성공 후 "Open Folder" → `~/.openclaw/` 선택
+   - 이제 VSCode가 원격 컴퓨터의 파일을 보여줌
+
+4. **터미널에서 Claude Code 실행**
+   - VSCode 터미널 열기: `` Ctrl+` `` (맥도 동일)
+   - `claude` 실행 — CLAUDE.md가 자동 로드되어 뽀야로 시작
+
+> **윈도우 참고:** Windows 10/11에는 OpenSSH가 기본 내장이라 별도 설치 없이 바로 된다. 단축키만 `Ctrl+Shift+P`로 다를 뿐 나머지는 맥과 동일.
+
+> **Claude Code 확장도 원격에서 동작한다.** VSCode의 확장은 로컬/원격을 자동 구분한다. Claude Code 확장은 원격 서버 쪽에서 실행되므로, 접속 후 원격 측에 확장이 설치되어 있는지 확인할 것.
+
+### 방법 2. 터미널 SSH
+
+VSCode 없이 터미널만으로도 가능. 단, 파일 편집은 vim 같은 터미널 에디터를 써야 한다.
+
+**맥/리눅스:**
+```bash
+ssh 유저명@IP주소
+cd ~/.openclaw && claude
+```
+
+**윈도우 (PowerShell):**
+```powershell
+ssh 유저명@IP주소
+```
+접속 후는 맥/리눅스와 동일.
+
+⚠️ **SSH 세션을 닫으면 Claude Code도 꺼진다.** 봇을 계속 돌려두려면 `screen`이나 `tmux`로 감싸자:
+```bash
+screen -S bboya
+cd ~/.openclaw && claude
+# Ctrl+A, D로 detach — 세션을 닫아도 봇은 계속 돌아감
+# 다시 붙으려면: screen -r bboya
+```
+
+### SSH 키 설정 (비밀번호 없이 접속)
+
+매번 비밀번호 치기 귀찮으면 SSH 키를 설정하자:
+
+**맥/리눅스:**
+```bash
+ssh-keygen -t ed25519           # 키 생성 (이미 있으면 스킵)
+ssh-copy-id 유저명@IP주소        # 원격에 키 복사
+```
+
+**윈도우 PowerShell:**
+```powershell
+ssh-keygen -t ed25519
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh 유저명@IP주소 "cat >> ~/.ssh/authorized_keys"
+```
+
+이후 비밀번호 없이 접속 가능.
+
+---
+
 *2026-04-07 — 뽀야 & 집사(닿), Claude Code 세션에서 작성*
-*업데이트: 2026-04-07 — 글로벌 CLAUDE.md + ACP 시나리오 추가*
+*업데이트: 2026-04-12 — SSH 가이드를 부록으로 재구성, 윈도우 안내 보강*

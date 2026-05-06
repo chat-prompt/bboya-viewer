@@ -266,12 +266,14 @@ Slack Workspace (뽀피터스) — 하나로 공유
 
 한 봇이 여러 스킬 돌리는데, 스킬마다 `.env` 따로 두면 같은 토큰을 N번 박게 돼. 한 토큰 갱신하려면 N개 파일 다 손봐야 하고, 한 군데 빼먹으면 사고. 루트 *한 곳*에 모아두면 그 봇의 single source of truth 됨.
 
-#### 이 룰이 박혀있는 곳 (봇이 절대 까먹지 않아)
+#### 이 룰이 박혀있는 곳
 
-- 📚 **공용 정의** → `bbopters-shared/TOOLS-COMMON.md` — 모든 봇이 git pull로 동기화
-- 🐱 **봇별 재주입** → 각 워크스페이스 `AGENTS.md` `## Red Lines` — *post-compaction에서도 자동 재주입*되니까 긴 대화 끝에서도 안 까먹음
+- 📚 **공용 정의** → `bbopters-shared/TOOLS-COMMON.md`에 *"env는 각 에이전트 워크스페이스 루트 `.env`에 둔다"* 박힘. 모든 봇이 git pull로 동기화
+- 🐱 **봇별 재인지 (권장 패턴)** → 양육자가 봇 워크스페이스에 *자기 봇이 절대 까먹지 않게* 박아두는 자리:
+  - `AGENTS.md` `## Red Lines`에 한 줄 추가하면 *post-compaction 재주입*까지 보장
+  - 또는 `memory/feedback_skill_env_location.md` 같은 메모리 파일로 박아도 OK
 
-→ *한 곳에서 정의 + 모든 봇 AGENTS.md에 뼈에 새기기*. 새 동생 들어와도 같은 패턴 그대로.
+→ *공용 정의 한 곳 + 봇별로 자기 머신에 한 번 더 새기기*. 새 동생 들어와도 양육자가 같은 패턴으로 박으면 됨.
 
 ---
 

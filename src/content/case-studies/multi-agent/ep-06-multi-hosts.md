@@ -224,11 +224,50 @@ Slack Workspace (뽀피터스) — 하나로 공유
 
 ### 🔑 .env 위치 규칙 — 자주 사고 나는 부분이라 따로 짚자
 
-스킬 환경변수(`.env`)는 **무조건 워크스페이스 루트** (`workspace-<id>/.env`)에 둔다. 스킬 디렉토리(`skills/<name>/.env`)에 두는 거 ❌ 절대 금지.
+스킬 환경변수(`.env`)는 **무조건 워크스페이스 루트** (`workspace-<id>/.env`)에 둔다.
 
-**왜?** — 한 봇이 여러 스킬 돌리는데, 스킬마다 `.env` 따로 두면 같은 토큰을 N번 박게 돼. 한 토큰 갱신하려면 N개 파일 다 손봐야 하고, 한 군데 빼먹으면 사고. 워크스페이스 루트 *한 곳*에 모아두면 그 봇의 single source of truth 됨.
+#### 폴더 구조로 보면
 
-**이 룰이 박혀있는 곳** (그래서 봇이 절대 까먹지 않아):
+❌ **잘못된 구조** — 스킬마다 `.env` 따로 (사고 패턴):
+
+```
+~/.openclaw/bbopters-shared/skills/
+├── airtable-query/
+│   ├── SKILL.md
+│   ├── .env       ❌ 여기 두면 안 됨
+│   └── scripts/
+├── linear-toolkit/
+│   ├── SKILL.md
+│   ├── .env       ❌ 또 여기에…
+│   └── scripts/
+└── modusign/
+    ├── SKILL.md
+    └── .env       ❌ 토큰이 N곳에 흩어짐
+```
+
+✅ **올바른 구조** — 워크스페이스 루트 한 곳 통합:
+
+```
+~/.openclaw/
+├── bbopters-shared/skills/        📚 공용 스킬 (.env 절대 X)
+│   ├── airtable-query/scripts/
+│   ├── linear-toolkit/scripts/
+│   └── modusign/scripts/
+│
+└── workspace-bboya/                🏠 봇 워크스페이스
+    ├── .env                        ⭐ 여기! 모든 스킬 환경변수 통합
+    ├── IDENTITY.md / SOUL.md
+    └── AGENTS.md                   ← Red Lines에 ".env는 여기에" 룰 박힘
+```
+
+스킬 실행 시 cwd가 `workspace-bboya/`라서 그 루트의 `.env`가 자동 로드돼. 공용 스킬도 *그 봇의 .env*를 읽어 — 봇마다 자기 토큰 들고 같은 스킬 굴리는 거지.
+
+#### 왜 한 곳 통합?
+
+한 봇이 여러 스킬 돌리는데, 스킬마다 `.env` 따로 두면 같은 토큰을 N번 박게 돼. 한 토큰 갱신하려면 N개 파일 다 손봐야 하고, 한 군데 빼먹으면 사고. 루트 *한 곳*에 모아두면 그 봇의 single source of truth 됨.
+
+#### 이 룰이 박혀있는 곳 (봇이 절대 까먹지 않아)
+
 - 📚 **공용 정의** → `bbopters-shared/TOOLS-COMMON.md` — 모든 봇이 git pull로 동기화
 - 🐱 **봇별 재주입** → 각 워크스페이스 `AGENTS.md` `## Red Lines` — *post-compaction에서도 자동 재주입*되니까 긴 대화 끝에서도 안 까먹음
 

@@ -106,35 +106,11 @@ Slack Workspace (뽀피터스) — 하나로 공유
 - **🔒 네트워크 분리**: 특정 내부망 접근 필요하면 그 망 안에 있는 머신에
 - **💳 구독 한도 분산**: Claude Pro/Max 계정을 사무실별로 따로 써서 한도 여유
 
-## 🚨 절대 어기면 안 되는 4가지 약속
+## 🤝 협업의 2가지 약속
 
-> 이 4개만 잘 지키면 멀티 사무실은 안전. 어기면 메시지 유실·중복 응답·페르소나 섞임 사고 100% 발생.
+> 분산 운영의 *인프라 셋업 룰*(봇 토큰 1개 = 게이트웨이 1곳 / default는 게이트웨이당 1명)은 [ep.3 1마리](./ep-04-single-agent) / [ep.4 2마리](./ep-05-two-agents-same-host)에서 이미 다뤘어. 본 편은 *협업 관점*에 필요한 2가지만 짚자. 어기면 메시지 못 닿거나 옛 자료로 작업하는 사고.
 
-### 🔴 약속 1. 같은 봇 토큰을 두 게이트웨이에 동시 등록 금지
-
-**무슨 약속?** — 슬랙 봇 1마리(토큰 1쌍)는 *게이트웨이 1개에서만* 띄울 것. 두 머신/게이트웨이가 같은 토큰으로 슬랙 Socket Mode 연결을 동시에 띄우면, 슬랙이 *나중에 연결한 쪽만 살리고 먼저 연결된 쪽을 끊어버림*. 어느 게이트웨이가 살아남을지 예측 불가 → 메시지 유실·중복 응답 사고.
-
-> 🪪 **비유** — 같은 SIM 카드를 두 폰에 꽂는 격이야. 한 쪽만 작동. 게다가 어느 쪽이 살아남는지 그때그때 다름. (= 같은 카톡 계정으로 두 폰 동시 로그인하면 한쪽 끊기는 그 패턴.) 슬랙 봇 토큰도 똑같이 작동해.
-
-**규칙**: 봇 1마리 = 게이트웨이 1곳. A에서 뽀야 돌리면 B/C 어디서도 절대 같은 토큰으로 띄우지 말 것.
-
-### 🔴 약속 2. "대장(default)"은 게이트웨이마다 1명씩만
-
-**무슨 약속?** — 각 게이트웨이의 `openclaw.json`에서 `"default": true`는 *1명만*. bindings 라우팅이 매칭 실패한 메시지(어느 에이전트가 받을지 명시 안 됨)를 받아내는 *폴백 자리*인데, 둘 이상이면 시스템이 어디로 보낼지 모름 → 라우팅 충돌.
-
-> 👑 **비유** — 사무실에서 *수신자 명확하지 않은 우편물을 받는 총무 자리*야. 한 사람만 정해놔야 헷갈림 없음. 두 명이 "내가 총무야"라고 하면 우편물이 어디로 가는지 시스템도 모름.
-
-**규칙**: 게이트웨이마다 `"default": true`는 1명. 1마리뿐인 게이트웨이는 그 1마리가 자동 default.
-
-여러 머신이어도 **각 머신의 `openclaw.json`엔 그 머신에 사는 직원만 정의**. default도 그 게이트웨이 직원 중 1명.
-
-- 맥미니 A `openclaw.json`: 뽀야·뽀짝이만 정의, 뽀야에 `"default": true`
-- 맥미니 B `openclaw.json`: 뽀둥이만 정의, `"default": true`
-- 맥미니 C `openclaw.json`: 뽀식이만 정의, `"default": true`
-
-⚠️ A의 뽀야와 B의 뽀둥이, C의 뽀식이가 모두 `default: true`여도 충돌 없음 — 슬랙이 토큰별로 알아서 분리 배달하니까. **머신 내부 폴백**만 결정. 1마리뿐인 머신은 default가 무조건 그 1마리.
-
-### 🔴 약속 3. 머신 간 협업은 슬랙 스레드로
+### 🔴 약속 1. 머신 간 협업은 슬랙 스레드로
 
 **무슨 약속?** — 다른 머신에 사는 봇한테 일 부탁하려면 *슬랙 채널*로. `subagents.allowAgents`(내부 통로)는 *같은 머신 안에서만* 작동해서 머신을 걸칠 수 없음. 같은 머신 안에서도 우린 의도적으로 슬랙 통일 ([앞 섹션](#-뽀피터스의-한-발-더--같은-사무실에서도-슬랙으로-통일) 참조).
 
@@ -145,7 +121,7 @@ Slack Workspace (뽀피터스) — 하나로 공유
 - ✅ 슬랙 채널에 `@뽀둥이 이거 부탁해` → 뽀둥이가 반응. 결과 리포트도 같은 스레드 답글로
 - 외부 큐(Redis/SQS)도 가능하지만 여기선 *슬랙이 메시지 큐 역할*
 
-### 🔴 약속 4. 공용 자료실(`bbopters-shared`) 읽기 전엔 무조건 `git pull`
+### 🔴 약속 2. 공용 자료실(`bbopters-shared`) 읽기 전엔 무조건 `git pull`
 
 **무슨 약속?** — 공용 레포 문서·스킬·hook을 *읽거나 참조하기 전에 항상 `git pull`*. 머신 N개가 같은 자료실을 공유하니까, A에서 수정·push한 걸 B/C가 pull 안 하면 옛 버전으로 작업 → 스키마 불일치/스킬 오작동 사고.
 
@@ -224,12 +200,12 @@ Slack Workspace (뽀피터스) — 하나로 공유
 | 규칙 | 정의된 위치 |
 |---|---|
 | `bbopters-shared` 절대 경로 = `~/.openclaw/bbopters-shared/` (모든 머신 동일) | 글로벌 `~/.claude/CLAUDE.md` + 프로젝트 `~/.openclaw/CLAUDE.md` |
-| 읽기 전 `git pull` (Rule 4) | 글로벌 `~/.claude/CLAUDE.md` |
+| 읽기 전 `git pull` (약속 2) | 글로벌 `~/.claude/CLAUDE.md` |
 | `bbopters-skill` CLI로 `~/.claude/skills/`에 심링크 활성화 | 프로젝트 `~/.openclaw/CLAUDE.md` |
 | `.env`는 **워크스페이스 루트**(`workspace-<id>/.env`)에 통합 — 스킬 디렉토리에 두지 않음 | 각 워크스페이스 `AGENTS.md` `## Red Lines` |
 | 호스팅·협업 (어느 머신에서 도는지, 머신 걸친 위임 불가) | 각 워크스페이스 `AGENTS.md` `## Red Lines` |
 | 말투·호칭·보안 등 에이전트별 하드 룰 | 각 워크스페이스 `AGENTS.md` `## Red Lines` |
-| 머신별 `openclaw.json`엔 자기 직원만 정의 (Rule 1·2) | 각 머신 `~/.openclaw/openclaw.json` 자체 — 구조적 제약 |
+| 머신별 `openclaw.json`엔 자기 직원만 정의 (인프라 셋업 룰) | 각 머신 `~/.openclaw/openclaw.json` 자체 — 구조적 제약 |
 | OAuth 토큰 머신 간 복사 금지 | 각 머신 `~/.openclaw/agents/<id>/agent/` 자체 — 머신별 독립 |
 
 **🌐 공통 룰 → CLAUDE.md** / **🐱 에이전트별 운영 룰 → AGENTS.md `## Red Lines`** 두 갈래로 분리되는 게 핵심.
@@ -494,7 +470,7 @@ cp -r ~/.openclaw/bbopters-shared/templates/workspace-skeleton/ \
 
 ## STEP 4 · 맥미니 B·C의 `openclaw.json` 작성 — "B/C 사무실 인사팀 셋업"
 
-> 📋 **비유** — A 사무실 인사팀이랑 별개로, B 사무실 인사팀이 자기 직원만, C 사무실 인사팀이 자기 직원만 관리. 절대 옆 사무실 직원 정보 들고있으면 안 됨 (Rule 1·2 위반 사고).
+> 📋 **비유** — A 사무실 인사팀이랑 별개로, B 사무실 인사팀이 자기 직원만, C 사무실 인사팀이 자기 직원만 관리. 절대 옆 사무실 직원 정보 들고있으면 안 됨 (인프라 셋업 룰 위반 사고).
 
 **이 사무실에 사는 직원만** 정의. B엔 뽀둥이만, C엔 뽀식이만.
 
@@ -588,7 +564,7 @@ cp -r ~/.openclaw/bbopters-shared/templates/workspace-skeleton/ \
 
 > B 사무실엔 뽀둥이만, C 사무실엔 뽀식이만 등록.
 > 1마리뿐인 사무실은 그 1마리가 곧 "관리자(default)" — 매칭 실패 시 자기가 폴백.
-> 봇 토큰도 머신별로만 — 뽀둥이 토큰은 B에만, 뽀식이 토큰은 C에만 (Rule 1).
+> 봇 토큰도 머신별로만 — 뽀둥이 토큰은 B에만, 뽀식이 토큰은 C에만 (토큰=1게이트웨이 룰).
 > 자기 직원의 우편물 분류표(bindings) 한 줄씩.
 
 **꼭 눈여겨볼 포인트**
@@ -646,7 +622,7 @@ ssh mac-mini-C "tail -f ~/.openclaw/logs/gateway.log | grep matchedBy"
 - `@뽀둥이 ping`  → B에만 `matchedBy=binding.account agentId=bboongi`
 - `@뽀식이 ping`  → C에만 `matchedBy=binding.account agentId=bbosiki`
 
-**절대 두 머신 이상의 로그에 같은 에이전트가 찍히면 안 됨.** 찍히면 Rule 1 위반 (같은 토큰 중복 기동).
+**절대 두 머신 이상의 로그에 같은 에이전트가 찍히면 안 됨.** 찍히면 토큰=1게이트웨이 룰 위반 (같은 토큰 중복 기동).
 
 ---
 
@@ -743,7 +719,7 @@ ep.4에서 같은 머신 두 마리는 `subagents.allowAgents`(*내부 DM 통로
 
 예: Airtable 스키마가 바뀌면 `bbopters-shared/context/airtable-schema.md`만 업데이트 → push → 모든 에이전트가 다음 작업 전 `git pull` → 최신 스키마 기반 작업.
 
-**절대 규칙**: 팀 위키 읽기 전 반드시 `git pull` (Rule 4). 오래된 스키마로 작업하면 사고.
+**절대 규칙**: 팀 위키 읽기 전 반드시 `git pull` (약속 2). 오래된 스키마로 작업하면 사고.
 
 ### 패턴 4 · MEMORY는 공유하지 않는다
 
@@ -772,7 +748,7 @@ ep.4에서 같은 머신 두 마리는 `subagents.allowAgents`(*내부 DM 통로
 - [ ] `~/.openclaw/bbopters-shared/` git clone (A와 동일 경로)
 - [ ] `bbopters-skill` CLI 사용 가능 확인 (`bbopters-skill list`)
 - [ ] `bbopters-skill install --all` 또는 필요 스킬만 활성화
-- [ ] pull/push 워크플로우 숙지 (Rule 4: 읽기 전 `git pull`)
+- [ ] pull/push 워크플로우 숙지 (약속 2: 읽기 전 `git pull`)
 
 ### 맥미니 B·C 인프라 (STEP 1 — 각 머신에서 한 번씩)
 - [ ] OpenClaw 2026.4.22+ 설치
@@ -830,7 +806,7 @@ Slack App Admin 계정은 공용(팀 이메일)으로 만들어서 여러 명이
 | 에이전트 간 위임 실패 | `subagents.allowAgents`는 머신 걸쳐 작동 안 함 | 슬랙 채널로 요청 전달 패턴 사용 (협업 패턴 1) |
 | 한 머신에서 고친 스킬이 다른 머신에선 구버전 | `bbopters-shared` pull 안 함 | 해당 머신에서 `cd ~/.openclaw/bbopters-shared && git pull` (또는 `bbopters-skill sync`) |
 | 새 머신의 hook 로그에 스킬이 안 찍힘 | `bbopters-skill install` 안 함 (심링크 없음) | `bbopters-skill install --all` 또는 필요 스킬 개별 install |
-| 팀 위키 내용대로 작업했는데 스키마가 다름 | 위키 pull 안 해서 구버전 참조 | Rule 4: 읽기 전 반드시 `git pull`. 특히 스키마/정책 문서 |
+| 팀 위키 내용대로 작업했는데 스키마가 다름 | 위키 pull 안 해서 구버전 참조 | 약속 2: 읽기 전 반드시 `git pull`. 특히 스키마/정책 문서 |
 | OAuth 한 머신에서 다른 머신으로 복사 시 계정 차단 | `auth-profiles.json`은 머신·에이전트별 독립이어야 함 | 해당 머신에서 직접 `CLAUDE_CONFIG_DIR=... claude /login` (복사 절대 금지) |
 | `bbopters-skill` 명령 안 먹힘 | CLI 설치 안 돼있음 | `~/.openclaw/CLAUDE.md`의 스킬 매니저 섹션 참조해 CLI 설치 |
 | 스킬이 `.env` 못 찾음 | 스킬 디렉토리에 `.env` 뒀음 | 워크스페이스 루트(`workspace-<id>/.env`)로 이동 (집사 규칙) |

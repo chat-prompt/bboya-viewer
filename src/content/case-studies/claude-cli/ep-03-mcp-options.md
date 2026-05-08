@@ -13,9 +13,11 @@ token: "밋업"
 
 # 3 · MCP 등록 길찾기 — 4가지 옵션, 한 가지 추천
 
-> 🛣️ **이 편의 핵심** — OpenClaw + Claude CLI 환경에서 MCP 서버 등록할 길이 4가지나 된다. 처음엔 *어디 박아야 봇이 쓸까?* 헷갈리는데, 공식문서 근거로 보면 **하나만 골라도 충분**하다. 결론부터 — `~/.claude/settings.json`이 우리 권장.
+> 🛣️ **이 편의 핵심** — OpenClaw + Claude CLI 환경에서 MCP 서버 등록할 길이 4가지나 된다. 처음엔 *어디 박아야 봇이 쓸까?* 헷갈리는데, 공식문서 근거로 보면 **하나만 골라도 충분**하다. 결론부터 — `~/.claude.json`이 우리 권장.
 >
 > 📜 *왜 PI 대신 Claude CLI를 골랐나* 궁금하면 → [ep.2 PI vs Claude CLI](./ep-02a-pi-vs-cli)부터 읽고 오자. 본 편은 그 결정 *이후* 마주치는 운영 디테일이다.
+>
+> 📝 **2026-05-08 정정** — 초기 발행 시 권장 위치를 `~/.claude/settings.json`로 표기했었는데, **Claude Code CLI가 `claude mcp add`로 박는 실제 위치는 `~/.claude.json`**. 본문 전체 표기 정정 완료. (공식문서 `bundles.md`는 *Claude `settings.json`*이라 적혀있지만, 사용자가 직접 만지는 실제 파일 경로는 `~/.claude.json`이라는 게 직접 검증 결과)
 
 ---
 
@@ -24,7 +26,7 @@ token: "밋업"
 뽀피터스 운영하면서 가장 헷갈렸던 순간 중 하나 — *MCP 등록 위치가 4군데*가 나왔다.
 
 ```
-1. ~/.claude/settings.json  ← Claude Code 글로벌
+1. ~/.claude.json  ← Claude Code 글로벌
 2. <프로젝트>/.mcp.json      ← 프로젝트별
 3. openclaw mcp set ...      ← OpenClaw 자체
 4. ~/.mcporter/mcporter.json ← mcporter (Bash 호출용)
@@ -38,7 +40,7 @@ token: "밋업"
 
 ## 🛣️ 4가지 옵션 — 어디에 박는가, 누가 읽는가
 
-### A. `~/.claude/settings.json` — Claude Code 글로벌
+### A. `~/.claude.json` — Claude Code 글로벌
 
 ```jsonc
 {
@@ -52,9 +54,23 @@ token: "밋업"
 }
 ```
 
+**등록 명령** (CLI 권장 — JSON 직접 편집보다 안전):
+```bash
+# stdio MCP (env 포함)
+claude mcp add -s user -e API_KEY=xxx <name> -- npx -y <package>
+
+# HTTP MCP
+claude mcp add -s user --transport http <name> <url>
+
+# 등록된 MCP 확인
+claude mcp list
+```
+
+⚠️ `-s user` 플래그가 핵심 — **빼면 local scope**(현재 디렉토리에서만 인식)로 박혀서 *봇이 못 봄*. user scope여야 `~/.claude.json`의 글로벌 `mcpServers`에 들어가서 모든 봇이 사용. (env 인자 variadic 흡수 버그가 있을 땐 `~/.claude.json` python으로 직접 편집)
+
 - **누가 씀?** Claude CLI (단독 터미널) + OpenClaw 봇(Claude CLI 백엔드 사용 시) — *둘 다 자동*
 - **장점**: 한 번 박으면 여기저기 쓰임. Anthropic 표준이라 자료 풍부
-- **단점**: JSON 직접 편집
+- **단점**: JSON 직접 편집 / OAuth flow가 필요한 HTTP MCP는 `claude mcp list`에 *Needs authentication*으로 뜸
 
 ### B. `<project>/.mcp.json` — 프로젝트별
 
@@ -118,9 +134,9 @@ openclaw mcp show notion
 > *"loads enabled bundle-MCP servers for the current workspace"*
 > *"**merges them with any existing backend MCP config/settings shape**"*
 
-**한국어**: claude-cli 백엔드 시작 시 OpenClaw가 *strict MCP config 파일을 생성*한다. 이때 워크스페이스에 활성화된 bundle-MCP 서버를 로드하고, **기존 backend MCP config(`~/.claude/settings.json` 등)와 합친다**.
+**한국어**: claude-cli 백엔드 시작 시 OpenClaw가 *strict MCP config 파일을 생성*한다. 이때 워크스페이스에 활성화된 bundle-MCP 서버를 로드하고, **기존 backend MCP config(`~/.claude.json` 등)와 합친다**.
 
-→ 즉 **Claude CLI 모드에서도** `~/.claude/settings.json`에 박은 MCP를 그대로 가져다 씀. 따로 설정 없이.
+→ 즉 **Claude CLI 모드에서도** `~/.claude.json`에 박은 MCP를 그대로 가져다 씀. 따로 설정 없이.
 
 ### 3. bundleMcp는 자동 작동
 
@@ -133,7 +149,7 @@ openclaw mcp show notion
    ↓
 [OpenClaw가 loopback HTTP MCP server 띄움 (per-session 토큰 격리)]
    ↓
-[~/.claude/settings.json의 MCP + OpenClaw 도구 → 합친 config 생성]
+[~/.claude.json의 MCP + OpenClaw 도구 → 합친 config 생성]
    ↓
 [Claude CLI는 그 합쳐진 config로 시작 → 양쪽 도구 다 사용]
 ```
@@ -144,7 +160,7 @@ openclaw mcp show notion
 
 | 옵션 | 위치 | 누가 자동으로 씀 | 비개발자 진입 | 자료 풍부도 | 토큰 효율 |
 |---|---|---|---|---|---|
-| **A. Claude 글로벌** | `~/.claude/settings.json` | Claude CLI 단독 + OpenClaw 봇 *둘 다* | ✅ JSON 한 번 | ✅ Anthropic 표준 | 보통 |
+| **A. Claude 글로벌** | `~/.claude.json` | Claude CLI 단독 + OpenClaw 봇 *둘 다* | ✅ JSON 한 번 | ✅ Anthropic 표준 | 보통 |
 | B. 프로젝트별 | `<proj>/.mcp.json` | 그 디렉토리 `claude` | ✅ JSON 한 번 | ✅ Anthropic 표준 | 보통 |
 | C. OpenClaw | `openclaw mcp set` | OpenClaw 봇 전체 | ❌ CLI 명령어 | ❌ OpenClaw만 | 보통 |
 | D. mcporter | `~/.mcporter/mcporter.json` | 모델이 Bash 호출 | ❌ 도구 발견 X | ❌ 자체 도구 | ✅ 가장 절약 |
@@ -186,19 +202,21 @@ OpenClaw 자체엔 MCP가 처음부터 있었다. 그런데 우리한테 mcporte
    ↓
 4. OpenClaw가 bundleMcp + loopback MCP bridge 정식화
    → Claude CLI도 OpenClaw 도구 자동으로 받음
-   → ~/.claude/settings.json도 같이 합침 ✅
+   → ~/.claude.json도 같이 합침 ✅
 ```
 
 CHANGELOG `#71724` 등에 *bundle-MCP transport 정규화*가 *최근에* 들어왔다. 정식화는 비교적 최근. 그 사이의 우회 도구가 mcporter.
 
 → **지금도 mcporter는 유효한 선택지**다. 하지만 *기본 표준은 아니고*, 토큰 절약·Bash 호출·자동화 스크립트용 *보조 도구*.
 
+> 📝 **2026-05-08 후속 — mcporter 완전 폐기**: 위 글에선 *"mcporter는 보조로 유효"*라고 적었지만, 그 뒤로 우리는 *mcporter 자체를 완전 아카이브*했다. 이유 두 가지: (1) *모델이 도구가 있는지조차 모름* 단점이 결정적이라 사실상 안 쓰게 됐고, (2) 한 번 우회 경로 두면 자꾸 거기로 빠지는 부작용(같은 도구를 mcporter+`~/.claude.json` 둘 다 박아놓고 헷갈리는 사고)이 더 컸음. `~/.mcporter/` 디렉토리는 archive로 이동하고 *모든 MCP를 `~/.claude.json` 한 곳으로 통일*. 결론: *mcporter 단계는 건너뛰고 처음부터 Claude 글로벌 하나로 시작하는 게 정답*.
+
 ---
 
 ## 🔧 삽질 포인트
 
 1. **세 곳에 같은 MCP 박지 마** — Claude 글로벌 + OpenClaw + mcporter에 같은 노션 MCP 등록하면 어디 게 작동하는지 헷갈린다. 하나만.
-2. **`~/.claude/settings.json` 박은 직후엔 세션 재시작** — 봇한테 새 MCP가 적용되려면 OpenClaw 게이트웨이 재시작 또는 새 세션 필요.
+2. **`~/.claude.json` 박은 직후엔 세션 재시작** — 봇한테 새 MCP가 적용되려면 OpenClaw 게이트웨이 재시작 또는 새 세션 필요.
 3. **MCP 인증 토큰을 채팅에 그대로 붙여넣지 마** — `env` 항목에 박을 때도 secret manager(예: macOS 키체인 / 1Password CLI)에서 꺼내쓰는 게 안전.
 4. **자주 안 쓰는 MCP는 빼라** — 시스템 프롬프트 토큰을 도구 스키마가 먹는다. 매일 안 쓰는 건 mcporter로 옮기거나 비활성화.
 
@@ -206,7 +224,7 @@ CHANGELOG `#71724` 등에 *bundle-MCP transport 정규화*가 *최근에* 들어
 
 ## 🎨 비유 — 콘센트 멀티탭과 책상
 
-- **`~/.claude/settings.json`** = 책상 위 *통합 콘센트 멀티탭*. Claude도 OpenClaw 봇도 같은 멀티탭에서 콘센트 빌려 씀.
+- **`~/.claude.json`** = 책상 위 *통합 콘센트 멀티탭*. Claude도 OpenClaw 봇도 같은 멀티탭에서 콘센트 빌려 씀.
 - **OpenClaw `mcp set`** = 사무실 *별도 콘센트 박스*. OpenClaw 봇 전용. Claude 단독은 못 씀.
 - **mcporter** = *서랍에 넣어둔 도구 가방*. 자주 안 쓰는 도구는 여기에 — 책상 위 자리 안 차지.
 
@@ -216,7 +234,7 @@ CHANGELOG `#71724` 등에 *bundle-MCP transport 정규화*가 *최근에* 들어
 
 ## 🐱 한 줄 요약
 
-> **MCP는 `~/.claude/settings.json` 한 곳에만 박아라.** OpenClaw가 *bundleMcp*로 자동 합쳐서 봇한테 그대로 전달한다. 4가지 옵션 다 가능하지만, 비개발자 친화 + 자료 풍부 + 일관성 면에서 Claude 글로벌이 정답이다. mcporter는 토큰 절약 절실해질 때 *보조*로.
+> **MCP는 `~/.claude.json` 한 곳에만 박아라.** OpenClaw가 *bundleMcp*로 자동 합쳐서 봇한테 그대로 전달한다. 4가지 옵션 다 가능하지만, 비개발자 친화 + 자료 풍부 + 일관성 면에서 Claude 글로벌이 정답이다. mcporter는 토큰 절약 절실해질 때 *보조*로.
 
 > 📜 *왜 PI 대신 Claude CLI를 골랐나* — [ep.2 PI vs Claude CLI](./ep-02a-pi-vs-cli)
 > 📜 *어쩌다 지금 셋업이 됐나* — [ep.1 OpenClaw 변천사](./ep-01-journey)

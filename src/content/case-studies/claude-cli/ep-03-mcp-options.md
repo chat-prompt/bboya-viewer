@@ -68,6 +68,49 @@ claude mcp list
 
 ⚠️ `-s user` 플래그가 핵심 — **빼면 local scope**(현재 디렉토리에서만 인식)로 박혀서 *봇이 못 봄*. user scope여야 `~/.claude.json`의 글로벌 `mcpServers`에 들어가서 모든 봇이 사용. (env 인자 variadic 흡수 버그가 있을 땐 `~/.claude.json` python으로 직접 편집)
 
+#### 🔐 환경변수에 토큰 박기
+
+대부분 MCP 서버는 *환경변수로 토큰을 받음* (Slack `SLACK_MCP_XOXB_TOKEN`, Notion `NOTION_TOKEN`, Linear `LINEAR_API_KEY` 등). `-e` 플래그로 *여러 개 동시*에 박을 수 있음:
+
+```bash
+# 예시: Slack MCP — Bot Token + Team ID + 옵션 한 번에
+claude mcp add -s user \
+  -e SLACK_MCP_XOXB_TOKEN=xoxb-... \
+  -e SLACK_MCP_TEAM_ID=T0XXXXXXX \
+  -e SLACK_MCP_ADD_MESSAGE_TOOL=true \
+  slack -- npx -y slack-mcp-server@latest
+```
+
+**박힌 후 검증** (3단계로):
+
+```bash
+# 1. 등록됐는지 + Connected 됐는지
+claude mcp list
+# slack: npx -y slack-mcp-server@latest - ✓ Connected
+
+# 2. 환경변수가 정확히 들어갔는지 (~/.claude.json 직접 확인)
+python3 -c "import json,os; \
+  d=json.load(open(os.path.expanduser('~/.claude.json'))); \
+  print(json.dumps(d['mcpServers']['slack'], indent=2, ensure_ascii=False))"
+
+# 3. OpenClaw 봇한테 적용하려면 게이트웨이 재시작
+oclaw <봇이름>
+```
+
+**토큰 어디서 가져오나** (서비스별 진입점):
+
+| MCP | 토큰 종류 | 어디서 |
+|---|---|---|
+| Slack (`slack-mcp-server`) | `xoxb-...` Bot Token | Slack 앱 페이지 → OAuth & Permissions |
+| Notion | Internal Integration Token | notion.so/my-integrations → New integration |
+| Linear (`@daht-mad/linear-mcp-plus`) | Personal API Key | Linear → Settings → Account → API → Personal API Key |
+| GitHub | Personal Access Token | github.com/settings/tokens (Fine-grained 권장) |
+| YouTube Transcript | *토큰 없음* — `-e` 플래그 자체 생략 |
+
+**토큰 갱신/교체** — 같은 이름으로 다시 `claude mcp add` 하면 *덮어쓰기*. 또는 `~/.claude.json` 직접 열어서 `env` 블록 수정.
+
+> 🚨 **토큰 끝 줄바꿈 함정** — *복사-붙여넣기* 과정에서 토큰 끝에 `\n`이나 공백이 붙으면 401. 의심되면 `~/.claude.json` 직접 열어 정확한 길이 확인. macOS 키체인이나 1Password CLI에서 *바로 꺼내쓰는* 패턴이 더 안전.
+
 - **누가 씀?** Claude CLI (단독 터미널) + OpenClaw 봇(Claude CLI 백엔드 사용 시) — *둘 다 자동*
 - **장점**: 한 번 박으면 여기저기 쓰임. Anthropic 표준이라 자료 풍부
 - **단점**: JSON 직접 편집 / OAuth flow가 필요한 HTTP MCP는 `claude mcp list`에 *Needs authentication*으로 뜸

@@ -8,7 +8,6 @@ publishedAt: "2026-04-30"
 accentColor: "#8B5CF6"
 description: "OpenClaw 골랐어도 끝이 아니다 — 그 안에서 PI 모드(빌트인) vs Claude CLI 모드 두 갈래가 또 있다. 우린 CLI 골랐고, 그 결정으로 잃은 것·얻은 것을 공식문서 근거로 정리한다."
 tags: ["멀티에이전트", "OpenClaw", "PI", "Claude CLI", "런타임", "심화"]
-token: "밋업"
 ---
 
 # 2.5 · 심화 — PI vs Claude CLI, OpenClaw 안의 두 갈래

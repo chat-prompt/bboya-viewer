@@ -4,7 +4,6 @@ date: "2026-03-27"
 series: notes
 description: "Slack 채널 하나에 봇 여러 마리가 들어오면? 호명규칙 AGENTS.md 템플릿, openclaw.json Slack 설정, 멘션 기반 봇 간 대화, 실전 삽질 포인트까지 — 멀티봇 공존의 모든 것."
 tags: ["Slack", "멀티봇", "호명규칙", "requireMention", "봇키우기교실"]
-token: "뽀야뽀야"
 ---
 
 # 같은 방에서 싸우지 마 — Slack 멀티봇 공존 에피소드

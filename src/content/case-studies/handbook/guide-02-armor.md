@@ -8,7 +8,6 @@ description: "봇을 팀 채널에 안전하게 데려가기 위한 핵심 설�
 publishedAt: "2026-03-28"
 accentColor: "#E8856C"
 tags: ["보안", "호명규칙", "교통정리", "온보딩", "팀협업"]
-token: "뽀짝이 많이 사랑해주세요"
 cover: "/images/guides/guide-02/cover.png"
 ---
 

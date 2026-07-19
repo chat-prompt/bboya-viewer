@@ -2,7 +2,6 @@
 title: "게이트웨이 분리 실전 셋업 + oclaw 운영 도우미 — 30~60분"
 episode: 15
 series: setup-guides
-token: "뽀야뽀야"
 description: "왜 쪼개는지 알았다면 이번엔 어떻게. 새 프로필 디렉토리 / config 변환 / LaunchAgent / 핸드오버 / EMFILE 함정 / oclaw 운영 도우미까지. 30~60분 안에 한 봇 떼어내는 풀 레시피."
 publishedAt: "2026-05-03"
 accentColor: "#06B6D4"

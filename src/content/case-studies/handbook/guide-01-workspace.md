@@ -8,7 +8,6 @@ description: "워크스페이스 구조, 핵심 파일 5개, 세션 개념까지
 publishedAt: "2026-03-28"
 accentColor: "#5B8DBE"
 tags: ["워크스페이스", "세션", "기초개념", "파일구조", "SOUL.md"]
-token: "뽀짝이 많이 사랑해주세요"
 cover: "/images/guides/guide-01/cover.png"
 ---
 

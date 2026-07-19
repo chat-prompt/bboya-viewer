@@ -9,7 +9,6 @@ publishedAt: "2026-04-08"
 updatedAt: "2026-04-12"
 accentColor: "#7C3AED"
 tags: ["ACP", "비용", "위임", "봇 먹이", "구독 차단"]
-token: "구독뽕뽑기"
 ---
 
 > **구독뽕뽑기 시리즈** — Claude Code 구독 하나로 AI 봇을 만들고, 말투를 가르치고, 슬랙에서 팀원과 함께 쓰기까지.

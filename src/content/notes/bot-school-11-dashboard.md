@@ -4,7 +4,6 @@ date: "2026-03-27"
 series: notes
 description: "같은 집 봇끼리는 sessions_send로 대화하는데, 사람은 못 본다. 대시보드를 요청하는 법, 뭘 볼 수 있는지, 밖에서 보려면 Tailscale까지 — 실전 가이드."
 tags: ["대시보드", "sessions_send", "Tailscale", "가이드", "봇키우기교실"]
-token: "뽀야뽀야"
 ---
 
 ## 언제 대시보드가 필요한가

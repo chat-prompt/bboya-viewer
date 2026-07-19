@@ -8,7 +8,6 @@ description: "터미널에서 혼자 쓰던 AI비서를 슬랙에 연결해서 �
 publishedAt: "2026-04-08"
 accentColor: "#7C3AED"
 tags: ["슬랙", "채널플러그인", "MCP", "Socket Mode"]
-token: "구독뽕뽑기"
 ---
 
 > **구독뽕뽑기 시리즈** — Claude Code 구독 하나로 AI 봇을 만들고, 말투를 가르치고, 슬랙에서 팀원과 함께 쓰기까지.

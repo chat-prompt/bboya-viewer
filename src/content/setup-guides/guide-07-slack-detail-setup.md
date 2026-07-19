@@ -2,7 +2,6 @@
 title: "Slack 세부 설정 가이드 — 봇 행동 튜닝"
 episode: 3
 series: setup-guides
-token: "뽀야뽀야"
 description: "DM 정책, 채널별 멘션 규칙, 스레드 답변, Group Policy, 워크스페이스 파일 구조까지. OpenClaw Slack 봇의 행동을 세밀하게 제어하는 방법."
 publishedAt: "2026-04-06"
 cover: "/images/team-guides/guide-07/cover.png"

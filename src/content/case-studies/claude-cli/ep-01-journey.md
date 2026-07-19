@@ -8,7 +8,6 @@ publishedAt: "2026-04-30"
 accentColor: "#8B5CF6"
 description: "2026년 4월, 뽀피터스는 두 번 갈아탔다 — 토큰 빌려쓰기 차단 → ACP 우회 → Claude CLI 정식. 본격 셋업 들어가기 전, 어쩌다 지금 모습이 됐는지 시간순으로 풀어보는 프롤로그."
 tags: ["멀티에이전트", "OpenClaw", "Claude CLI", "ACP", "변천사"]
-token: "밋업"
 ---
 
 # Prologue · OpenClaw 변천사 — 어쩌다 우리가 Claude CLI로 왔나

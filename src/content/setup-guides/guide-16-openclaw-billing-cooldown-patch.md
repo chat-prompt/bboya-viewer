@@ -2,7 +2,6 @@
 title: "OpenClaw 빌링 쿨다운 자체 패치 — 슬랙 빌링 에러 노출 1/10로 줄이기"
 episode: 16
 series: setup-guides
-token: "뽀야뽀야"
 description: "claude-cli 단일 백엔드 환경에서 빌링 에러 1회 받으면 게이트웨이가 30초간 모든 요청을 reject — 슬랙에 'Provider anthropic has billing issue'가 폭주하는 현상. MIN_PROBE_INTERVAL_MS 30s→3s 패치로 노출 빈도 1/10 + npm 업데이트해도 패치 살리는 wrapper 패턴까지."
 publishedAt: "2026-05-04"
 accentColor: "#EF4444"

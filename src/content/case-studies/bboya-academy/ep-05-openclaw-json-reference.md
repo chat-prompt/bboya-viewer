@@ -8,7 +8,6 @@ publishedAt: "2026-05-18"
 accentColor: "#6366F1"
 description: "~/.openclaw/openclaw.json의 모든 섹션 사전. agents·gateway·messages·session·tools·plugins·auth·channels·commands·bindings까지 — 구조 자체를 알고 싶을 때 펴보는 레퍼런스."
 tags: ["OpenClaw", "레퍼런스", "openclaw.json", "설정", "뽀야사관학교"]
-token: "복자키우기"
 ---
 
 # openclaw.json 설정 사전

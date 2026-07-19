@@ -6,7 +6,6 @@ series: case-studies
 category: "금쪽같은 봇 한마리"
 description: "이름·집사·기억까지 줬는데 봇이 할 수 있는 일이 제한적이다. 스킬과 MCP로 봇의 손을 늘리는 법."
 tags: ["스킬", "MCP", "bbopters-skill", "도구장착", "확장"]
-token: "한마리키우기"
 ---
 
 > 📋 **금쪽같은 내 봇 한마리 키우기 — Ep 05**

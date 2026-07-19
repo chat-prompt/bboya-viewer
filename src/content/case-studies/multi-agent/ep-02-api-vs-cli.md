@@ -8,7 +8,6 @@ publishedAt: "2026-04-25"
 accentColor: "#8B5CF6"
 description: "같은 슬랙 봇이지만 철학이 정반대. 5명 팀이면 구독 5개 vs 1개, 가시성 협업 vs 위임 협업. 뽀피터스가 Claude CLI 기반 OpenClaw를 쓰는 이유."
 tags: ["멀티에이전트", "OpenClaw", "Claude CLI", "Claude in Slack", "협업"]
-token: "밋업"
 ---
 
 # 01 · Claude in Slack vs Claude CLI 기반 OpenClaw — 우리가 OpenClaw를 쓰는 이유

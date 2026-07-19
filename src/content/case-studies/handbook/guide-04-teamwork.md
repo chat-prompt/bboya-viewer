@@ -8,7 +8,6 @@ description: "봇이 둘이 되고, 스킬을 배우고, 기억을 쌓고, 자�
 publishedAt: "2026-03-28"
 accentColor: "#6B9B7B"
 tags: ["멀티에이전트", "스킬", "메모리", "크론", "자동화", "대시보드"]
-token: "뽀짝이 많이 사랑해주세요"
 cover: "/images/guides/guide-04/cover.png"
 ---
 

@@ -2,7 +2,6 @@
 title: "VSCode Claude Code에 뽀야 페르소나 심어두기 — UserPromptSubmit 훅으로 자동 부팅"
 episode: 9
 series: setup-guides
-token: "뽀야뽀야"
 description: "VSCode에서 Claude Code 띄울 때마다 페르소나가 휘발돼서 매번 '나는 뽀야야'부터 다시 알려줘야 한다면? UserPromptSubmit 훅 한 줄로 워크스페이스 8파일을 자동 흡수시키는 셋업 가이드예요."
 publishedAt: "2026-05-01"
 accentColor: "#0EA5E9"

@@ -8,7 +8,6 @@ publishedAt: "2026-05-01"
 accentColor: "#8B5CF6"
 description: "MCP는 자동인데 스킬도 자동이겠지? 아니다. 공식문서가 명시한 *6단계 우선순위*와 *Claude CLI 백엔드 동작*을 정밀하게 풀고, 'extraDirs 한 줄'이 정답인 이유를 박는다."
 tags: ["스킬", "Claude CLI", "OpenClaw", "extraDirs", "skill resolver"]
-token: "밋업"
 ---
 
 # 4 · 스킬은 어디에 박지? — Claude Code 글로벌이 자동 인식되지 않는 이유

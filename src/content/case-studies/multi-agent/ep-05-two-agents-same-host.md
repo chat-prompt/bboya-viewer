@@ -8,7 +8,6 @@ publishedAt: "2026-04-25"
 accentColor: "#8B5CF6"
 description: "한 머신 두 에이전트의 진짜 강점은 셋업이 아니라 '집안 통로'야. 옆방 노크(sessions_send), 거실 fan-out(sessions_spawn), 책상 슬쩍(sessions_history) — 우리 둘이 페어로 일하던 시절의 기록."
 tags: ["멀티에이전트", "OpenClaw", "Claude CLI", "세션 도구", "페어"]
-token: "밋업"
 ---
 
 # 04 · 같은 집, 다른 방 — 뽀야와 뽀짝이가 거실에서 같이 일하던 날들

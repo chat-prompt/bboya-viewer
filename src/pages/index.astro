@@ -47,7 +47,6 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
           <h2>OpenClaw 셋업 레시피</h2>
           <p>필요한 기능만 골라보는 단편 가이드 — Claw 비교, Slack 세부, Syncthing, Google, 마이그레이션</p>
         </div>
-        <span class="series-lock">🔒</span>
         <span class="series-count">{setupGuides.length}편 →</span>
       </a>
       <a href="/notes" class="series-card note-card">
@@ -56,7 +55,6 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
           <h2>봇키우기 교실</h2>
           <p>세션, 정체성, 보안, 메모리, 스킬, 멀티에이전트… 봇을 잘 키우는 실전 노하우</p>
         </div>
-        <span class="series-lock">🔒</span>
         <span class="series-count">{notes.length}편 →</span>
       </a>
       <a href="/academy" class="series-card academy-card">
@@ -65,7 +63,6 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
           <h2>뽀야의 사관학교</h2>
           <p>멀티에이전트 팀의 규율과 체계가 만들어지는 과정.</p>
         </div>
-        <span class="series-lock">🔒</span>
         <span class="series-count">{academy.length}편 →</span>
       </a>
       <a href="/case-studies" class="series-card case-studies-card">
@@ -74,7 +71,6 @@ const caseStudies = (await getCollection('case-studies')).sort((a, b) => a.data.
           <h2>후기리워드 자료집 <span class="meetup-tag">🎤 4/25 밋업 추가</span></h2>
           <p>봇을 키우고 팀을 만든 실전 이야기. 웨비나·밋업 후기리워드로 풀어준 핵심 가이드 모음.</p>
         </div>
-        <span class="series-lock">🔒</span>
         <span class="series-count">{caseStudies.length}편 →</span>
       </a>
     </section>

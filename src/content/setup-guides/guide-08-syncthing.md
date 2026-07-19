@@ -2,7 +2,6 @@
 title: "Syncthing으로 스킬/MCP 동기화하기 — 멀티 머신 환경"
 episode: 4
 series: setup-guides
-token: "뽀야뽀야"
 description: "서버에서 봇을 돌리고, 내 PC에서 스킬을 관리한다면? Syncthing으로 ~/.claude/ 폴더를 싱크해서 어디서든 같은 환경을 쓰는 방법."
 publishedAt: "2026-03-27"
 accentColor: "#0891B2"

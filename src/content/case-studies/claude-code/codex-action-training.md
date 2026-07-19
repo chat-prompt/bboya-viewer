@@ -8,7 +8,6 @@ description: "봇이 '원하시면 해드릴까요?'만 반복한다. 시스템 
 publishedAt: "2026-04-12"
 accentColor: "#7C3AED"
 tags: ["Codex", "GPT-5.4", "AGENTS.md", "실행", "approval-mode", "strict-agentic", "OpenClaw", "페르소나", "봇 먹이"]
-token: "구독뽕뽑기"
 ---
 
 > **구독뽕뽑기 시리즈** — Claude Code 구독 하나로 AI 봇을 만들고, 말투를 가르치고, 슬랙에서 팀원과 함께 쓰기까지.

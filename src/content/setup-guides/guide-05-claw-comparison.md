@@ -2,7 +2,6 @@
 title: "나에게 맞는 Claw는?"
 episode: 1
 series: setup-guides
-token: "뽀야뽀야"
 description: "OpenClaw, KimiClaw, NanoClaw, AndClaw, MicroClaw, ZeroClaw, MetaClaw, I-Claw — 8종 Claw 에이전트 완전 비교. 나한테 딱 맞는 Claw를 찾아보세요!"
 publishedAt: "2026-03-20"
 cover: "/images/team-guides/guide-05/cover.png"

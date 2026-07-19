@@ -2,7 +2,6 @@
 title: "Google Workspace 연결하기 — gog 스킬 설치 가이드"
 episode: 5
 series: setup-guides
-token: "뽀야뽀야"
 description: "Gmail, 캘린더, Drive, Sheets를 터미널에서 다루고 싶다면? gog CLI 설치부터 OpenClaw 연동까지, 한 편으로 끝내는 Google Workspace 셋업 가이드."
 publishedAt: "2026-04-06"
 accentColor: "#4285F4"

@@ -8,7 +8,6 @@ publishedAt: "2026-05-01"
 accentColor: "#8B5CF6"
 description: "OpenClaw + Claude CLI 환경에서 MCP를 어디에 박을지 헷갈린다. Claude 글로벌·프로젝트·OpenClaw·mcporter 4가지 옵션을 공식문서 근거로 풀고, 한 가지를 권장한다."
 tags: ["MCP", "Claude CLI", "OpenClaw", "mcporter", "bundleMcp"]
-token: "밋업"
 ---
 
 # 3 · MCP 등록 길찾기 — 4가지 옵션, 한 가지 추천

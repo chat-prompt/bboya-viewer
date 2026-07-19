@@ -2,7 +2,6 @@
 title: "Claude CLI 슬랙 스레드 비용 관리 — 캐싱·토큰·압축이 함께 작동하는 법"
 episode: 8
 series: setup-guides
-token: "뽀야뽀야"
 description: "길어진 슬랙 스레드가 갑자기 비싸지는 진짜 원인은 뭘까요? Anthropic prompt cache의 5분 TTL부터 비용이 10배 갈리는 패턴까지 — Claude CLI 운영의 비용 구조를 정리한 가이드예요."
 publishedAt: "2026-04-30"
 accentColor: "#EC4899"

@@ -8,7 +8,6 @@ publishedAt: "2026-05-18"
 accentColor: "#6366F1"
 description: "라이브 진입 전, 복자가 슬랙에서 진짜로 답하는 상태까지. Claude Max 구독부터 CLI·OpenClaw 설치, 최소 한국어 영혼, 침묵하지 않을 8가지 점검."
 tags: ["OpenClaw", "Claude CLI", "셋업", "복자", "뽀야사관학교"]
-token: "복자키우기"
 ---
 
 # 0-2 · Claude CLI + OpenClaw 셋팅

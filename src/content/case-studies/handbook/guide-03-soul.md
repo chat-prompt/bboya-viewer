@@ -8,7 +8,6 @@ description: "SOUL.md로 봇의 정체성을 만들고, MCP로 외부 도구를 
 publishedAt: "2026-03-28"
 accentColor: "#9B6B9B"
 tags: ["SOUL.md", "USER.md", "MCP", "정체성", "실습"]
-token: "뽀짝이 많이 사랑해주세요"
 cover: "/images/guides/guide-03/cover.png"
 ---
 

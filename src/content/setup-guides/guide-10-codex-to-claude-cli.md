@@ -2,7 +2,6 @@
 title: "오래된 OpenClaw 살리기 — Codex에서 Claude CLI로 갈아끼우기"
 episode: 6
 series: setup-guides
-token: "뽀야뽀야"
 description: "OpenClaw가 아직 codex로 돌고 있다면? 모델 백엔드를 Claude CLI로 옮기는 한방 마이그레이션 가이드. 4/29에 뽀피터스 본진이 따라간 절차 그대로."
 publishedAt: "2026-04-30"
 accentColor: "#8B5CF6"

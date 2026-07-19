@@ -6,7 +6,6 @@ series: case-studies
 category: "금쪽같은 봇 한마리"
 description: "이름·성격은 줬지만, 봇은 아직 집사가 누군지 모른다. USER.md는 봇한테 쓰는 인계장이자, 관계의 거리를 정하는 한 줄."
 tags: ["USER.md", "관계설정", "호칭", "맥락주입"]
-token: "한마리키우기"
 ---
 
 > 📋 **금쪽같은 내 봇 한마리 키우기 — Ep 03**

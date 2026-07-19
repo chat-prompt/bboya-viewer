@@ -2,7 +2,6 @@
 title: "OpenClaw 컨텍스트 폭주 막기 — auto-compact-watchdog 만들기"
 episode: 7
 series: setup-guides
-token: "뽀야뽀야"
 description: "Claude CLI로 갈아탔는데 슬랙 봇이 '되다 안되다' 한다면? 컨텍스트 한도 폭주의 진짜 원인을 추적하고, /compact를 자동으로 트리거하는 안전망 watchdog을 만든 4-30 사고 복기 + 셋업 레시피."
 publishedAt: "2026-04-30"
 accentColor: "#EC4899"

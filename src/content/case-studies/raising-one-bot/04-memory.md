@@ -6,7 +6,6 @@ series: case-studies
 category: "금쪽같은 봇 한마리"
 description: "봇이 어제 한 일을 기억 못 하는 건 결함이 아니라 구조다. 화이트보드와 일기장과 오답노트 — 기억 3층을 만들어준다."
 tags: ["MEMORY.md", "memory", "learnings", "기억구조", "세션"]
-token: "한마리키우기"
 ---
 
 > 📋 **금쪽같은 내 봇 한마리 키우기 — Ep 04**

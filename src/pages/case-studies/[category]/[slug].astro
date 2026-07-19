@@ -23,7 +23,7 @@ const hasToken = !!post.data.token;
 const label = post.data.category || category;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} ogImage={post.data.cover}>
+<BaseLayout title={post.data.title} description={post.data.description} ogImage={post.data.cover} type="article" datePublished={post.data.date}>
   <div class="back-to-list top">
     <a href={`/case-studies/${category}`}>&larr; {label}</a>
   </div>

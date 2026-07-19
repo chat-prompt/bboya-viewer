@@ -22,7 +22,7 @@ const prevGuide = currentIndex > 0 ? guides[currentIndex - 1] : null;
 const nextGuide = currentIndex < guides.length - 1 ? guides[currentIndex + 1] : null;
 ---
 
-<BaseLayout title={guide.data.title} description={guide.data.description} ogImage={guide.data.cover}>
+<BaseLayout title={guide.data.title} description={guide.data.description} ogImage={guide.data.cover} type="article" datePublished={guide.data.publishedAt}>
   <div class="back-to-list top">
     <a href="/setup-guides">← 가이드 목록</a>
   </div>

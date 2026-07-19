@@ -17,7 +17,7 @@ const { Content } = await post.render();
 const hasToken = !!post.data.token;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} type="article" datePublished={post.data.date}>
   <div class="back-to-list top">
     <a href="/academy">← 사관학교 목록</a>
   </div>

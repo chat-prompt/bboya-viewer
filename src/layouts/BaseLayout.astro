@@ -3,13 +3,39 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  type?: 'website' | 'article';
+  datePublished?: string;
 }
 
-const { title, description = '뽀야의 서재 — 다혜의 OpenClaw 이것저것', ogImage } = Astro.props;
+const { title, description = '뽀야의 서재 — 다혜의 OpenClaw 이것저것', ogImage, type = 'website', datePublished } = Astro.props;
 
 const siteTitle = '뽀야의 서재';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString().replace(/\/+$/, '');
 const imageURL = new URL(ogImage || '/images/bboya-profile.jpg', Astro.site).toString();
+const siteURL = new URL('/', Astro.site).toString().replace(/\/+$/, '');
+
+const jsonLd = type === 'article'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      image: imageURL,
+      ...(datePublished ? { datePublished } : {}),
+      author: { '@type': 'Person', name: '뽀야' },
+      publisher: { '@type': 'Organization', name: 'GPTers', url: 'https://www.gpters.org' },
+      mainEntityOfPage: canonicalURL,
+      url: canonicalURL,
+      inLanguage: 'ko-KR',
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteTitle,
+      url: siteURL,
+      description,
+      inLanguage: 'ko-KR',
+    };
 ---
 
 <!DOCTYPE html>
@@ -23,8 +49,11 @@ const imageURL = new URL(ogImage || '/images/bboya-profile.jpg', Astro.site).toS
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="sitemap" href="/sitemap-index.xml" />
 
+  <!-- JSON-LD 구조화 데이터 -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
   <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={type} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
